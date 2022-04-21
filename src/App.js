@@ -19,6 +19,7 @@ import Movies from './components/Movies/index';
 import MoviePlay from './components/Movies/MoviePlay';
 import Navbar from './components/Widgets/Navbar';
 import MyAccount from './components/MyAccount';
+import MyCompany from './components/MyCompany';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
 
@@ -73,6 +74,7 @@ const App = () => {
               
               {/* Private eg authenticated user */}
               <PrivateRoute path='/dashboard'    loggedIn={loggedIn} component={Dashboard} />
+              <PrivateRoute path='/my_company' loggedIn={loggedIn} component={MyCompany} />
               <PrivateRoute path='/my_account' loggedIn={loggedIn} component={MyAccount} />
               <PrivateRoute path='/change_password' loggedIn={loggedIn} component={Password} />
               <PrivateRoute path='/movies'  loggedIn={loggedIn} component={Movies} />

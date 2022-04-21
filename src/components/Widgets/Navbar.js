@@ -24,9 +24,14 @@ const NavbarMenu = (
     ? <NavLink as={Link} to='/dashboard' className="nav-link">Dashboard</NavLink> 
     : <NavLink as={Link} to='/home' className="nav-link">Home</NavLink>
 
-    const moviesLink = loggedIn 
-    ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
+    // const moviesLink = loggedIn 
+    // ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
+    // : null
+
+    const companyLink = loggedIn 
+    ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
     : null
+
 
     const accountLink = loggedIn 
     ?  
@@ -63,39 +68,6 @@ const NavbarMenu = (
   
 
      return ( 
-        // <nav className="navbar navbar-expand-sm navbar-dark bg-primary p-3">
-        // <a className="navbar-brand" href="/"><i className="fa fa-cog fa-spin"></i> React Flix</a>
-        // <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        // <ul className="navbar-nav">
-        //     <li className="nav-item text-light">
-        //         {homeLink}
-        //     </li>
-        //     <li className="nav-item text-light">
-        //         {moviesLink}
-        //     </li>
-        // </ul>
-        
-        // <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-        // <li className="nav-item">
-  
-        //          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        //             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        //              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        //             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        //              <NavDropdown.Divider />
-        //              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-        //             </NavDropdown>
-        // </li>
-        //     <li className="nav-item">
-        //         {accountLink}
-        //     </li>
-        //     <li className="nav-item">
-        //         {authLink}
-        //     </li>
-        // </ul>
-        // </div>
-        // </nav>
-
 
             <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
@@ -104,7 +76,7 @@ const NavbarMenu = (
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     {homeLink}
-                    {moviesLink}
+                    {companyLink}
                 </Nav>
                 <Nav>
                 {accountLink}
