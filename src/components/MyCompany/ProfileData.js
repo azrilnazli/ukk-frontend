@@ -1,6 +1,11 @@
 import React from 'react';
+import apiClient from '../../services/api';
 
-const ProfileData = () => {
+const ProfileData = (company) => {
+
+
+
+
     return (
         <div className="card mt-3">
         <h5 className="card-header">          
@@ -16,25 +21,25 @@ const ProfileData = () => {
         <div>
             <dl className="row">
                 <dt className="col-sm-3">Name</dt>
-                <dd className="col-sm-9">VireServe SDN BHD</dd>
+                <dd className="col-sm-9">{company.name}</dd>
 
                 <dt className="col-sm-3">Email</dt>
-                <dd className="col-sm-9">contact@vireserve.com</dd>
+                <dd className="col-sm-9">{company.email}</dd>
 
                 <dt className="col-sm-3">Phone</dt>
-                <dd className="col-sm-9">013-8888 8888</dd>
+                <dd className="col-sm-9">{company.phone}</dd>
 
                 <dt className="col-sm-3">Address</dt>
-                <dd className="col-sm-9">No 1 Jalan Gemilang</dd>
+                <dd className="col-sm-9">{company.address}</dd>
 
                 <dt className="col-sm-3">Postcode</dt>
-                <dd className="col-sm-9">43900</dd>
+                <dd className="col-sm-9">{company.postcode}</dd>
 
                 <dt className="col-sm-3">City</dt>
-                <dd className="col-sm-9">Petaling Jaya</dd>
+                <dd className="col-sm-9">{company.city}</dd>
 
                 <dt className="col-sm-3">State</dt>
-                <dd className="col-sm-9">Selangor</dd>
+                <dd className="col-sm-9">{company.states}</dd>
           
             </dl>
         </div>

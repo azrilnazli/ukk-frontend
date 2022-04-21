@@ -9,9 +9,7 @@ export const VideoJS = ( props ) => {
   const playerRef = React.useRef(null);
   const { options, onReady } = props;
 
-  const [profile, setProfile] = React.useState(
-    JSON.parse(sessionStorage.getItem('userObject'))
-  );
+
 
   React.useEffect(() => {
     // make sure Video.js player is only initialized once
