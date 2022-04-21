@@ -1,6 +1,7 @@
 import React from "react";
 import VideoJS from '../../utils/VideoJS' // point to where the functional component is stored
 import apiClient from '../../services/api';
+import config from '../../config.json'
 
 window.addEventListener("beforeunload", (ev) => 
 {  
@@ -13,7 +14,7 @@ window.addEventListener("beforeunload", (ev) =>
 const VideoJSPlayer = (props) => {
   const playerRef = React.useRef(null);
   const token = sessionStorage.getItem('token');
-  const src = `http://admin.test/api/movie/${props.id}/playlist.m3u8/${token}?access_token=${token}`
+  const src = config.SERVER_URL + `/api/movie/${props.id}/playlist.m3u8/${token}?access_token=${token}`
   //const src = `https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8` //test header
   //const src = `http://admin.test/api/movie/${props.id}/play` //test header
 

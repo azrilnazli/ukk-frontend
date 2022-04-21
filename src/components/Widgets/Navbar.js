@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Navbar, NavbarBrand, Container,Nav,NavDropdown } from 'react-bootstrap';
 import { BrowserRouter as Router,Link } from 'react-router-dom';
 import LogoutLink from './LogoutLink';
+import config from '../../config.json';
 
 
 const NavbarMenu = (
@@ -98,7 +99,7 @@ const NavbarMenu = (
 
             <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">UKK RTM</Navbar.Brand>
+                <Navbar.Brand href="#home">{config.APP}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

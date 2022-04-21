@@ -22,6 +22,8 @@ import MyAccount from './components/MyAccount';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
 
+
+
 const App = () => {
 
   const [user, setUser] = React.useState('');
@@ -52,6 +54,7 @@ const App = () => {
       <div className="container mt-1 mb-2 py-3 bg-primary">
         <Navbar  NavLink={NavLink} logout={logout} loggedIn={loggedIn}  authLink={authLink}/>        
         <div className="container mt-1 mb-2 py-3 bg-primary">
+        
           <Switch>
 
               {/* Public eg guest */}

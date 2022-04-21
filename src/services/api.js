@@ -1,11 +1,12 @@
 import axios from 'axios';
+import config from '../config.json'
 
 // axios create
 const apiClient = axios.create({
 
     // token
     //baseURL: 'http://laravel8.test',
-    baseURL: 'http://admin.test',
+    baseURL: config.SERVER_URL,
 
     // cookie CSRF
     //baseURL: 'http://localhost:8000',
