@@ -3,6 +3,8 @@ import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import config from '../../config.json'
 
+
+
 const MovieCard = (props) => {
         
     const src = config.SERVER_URL + "/storage/streaming/" + props.id + "/thumbnails/potrait.jpg";

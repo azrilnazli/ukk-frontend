@@ -3,9 +3,6 @@ import apiClient from '../../services/api';
 
 const ProfileData = (company) => {
 
-
-
-
     return (
         <div className="card mt-3">
         <h5 className="card-header">          
@@ -22,6 +19,9 @@ const ProfileData = (company) => {
             <dl className="row">
                 <dt className="col-sm-3">Name</dt>
                 <dd className="col-sm-9">{company.name}</dd>
+
+                <dt className="col-sm-3">Registration Date</dt>
+                <dd className="col-sm-9">{company.registration_date}</dd>
 
                 <dt className="col-sm-3">Email</dt>
                 <dd className="col-sm-9">{company.email}</dd>

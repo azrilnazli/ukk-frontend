@@ -2,6 +2,8 @@ import React from 'react';
 import ProfileData from './ProfileData';
 import Profile from './ProfileForm';
 import apiClient from '../../services/api';
+import SsmData from './SsmData';
+import MofData from './MofData';
  
 const MyCompany = () => {
 
@@ -23,10 +25,9 @@ const MyCompany = () => {
         <React.Fragment>
    {company.name}
             <ProfileData {...company} />
-            <ProfileData />
-            <ProfileData />
-            <ProfileData />
-            <ProfileData />
+            <SsmData {...company} />
+            <MofData {...company} />
+ 
         </React.Fragment>
         
     );
