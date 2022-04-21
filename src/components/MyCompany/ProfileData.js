@@ -9,7 +9,6 @@ const ProfileData = () => {
 
         <a  className=" btn btn-sm btn-primary m-1">Edit</a>
         
-        
         </div>
         </h5>  
         
