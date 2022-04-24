@@ -40,6 +40,17 @@ const ProfileData = (company) => {
 
                 <dt className="col-sm-3">State</dt>
                 <dd className="col-sm-9">{company.states}</dd>
+
+                <dt className="col-sm-3">Board of Directors</dt>
+                <dd className="col-sm-9">{company.board_of_directors}</dd>
+
+                <dt className="col-sm-3">Paid Capital</dt>
+                <dd className="col-sm-9">MYR {company.paid_capital}</dd>
+
+                <dt className="col-sm-3">Experiences</dt>
+                <dd className="col-sm-9">{company.experiences}</dd>
+
+                
           
             </dl>
         </div>
