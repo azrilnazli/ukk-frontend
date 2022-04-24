@@ -124,7 +124,6 @@ const Profile = () => {
         return () => abortCont.abort();    
     }, [] ); // Empty array [] means this only run on first render
 
-
     return (
 
         <Fragment>

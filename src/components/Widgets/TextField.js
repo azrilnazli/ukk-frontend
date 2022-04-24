@@ -1,22 +1,28 @@
 import React from 'react';
-import { ErrorMessage, useField} from 'formik';
 
-function TextField({label, ...props}) {
-    const [field, meta] = useField(props)
+const TextField = (props) => {
     return (
-        <div className='mb-2'>
-            <label htmlFor={field.name}>{label}</label>
-            <input 
-                className={`form-control ${meta.touched && meta.error && 'is-invalid'}`}
-                {...field}
-                {...props}
-                autoComplete="off"
-            />    
-            {props.error ? 'ada error' : null}
-            <ErrorMessage component="span" className="invalid-feedback" name={field.name} />
-        </div>
-        
+
+    <React.Fragment>
+    <label htmlFor={props.name}>{props.label}</label>
+    <input
+        name={props.name}
+        type={ props.type ? props.type : 'text'}     
+        className={"form-control" + (props.error ? ' is-invalid' : '')}
+        disabled={props.disabled}
+        placeholder={props.placeholder}
+        value={props.value}    
+        onChange={props.onChange}
+    />
+    
+    {props.error ? 
+        <span className="invalid-feedback" ><strong>{props.error}</strong></span> 
+        : 
+        null 
+    }  
+    </React.Fragment>
+   
     );
-}
+};
 
 export default TextField;

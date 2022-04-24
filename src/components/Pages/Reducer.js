@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import TextField from '../Widgets/TextField';
+import TextField from '../Widgets/ReducerTextField';
 import * as Yup from 'yup';
 
 const Reducer = () => {
