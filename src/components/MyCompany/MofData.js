@@ -1,16 +1,23 @@
 import React from 'react';
 import apiClient from '../../services/api';
 import {Modal, Button, Form} from 'react-bootstrap';
+import FileUpload from './FileUpload';
+
 const collect = require('collect.js'); 
 
 const MofData = () => {
 
+  // mof related fields
   const initialValues = {
     mof_registration_number: { value: '' ,error: '' },
+    is_mof_active: { value: '' ,error: '' },
+    is_mof_cert_uploaded: { value: '' ,error: '' },
+    mof_expiry_date: { value: '' ,error: '' },
   }
+
   const [state, setState] = React.useState(initialValues)
 
-  // change input value dynamically
+  //change input value dynamically
   const updateStateValue = (field,value) => {
 
       setState(prevState => ({
@@ -35,9 +42,8 @@ const MofData = () => {
   };
 
   const [show, setShow] = React.useState(false)
-  const handleClose = (e) => {
+  const handleClose = () => {
     setShow(false);
-    handleSubmit(e);
   }
   
   const handleShow = () => {
@@ -59,8 +65,14 @@ const MofData = () => {
 };
 
 const handleSubmit = (e) => {
+  setShow(false);
   e.preventDefault();
   console.log('submit')
+
+  // upload file
+  if(selectedFile){
+    handleUpload(e)
+  }
 
   // reset the error
   const fields = collect(state);
@@ -71,9 +83,12 @@ const handleSubmit = (e) => {
   // post the data
   apiClient.post('/api/company/update_profile', {
       mof_registration_number: state.mof_registration_number.value,
-
+      is_mof_active: state.is_mof_active.value,
+      is_mof_cert_uploaded: state.is_mof_cert_uploaded.value,
+      mof_expiry_date:  state.mof_expiry_date.value
   }).then(response => {
       //console.log(response);
+      console.log(state.is_mof_active.value)
       if (response.status === 200) {
         console.log(response.data)
       }
@@ -86,9 +101,31 @@ const handleSubmit = (e) => {
           })
       }
   });
+} // handleSubmit
+
+const [selectedFile, setSelectedFile] = React.useState(null);
+
+const handleUpload = (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile);
+    try {
+    const response = apiClient({
+        method: "post",
+        url: "/api/company/upload",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+    });
+    } catch(error) {
+        console.log(error)
+    }
 }
 
-  
+const handleFileSelect = (event) => {
+  setSelectedFile(event.target.files[0])
+}
+
+
   React.useEffect(() => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/show_profile', { signal: abortCont.signal} )
@@ -107,7 +144,6 @@ const handleSubmit = (e) => {
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
 
-console.log(state.mof_registration_number.value)
     
     return (
       <div className="card mt-3">
@@ -125,17 +161,17 @@ console.log(state.mof_registration_number.value)
           <dl className="row">
               <dt className="col-sm-3">MOF Registration</dt>
               <dd className="col-sm-9">{state.mof_registration_number.value}</dd>
-{/* 
+
               <dt className="col-sm-3">Expiry Date</dt>
               <dd className="col-sm-9">{state.mof_expiry_date.value}</dd>
 
               <dt className="col-sm-3">MOF Status</dt>
               <dd className="col-sm-9">
-                {state.is_mof_active ? 
-               <span className="text-success">Active</span> 
-              : 
-              <span className="text-danger">Inactive</span>
-              }
+                {state.is_mof_active.value == 1 ? 
+                <span className="badge rounded-pill bg-success">Active</span> 
+                : 
+                <span className="badge rounded-pill bg-danger">Inactive</span> 
+                } 
               </dd>
 
               <dt className="col-sm-3">MOF Certificate</dt>
@@ -145,7 +181,7 @@ console.log(state.mof_registration_number.value)
                   :
                   <span className="text-danger">Please upload MOF certifacate ( PDF )</span>
                   }
-              </dd> */}
+              </dd>
 
         
           </dl>
@@ -172,13 +208,13 @@ console.log(state.mof_registration_number.value)
               autoFocus
             />
           </Form.Group>
-{/* 
+
           <Form.Group className="mb-3">
             <Form.Label>Expiry Date</Form.Label>
             <Form.Control
               name="mof_expiry_date"
               onChange={handleChange}
-              value={state.mof_expiry_date}
+              value={state.mof_expiry_date.value}
               type="date"
               placeholder="Choose MOF Expiry Date"
               autoFocus
@@ -188,18 +224,35 @@ console.log(state.mof_registration_number.value)
           <Form.Group className="mb-3">
             <Form.Label>eProlehan Status ?</Form.Label>
             <Form.Check 
-              name="mof_is_mof_active"
+              name="is_mof_active"
               onChange={handleChange}
-              type="checkbox" 
+              type="radio" 
               label="Active" 
-              value={state.is_mof_active}  
+              value="1"
+              checked={state.is_mof_active.value == 1 ? 'checked' : ''} 
+        
+            />
+            
+            <Form.Check 
+              name="is_mof_active"
+              onChange={handleChange}
+              type="radio" 
+              label="Inactive" 
+              value="0"
+              checked={state.is_mof_active.value == 0 ? 'checked' : ''} 
+          
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Upload MOF Certificate</Form.Label>
-            <Form.Control type="file" />
-          </Form.Group> */}
+            <Form.Control 
+              onChange={handleFileSelect}
+              name="file" 
+              type="file" 
+           
+            />
+          </Form.Group>
 
 
         </Form>
@@ -208,7 +261,7 @@ console.log(state.mof_registration_number.value)
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>
