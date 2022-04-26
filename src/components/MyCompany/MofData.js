@@ -2,6 +2,7 @@ import React from 'react';
 import apiClient from '../../services/api';
 import {Modal, Button, Form} from 'react-bootstrap';
 import FileUpload from './FileUpload';
+import config from '../../config.json'
 
 const collect = require('collect.js'); 
 
@@ -9,6 +10,7 @@ const MofData = () => {
 
   // mof related fields
   const initialValues = {
+    id: { value: '' ,error: '' },
     mof_registration_number: { value: '' ,error: '' },
     is_mof_active: { value: '' ,error: '' },
     is_mof_cert_uploaded: { value: '' ,error: '' },
@@ -50,7 +52,15 @@ const MofData = () => {
     setShow(true);
   }
 
- 
+  const [showPdf, setShowPdf] = React.useState(false)
+  const handleClosePdf = () => {
+    setShowPdf(false);
+  }
+  
+  const handleShowPdf = () => {
+    setShowPdf(true);
+  }
+
   const handleChange = (e) => {
     console.log(e.target.value)
     const { name, value } = e.target; // object
@@ -155,7 +165,8 @@ const handleFileSelect = (event) => {
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
 
-    
+  const [fullscreen, setFullscreen] = React.useState(true);
+
     return (
       <div className="card mt-3">
       <h5 className="card-header">          
@@ -188,7 +199,7 @@ const handleFileSelect = (event) => {
               <dt className="col-sm-3">MOF Certificate</dt>
               <dd className="col-sm-9">
                   { state.is_mof_cert_uploaded.value ? 
-                  <button className='btn btn-primary btn-sm'>View Document</button>
+                  <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
                   :
                   <span className="text-danger">Please upload MOF certifacate ( PDF )</span>
                   }
@@ -201,7 +212,25 @@ const handleFileSelect = (event) => {
 
 
   <>
-    <Modal show={show} onHide={handleClose}>
+  <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
+      <Modal.Header closeButton>
+        <Modal.Title>Ministry of Finance</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <embed
+   // src=`http://ukk-backend.test/storage/companies/{$id}/mof_cert.pdf`
+    src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
+    type="application/pdf"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%"
+></embed>
+      </Modal.Body>
+    </Modal>
+
+
+    <Modal size="md" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
@@ -216,7 +245,7 @@ const handleFileSelect = (event) => {
               type="text"
               value={state.mof_registration_number.value}
               placeholder="Enter MOF Registration Number"
-              autoFocus
+             
             />
           </Form.Group>
 
@@ -228,7 +257,7 @@ const handleFileSelect = (event) => {
               value={state.mof_expiry_date.value}
               type="date"
               placeholder="Choose MOF Expiry Date"
-              autoFocus
+              
             />
           </Form.Group>
 
