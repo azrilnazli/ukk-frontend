@@ -86,6 +86,11 @@ const handleSubmit = (e) => {
       console.log(state.is_mof_active.value)
       if (response.status === 200) {
         console.log(response.data)
+          // upload file
+        if(selectedFile){
+          console.log('upload')
+          handleUpload(e)
+        }
       }
   }).catch(error => {
      
@@ -97,17 +102,15 @@ const handleSubmit = (e) => {
       }
   });
 
-  // upload file
-  if(selectedFile){
-    console.log('upload')
-    handleUpload(e)
-  }
+
 } // handleSubmit
 
+// file related constants
 const [selectedFile, setSelectedFile] = React.useState(null);
+const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
-    e.preventDefault()
+   
 
     // JS formData
     const formData = new FormData();
@@ -121,7 +124,8 @@ const handleUpload = (e) => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
-      console.log(response)
+      console.log(response.data.is_mof_cert_uploaded)
+      updateStateValue('is_mof_cert_uploaded',response.data.is_mof_cert_uploaded )
     }).catch(error => {
       console.error(error)
     })
@@ -255,6 +259,7 @@ const handleFileSelect = (event) => {
             <Form.Label>Upload MOF Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
+              accept=".pdf"
               type="file" 
            
             />
