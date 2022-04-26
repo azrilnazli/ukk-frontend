@@ -69,11 +69,6 @@ const handleSubmit = (e) => {
   e.preventDefault();
   console.log('submit')
 
-  // upload file
-  if(selectedFile){
-    handleUpload(e)
-  }
-
   // reset the error
   const fields = collect(state);
   fields.each( (error,field) => {
@@ -101,24 +96,36 @@ const handleSubmit = (e) => {
           })
       }
   });
+
+  // upload file
+  if(selectedFile){
+    console.log('upload')
+    handleUpload(e)
+  }
 } // handleSubmit
 
 const [selectedFile, setSelectedFile] = React.useState(null);
 
 const handleUpload = (e) => {
     e.preventDefault()
+
+    // JS formData
     const formData = new FormData();
-    formData.append("selectedFile", selectedFile);
-    try {
-    const response = apiClient({
+    formData.append('document', 'mof_cert.pdf'); // force the filename on server
+    formData.append("selectedFile", selectedFile); // input name = selectedFile
+
+    // axios 
+    apiClient({
         method: "post",
         url: "/api/company/upload",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
-    });
-    } catch(error) {
-        console.log(error)
-    }
+    }).then(response => {
+      console.log(response)
+    }).catch(error => {
+      console.error(error)
+    })
+
 }
 
 const handleFileSelect = (event) => {
@@ -248,7 +255,6 @@ const handleFileSelect = (event) => {
             <Form.Label>Upload MOF Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
-              name="file" 
               type="file" 
            
             />
