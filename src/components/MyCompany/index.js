@@ -16,7 +16,7 @@ const MyCompany = () => {
     return (
         <React.Fragment>
             <ProfileData/>
-            {/* <SsmData {...company} />  */}
+            <SsmData />
             <MofData />
             {/* <FinasData {...company} />
             <KkmmData {...company} />

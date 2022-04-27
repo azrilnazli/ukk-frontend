@@ -3,6 +3,7 @@ import apiClient from '../../services/api';
 import {Modal, Button, Form} from 'react-bootstrap';
 import FileUpload from './FileUpload';
 import config from '../../config.json'
+import TextField from '../Widgets/TextField';
 
 const collect = require('collect.js'); 
 
@@ -34,6 +35,7 @@ const MofData = () => {
     is_mof_active: { value: '' ,error: '' },
     is_mof_cert_uploaded: { value: '' ,error: '' },
     mof_expiry_date: { value: '' ,error: '' },
+    selectedFile: { value: '' ,error: '' },
   }
 
   const [state, setState] = React.useState(initialValues)
@@ -114,13 +116,18 @@ const handleSubmit = (e) => {
       //console.log(response);
       console.log(state.is_mof_active.value)
       if (response.status === 200) {
-        setShow(false) // close the modal
+       
         console.log(response.data)
           // upload file
+
         if(selectedFile){
           console.log('upload')
           handleUpload(e)
+        } else {
+          setShow(false) // close the modal
         }
+
+        
       }
   }).catch(error => {
      
@@ -145,6 +152,7 @@ const handleUpload = (e) => {
     // JS formData
     const formData = new FormData();
     formData.append('document', 'mof_cert.pdf'); // force the filename on server
+    formData.append('field', 'is_mof_cert_uploaded'); // db field
     formData.append("selectedFile", selectedFile); // input name = selectedFile
 
     // axios 
@@ -156,8 +164,18 @@ const handleUpload = (e) => {
     }).then(response => {
       console.log(response.data.is_mof_cert_uploaded)
       updateStateValue('is_mof_cert_uploaded',response.data.is_mof_cert_uploaded )
+      setShow(false) // open the modal
     }).catch(error => {
-      console.error(error)
+      //console.error(error)
+      setShow(true) // open the modal
+      if (error.response.status === 422) {
+
+        const errors = collect(error.response.data.errors); 
+        console.log(errors)
+        errors.each( (error,field) => {
+            updateStateError(field,error)  
+        })
+      }
     })
 
 }
@@ -245,37 +263,38 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Form>
 
           <Form.Group className="mb-3">
-            <Form.Label>MOF Registration</Form.Label>
-            <Form.Control
-              name="mof_registration_number"
-              onChange={handleChange}
-              type="text"
-              value={state.mof_registration_number.value}
-              placeholder="Enter MOF Registration Number"
-             
-            />
+          <TextField
+                    label="mof_registration_number"          
+                    name="mof_registration_number"
+                    onChange={handleChange}
+                    type="text"
+                    value={state.mof_registration_number.value}
+                    placeholder="Enter your company MOF registration number"
+                    error={state.mof_registration_number.error}
+                />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Expiry Date</Form.Label>
-            <Form.Control
-              name="mof_expiry_date"
-              onChange={handleChange}
-              value={state.mof_expiry_date.value}
-              type="date"
-              placeholder="Choose MOF Expiry Date"
-              
-            />
+          <TextField
+                    label="MOF Expiry Date"          
+                    name="mof_expiry_date"
+                    onChange={handleChange}
+                    type="date"
+                    value={state.mof_expiry_date.value}
+                    placeholder="Enter your company MOF Expiry Date"
+                    error={state.mof_expiry_date.error}
+                />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>eProlehan Status ?</Form.Label>
+            <Form.Label>ePerolehan Status ?</Form.Label>
             <Form.Check 
               name="is_mof_active"
               onChange={handleChange}
               type="radio" 
               label="Active" 
               value="1"
+              //className={"form-control" + (state.is_mof_active.error ? ' is-invalid' : '')}
               checked={state.is_mof_active.value == 1 ? 'checked' : ''} 
         
             />
@@ -286,18 +305,39 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="radio" 
               label="Inactive" 
               value="0"
+              //className={"form-control" + (state.is_mof_active.error ? ' is-invalid' : '')}
               checked={state.is_mof_active.value == 0 ? 'checked' : ''} 
           
             />
+            {state.is_mof_active.error ? 
+              <p className='text-danger'><strong>{state.is_mof_active.error}</strong></p>
+            :
+              null
+            }
           </Form.Group>
 
+          {state.is_mof_active.error ? 
+            <span className="invalid-feedback" ><strong>{state.is_mof_active.error}</strong></span> 
+          : 
+             null 
+          }  
+
           <Form.Group className="mb-3">
-            <Form.Label>Upload MOF Certificate</Form.Label>
+            {/* <Form.Label>Upload MOF Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
               accept=".pdf"
               type="file" 
-            />
+            /> */}
+                   <TextField
+                    label="MOF Certificate"          
+                    name="mof_expiry_date"
+                    onChange={handleFileSelect}
+                    type="file"
+                    // value={state.mof_expiry_date.value}
+                    placeholder="Upload your company MOF certificate"
+                    error={state.selectedFile.error}
+                />
           </Form.Group>
         </Form>
       </Modal.Body>

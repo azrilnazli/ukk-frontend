@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextField = (props) => {
+const RadioButton = (props) => {
     return (
 
     <React.Fragment>
@@ -13,7 +13,7 @@ const TextField = (props) => {
         placeholder={props.placeholder}
         value={props.value}    
         onChange={props.onChange}
-        
+        checked={state.is_mof_active.value == 1 ? 'checked' : ''} 
     />
     
     {props.error ? 
@@ -26,4 +26,4 @@ const TextField = (props) => {
     );
 };
 
-export default TextField;
+export default RadioButton;
