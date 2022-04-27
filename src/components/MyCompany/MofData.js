@@ -8,10 +8,29 @@ const collect = require('collect.js');
 
 const MofData = () => {
 
+  // load data from server
+  React.useEffect(() => {
+    const abortCont = new AbortController();
+    apiClient.get('/api/company/mof', { signal: abortCont.signal} )
+    .then(response => {
+        console.log(response)
+ 
+        const fields = collect(response.data.data);
+       // console.log(fields)
+         fields.each( (value,field) => {
+  
+             //console.log(field + ":" + value)
+             updateStateValue(field, value)
+         })
+    })
+    .catch(error => console.error(error));
+    return () => abortCont.abort();    
+  }, [] ); // Empty array [] means this only run on first render
+
   // mof related fields
   const initialValues = {
     id: { value: '' ,error: '' },
-    mof_registration_number: { value: '' ,error: '' },
+    mof_registration_number: { value: null ,error: '' },
     is_mof_active: { value: '' ,error: '' },
     is_mof_cert_uploaded: { value: '' ,error: '' },
     mof_expiry_date: { value: '' ,error: '' },
@@ -75,7 +94,7 @@ const MofData = () => {
 };
 
 const handleSubmit = (e) => {
-  setShow(false);
+
   e.preventDefault();
   console.log('submit')
 
@@ -86,7 +105,7 @@ const handleSubmit = (e) => {
   })
 
   // post the data
-  apiClient.post('/api/company/update_profile', {
+  apiClient.post('/api/company/update_mof', {
       mof_registration_number: state.mof_registration_number.value,
       is_mof_active: state.is_mof_active.value,
       is_mof_cert_uploaded: state.is_mof_cert_uploaded.value,
@@ -95,6 +114,7 @@ const handleSubmit = (e) => {
       //console.log(response);
       console.log(state.is_mof_active.value)
       if (response.status === 200) {
+        setShow(false) // close the modal
         console.log(response.data)
           // upload file
         if(selectedFile){
@@ -146,68 +166,55 @@ const handleFileSelect = (event) => {
   setSelectedFile(event.target.files[0])
 }
 
+const [fullscreen, setFullscreen] = React.useState(true);
 
-  React.useEffect(() => {
-    const abortCont = new AbortController();
-    apiClient.get('/api/company/show_profile', { signal: abortCont.signal} )
-    .then(response => {
-        console.log(response)
- 
-        const fields = collect(response.data.data);
-       // console.log(fields)
-         fields.each( (value,field) => {
-  
-             //console.log(field + ":" + value)
-             updateStateValue(field, value)
-         })
-    })
-    .catch(error => console.error(error));
-    return () => abortCont.abort();    
-  }, [] ); // Empty array [] means this only run on first render
-
-  const [fullscreen, setFullscreen] = React.useState(true);
+//console.log(state.mof_registration_number.value)
 
     return (
       <div className="card mt-3">
-      <h5 className="card-header">          
-      <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-      <span className="float-start"> Ministry of Finance</span>
+        <h5 className="card-header">          
+        <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
+        <span className="float-start"> Ministry of Finance</span>
 
-      <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
-      
-      </div>
-      </h5>  
-      
-      <div className="card-body">
-      <div>
-          <dl className="row">
-              <dt className="col-sm-3">MOF Registration</dt>
-              <dd className="col-sm-9">{state.mof_registration_number.value}</dd>
-
-              <dt className="col-sm-3">Expiry Date</dt>
-              <dd className="col-sm-9">{state.mof_expiry_date.value}</dd>
-
-              <dt className="col-sm-3">MOF Status</dt>
-              <dd className="col-sm-9">
-                {state.is_mof_active.value == 1 ? 
-                <span className="badge rounded-pill bg-success">Active</span> 
-                : 
-                <span className="badge rounded-pill bg-danger">Inactive</span> 
-                } 
-              </dd>
-
-              <dt className="col-sm-3">MOF Certificate</dt>
-              <dd className="col-sm-9">
-                  { state.is_mof_cert_uploaded.value ? 
-                  <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
-                  :
-                  <span className="text-danger">Please upload MOF certifacate ( PDF )</span>
-                  }
-              </dd>
-
+        <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
-          </dl>
-      </div>
+        </div>
+        </h5>  
+        
+        <div className="card-body">
+
+          { state.mof_registration_number.value != null ? 
+          <div>
+            <dl className="row">
+                <dt className="col-sm-3">MOF Registration</dt>
+                <dd className="col-sm-9">{state.mof_registration_number.value}</dd>
+
+                <dt className="col-sm-3">Expiry Date</dt>
+                <dd className="col-sm-9">{state.mof_expiry_date.value}</dd>
+
+                <dt className="col-sm-3">MOF Status</dt>
+                <dd className="col-sm-9">
+                  {state.is_mof_active.value == 1 ? 
+                  <span className="badge rounded-pill bg-success">Active</span> 
+                  : 
+                  <span className="badge rounded-pill bg-danger">Inactive</span> 
+                  } 
+                </dd>
+
+                <dt className="col-sm-3">MOF Certificate</dt>
+                <dd className="col-sm-9">
+                    { state.is_mof_cert_uploaded.value ? 
+                    <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
+                    :
+                    <span className="text-danger">Please upload MOF certifacate ( PDF )</span>
+                    }
+                </dd>
+            </dl>
+          </div>
+          :
+            <span>Please update your MOF data</span>
+          }
+
       </div>
 
 
@@ -217,15 +224,15 @@ const handleFileSelect = (event) => {
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
       <embed
-   // src=`http://ukk-backend.test/storage/companies/{$id}/mof_cert.pdf`
-    src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
-    type="application/pdf"
-    frameBorder="0"
-    scrolling="auto"
-    height="100%"
-    width="100%"
-></embed>
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
+        type="application/pdf"
+        frameBorder="0"
+        scrolling="auto"
+        height="100%"
+        width="100%"
+      ></embed>
       </Modal.Body>
     </Modal>
 
@@ -290,11 +297,8 @@ const handleFileSelect = (event) => {
               onChange={handleFileSelect}
               accept=".pdf"
               type="file" 
-           
             />
           </Form.Group>
-
-
         </Form>
       </Modal.Body>
       <Modal.Footer>
