@@ -4,15 +4,16 @@ const TextField = (props) => {
     return (
 
     <React.Fragment>
-    <input
+    <label htmlFor={props.name}>{props.label}</label>
+    <textarea
         name={props.name}
         type={ props.type ? props.type : 'text'}     
         className={"form-control" + (props.error ? ' is-invalid' : '')}
         disabled={props.disabled}
         placeholder={props.placeholder}
-        value={props.value}    
+        rows="5"
         onChange={props.onChange}
-    />
+    >{props.value}</textarea>
     
     {props.error ? 
         <span className="invalid-feedback" ><strong>{props.error}</strong></span> 

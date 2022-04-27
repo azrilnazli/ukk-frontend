@@ -7,7 +7,7 @@ import TextField from '../Widgets/TextField';
 
 const collect = require('collect.js'); 
 
-const FinasFPData = () => {
+const FinasFDData = () => {
 
   // load data from server
   React.useEffect(() => {
@@ -193,7 +193,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">FINAS (fd)</span>
+        <span className="float-start">FINAS (DF)</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
@@ -205,7 +205,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
           { state.finas_fd_registration_number.value != null ? 
           <div>
             <dl className="row">
-                <dt className="col-sm-3">finas_fd Registration</dt>
+                <dt className="col-sm-3">FINAS (DF) Registration</dt>
                 <dd className="col-sm-9">{state.finas_fd_registration_number.value}</dd>
 
                 <dt className="col-sm-3">Expiry Date</dt>
@@ -220,18 +220,18 @@ const [fullscreen, setFullscreen] = React.useState(true);
                   } 
                 </dd> */}
 
-                <dt className="col-sm-3">finas_fd Certificate</dt>
+                <dt className="col-sm-3">FINAS (DF) Certificate</dt>
                 <dd className="col-sm-9">
                     { state.is_finas_fd_cert_uploaded.value ? 
                     <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
                     :
-                    <span className="text-danger">Please upload finas_fd certifacate ( PDF )</span>
+                    <span className="text-danger">Please upload FINAS (DF) certifacate ( PDF )</span>
                     }
                 </dd>
             </dl>
           </div>
           :
-            <span>Please update your finas_fd data</span>
+            <span>Please update your FINAS (DF) data</span>
           }
 
       </div>
@@ -240,7 +240,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
-        <Modal.Title>Ministry of Finance</Modal.Title>
+        <Modal.Title>FINAS (DF)</Modal.Title>
       </Modal.Header>
       <Modal.Body>
       { config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fd_cert.pdf"}
@@ -265,7 +265,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
           <Form.Group className="mb-3">
           <TextField
-                    label="finas_fd Registration Number"          
+                    label="FINAS (DF) Registration Number"          
                     name="finas_fd_registration_number"
                     onChange={handleChange}
                     type="text"
@@ -277,7 +277,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
           <Form.Group className="mb-3">
           <TextField
-                    label="finas_fd Expiry Date"          
+                    label="FINAS (DF) Expiry Date"          
                     name="finas_fd_expiry_date"
                     onChange={handleChange}
                     type="date"
@@ -296,12 +296,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
-                    label="finas_fd Certificate"          
+                    label="FINAS (DF) Certificate"          
                     name="finas_fd_expiry_date"
                     onChange={handleFileSelect}
                     type="file"
                     // value={state.finas_fd_expiry_date.value}
-                    placeholder="Upload your company finas_fd certificate"
+                    placeholder="Upload your company FINAS (DF) certificate"
                     error={state.selectedFile.error}
                 />
           </Form.Group>
@@ -322,4 +322,4 @@ const [fullscreen, setFullscreen] = React.useState(true);
     );
 };
 
-export default FinasFPData;
+export default FinasFDData;

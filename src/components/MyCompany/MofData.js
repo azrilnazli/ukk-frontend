@@ -264,7 +264,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
           <Form.Group className="mb-3">
           <TextField
-                    label="mof_registration_number"          
+                    label="MOF Registration Number"          
                     name="mof_registration_number"
                     onChange={handleChange}
                     type="text"

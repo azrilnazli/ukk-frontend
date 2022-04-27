@@ -1,6 +1,5 @@
 import React from 'react';
 import ProfileData from './ProfileData';
-import Profile from './ProfileForm';
 import apiClient from '../../services/api';
 import SsmData from './SsmData';
 import MofData from './MofData';
@@ -13,6 +12,9 @@ import BankData from './BankData';
 import KkmmSwastaData from './KkmmSwasta';
 import KkmmSyndicatedData from './KkmmSyndicated';
 import BumiputeraData from './BumiputeraData';
+import CreditData from './CreditData';
+import BoardOfDirectors from './BoardOfDirectorsData';
+import ExperiencesData from './ExperiencesData';
 
  
 const MyCompany = () => {
@@ -20,6 +22,8 @@ const MyCompany = () => {
     return (
         <React.Fragment>
             <ProfileData/>
+            <BoardOfDirectors />
+            <ExperiencesData />
             <SsmData />
             <MofData />
             <FinasFPData />
@@ -28,10 +32,10 @@ const MyCompany = () => {
             <KkmmSyndicatedData />
             <BumiputeraData />
             <AuditData />
+            <BankData  /> 
+            <CreditData />
 
-            {/* <KkmmData/>
-            <AuditData />
-             <BankData  />  */}
+      
         </React.Fragment>
         
     );

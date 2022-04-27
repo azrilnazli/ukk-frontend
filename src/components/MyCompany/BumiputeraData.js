@@ -114,7 +114,7 @@ const handleSubmit = (e) => {
       bumiputera_expiry_date:  state.bumiputera_expiry_date.value
   }).then(response => {
       //console.log(response);
-      //console.log(state.is_bumiputera.value)
+      console.log(state.id.value)
       if (response.status === 200) {
        
         console.log(response.data)

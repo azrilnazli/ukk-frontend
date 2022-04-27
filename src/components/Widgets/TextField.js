@@ -9,7 +9,7 @@ const TextField = (props) => {
         name={props.name}
         type={ props.type ? props.type : 'text'}     
         className={"form-control" + (props.error ? ' is-invalid' : '')}
-        disabled={props.disabled}
+       // disabled={props.disabled}
         placeholder={props.placeholder}
         value={props.value}    
         onChange={props.onChange}

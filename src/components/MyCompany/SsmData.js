@@ -258,7 +258,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="md" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Ministry of Finance</Modal.Title>
+        <Modal.Title>Suruhanjaya Syarikat Malaysia</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -296,8 +296,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
-                    label="ssm Certificate"          
-                    name="ssm_expiry_date"
+                    label="SSM Certificate"          
+                    name="ssm_cert"
                     onChange={handleFileSelect}
                     type="file"
                     // value={state.ssm_expiry_date.value}

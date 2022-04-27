@@ -23,7 +23,6 @@ const ProfileData = () => {
     city: { value: '' ,error: '' },
     states: { value: '' ,error: '' },
     board_of_directors: { value: '' ,error: '' },
-    paid_capital: { value: '' ,error: '' },
     experiences: { value: '' ,error: '' },
 
   }
@@ -111,7 +110,6 @@ const handleSubmit = (e) => {
       city: state.city.value,
       states: state.states.value,
       board_of_directors: state.board_of_directors.value,
-      paid_capital: state.paid_capital.value,
       experiences: state.experiences.value,
 
   }).then(response => {
@@ -234,15 +232,12 @@ console.log(state.id.value)
 
                 <dt className="col-sm-3">State</dt>
                 <dd className="col-sm-9">{state.states.value}</dd>
-
+{/* 
                 <dt className="col-sm-3">Board of Directors</dt>
                 <dd className="col-sm-9">{state.board_of_directors.value}</dd>
 
-                <dt className="col-sm-3">Paid Capital</dt>
-                <dd className="col-sm-9">{state.paid_capital.value}</dd>
-
                 <dt className="col-sm-3">Experiences</dt>
-                <dd className="col-sm-9">{state.experiences.value}</dd>
+                <dd className="col-sm-9">{state.experiences.value}</dd> */}
 
             </dl>
           </div>
@@ -318,7 +313,7 @@ console.log(state.id.value)
 
           <Form.Group className="mb-3">
             <TextField
-                    label="email"          
+                    label="Email"          
                     name="email"
                     onChange={handleChange}
                     type="text"
@@ -331,7 +326,7 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
             <TextField
-                    label="phone"          
+                    label="Phone"          
                     name="phone"
                     onChange={handleChange}
                     type="text"
@@ -344,7 +339,7 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextField
-                    label="address"          
+                    label="Address"          
                     name="address"
                     onChange={handleChange}
                     type="text"
@@ -357,7 +352,7 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextField
-                    label="postcode"          
+                    label="Postcode"          
                     name="postcode"
                     onChange={handleChange}
                     type="text"
@@ -370,7 +365,7 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextField
-                    label="city"          
+                    label="City"          
                     name="city"
                     onChange={handleChange}
                     type="text"
@@ -383,18 +378,18 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextField
-                    label="states"          
+                    label="State"          
                     name="states"
                     onChange={handleChange}
                     type="text"
                     value={state.states.value}
-                    placeholder="Enter your company states"
+                    placeholder="Enter your company state"
                     error={state.states.error}
                 />
           </Form.Group>
 
           
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
           <TextField
                     label="board_of_directors"          
                     name="board_of_directors"
@@ -404,22 +399,11 @@ console.log(state.id.value)
                     placeholder="Enter your company board_of_directors"
                     error={state.board_of_directors.error}
                 />
-          </Form.Group>
+          </Form.Group> */}
 
-          
-          <Form.Group className="mb-3">
-          <TextField
-                    label="paid_capital"          
-                    name="paid_capital"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.paid_capital.value}
-                    placeholder="Enter your company paid_capital"
-                    error={state.paid_capital.error}
-                />
-          </Form.Group>
+  
 
-          
+{/*           
           <Form.Group className="mb-3">
           <TextField
                     label="experiences"          
@@ -430,7 +414,7 @@ console.log(state.id.value)
                     placeholder="Enter your company experiences"
                     error={state.experiences.error}
                 />
-          </Form.Group>
+          </Form.Group> */}
 
 
 

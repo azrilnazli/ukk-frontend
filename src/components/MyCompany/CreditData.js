@@ -7,12 +7,12 @@ import TextField from '../Widgets/TextField';
 
 const collect = require('collect.js'); 
 
-const FinasFPData = () => {
+const CreditData = () => {
 
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
-    apiClient.get('/api/company/finas_fp', { signal: abortCont.signal} )
+    apiClient.get('/api/company/credit', { signal: abortCont.signal} )
     .then(response => {
         console.log(response)
  
@@ -27,14 +27,14 @@ const FinasFPData = () => {
     .catch(error => console.error(error));
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
+  console.log('is_credit_cert_uploaded')
 
-  // finas_fp related fields
+  // credit related fields
   const initialValues = {
     id: { value: '' ,error: '' },
-    finas_fp_registration_number: { value: null ,error: '' },
-    //is_finas_fp_active: { value: '' ,error: '' },
-    is_finas_fp_cert_uploaded: { value: '' ,error: '' },
-    finas_fp_expiry_date: { value: '' ,error: '' },
+
+    is_credit_cert_uploaded: { value: null ,error: '' },
+
     selectedFile: { value: '' ,error: '' },
   }
 
@@ -107,11 +107,9 @@ const handleSubmit = (e) => {
   })
 
   // post the data
-  apiClient.post('/api/company/update_finas_fp', {
-      finas_fp_registration_number: state.finas_fp_registration_number.value,
-      //is_finas_fp_active: state.is_finas_fp_active.value,
-      is_finas_fp_cert_uploaded: state.is_finas_fp_cert_uploaded.value,
-      finas_fp_expiry_date:  state.finas_fp_expiry_date.value
+  apiClient.post('/api/company/update_ssm', {
+      is_credit_cert_uploaded: state.is_credit_cert_uploaded.value,
+
   }).then(response => {
       //console.log(response);
     
@@ -152,8 +150,8 @@ const handleUpload = (e) => {
 
     // JS formData
     const formData = new FormData();
-    formData.append('document', 'finas_fp_cert.pdf'); // force the filename on server
-    formData.append('field', 'is_finas_fp_cert_uploaded'); // db field
+    formData.append('document', 'credit_cert.pdf'); // force the filename on server
+    formData.append('field', 'is_credit_cert_uploaded'); // db field
     formData.append("selectedFile", selectedFile); // input name = selectedFile
 
     // axios 
@@ -164,8 +162,8 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      console.log(response.data.is_finas_fp_cert_uploaded)
-      updateStateValue('is_finas_fp_cert_uploaded',response.data.is_finas_fp_cert_uploaded )
+      console.log(response.data.is_credit_cert_uploaded)
+      updateStateValue('is_credit_cert_uploaded',response.data.is_credit_cert_uploaded )
     }).catch(error => {
       //console.error(error)
       setShow(true) // open the modal
@@ -187,13 +185,13 @@ const handleFileSelect = (event) => {
 
 const [fullscreen, setFullscreen] = React.useState(true);
 
-//console.log(state.finas_fp_registration_number.value)
+//console.log(state.ssm_registration_number.value)
 
     return (
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">FINAS (PF)</span>
+        <span className="float-start">Credit Information</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
@@ -201,37 +199,24 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </h5>  
         
         <div className="card-body">
-
-          { state.finas_fp_registration_number.value != null ? 
+        
+          { state.is_credit_cert_uploaded.value != null ? 
           <div>
             <dl className="row">
-                <dt className="col-sm-3">FINAS PF Registration</dt>
-                <dd className="col-sm-9">{state.finas_fp_registration_number.value}</dd>
+      
 
-                <dt className="col-sm-3">Expiry Date</dt>
-                <dd className="col-sm-9">{state.finas_fp_expiry_date.value}</dd>
-
-                {/* <dt className="col-sm-3">finas_fp Status</dt>
+                <dt className="col-sm-3">Credit Certificate</dt>
                 <dd className="col-sm-9">
-                  {state.is_finas_fp_active.value == 1 ? 
-                  <span className="badge rounded-pill bg-success">Active</span> 
-                  : 
-                  <span className="badge rounded-pill bg-danger">Inactive</span> 
-                  } 
-                </dd> */}
-
-                <dt className="col-sm-3">FINAS (PF) Certificate</dt>
-                <dd className="col-sm-9">
-                    { state.is_finas_fp_cert_uploaded.value ? 
+                    { state.is_credit_cert_uploaded.value ? 
                     <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
                     :
-                    <span className="text-danger">Please upload FINAS (PF) certifacate ( PDF )</span>
+                    <span className="text-danger">Please upload Credit certifacate ( PDF )</span>
                     }
                 </dd>
             </dl>
           </div>
           :
-            <span>Please update your FINAS (PF) data</span>
+            <span>Please update your Credit data</span>
           }
 
       </div>
@@ -240,12 +225,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
-        <Modal.Title>FINAS (PF)</Modal.Title>
+        <Modal.Title>Credit</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf"}
+      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/credit_cert.pdf"}
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf"}
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/credit_cert.pdf"}
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"
@@ -263,45 +248,22 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <Modal.Body>
         <Form>
 
-          <Form.Group className="mb-3">
-          <TextField
-                    label="FINAS (PF) Registration Number"          
-                    name="finas_fp_registration_number"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.finas_fp_registration_number.value}
-                    placeholder="Enter your company finas_fp registration number"
-                    error={state.finas_fp_registration_number.error}
-                />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-          <TextField
-                    label="FINAS (PF) Expiry Date"          
-                    name="finas_fp_expiry_date"
-                    onChange={handleChange}
-                    type="date"
-                    value={state.finas_fp_expiry_date.value}
-                    placeholder="Enter your company finas_fp Expiry Date"
-                    error={state.finas_fp_expiry_date.error}
-                />
-          </Form.Group>
 
 
           <Form.Group className="mb-3">
-            {/* <Form.Label>Upload finas_fp Certificate</Form.Label>
+            {/* <Form.Label>Upload ssm Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
               accept=".pdf"
               type="file" 
             /> */}
                    <TextField
-                    label="FINAS (PF) Certificate"          
-                    name="finas_fp_expiry_date"
+                    label="Credit Certificate"          
+                    name="credit_cert"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.finas_fp_expiry_date.value}
-                    placeholder="Upload your company FINAS (PF) certificate"
+                    // value={state.ssm_expiry_date.value}
+                    placeholder="Upload your company credit certificate"
                     error={state.selectedFile.error}
                 />
           </Form.Group>
@@ -322,4 +284,4 @@ const [fullscreen, setFullscreen] = React.useState(true);
     );
 };
 
-export default FinasFPData;
+export default CreditData;
