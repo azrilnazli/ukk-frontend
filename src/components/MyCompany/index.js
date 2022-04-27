@@ -5,10 +5,14 @@ import apiClient from '../../services/api';
 import SsmData from './SsmData';
 import MofData from './MofData';
 import {Modal, Button} from 'react-bootstrap';
-import FinasData from './FinasData';
+import FinasFPData from './FinasFPData';
+import FinasFDData from './FinasFDData';
 import KkmmData from './KkmmData';
 import AuditData from './AuditData';
 import BankData from './BankData';
+import KkmmSwastaData from './KkmmSwasta';
+import KkmmSyndicatedData from './KkmmSyndicated';
+import BumiputeraData from './BumiputeraData';
 
  
 const MyCompany = () => {
@@ -18,10 +22,15 @@ const MyCompany = () => {
             <ProfileData/>
             <SsmData />
             <MofData />
-            {/* <FinasData {...company} />
-            <KkmmData {...company} />
-            <AuditData {...company} />
-            <BankData {...company} /> */}
+            <FinasFPData />
+            <FinasFDData />
+            <KkmmSwastaData />
+            <KkmmSyndicatedData />
+            <BumiputeraData />
+
+            {/* <KkmmData/>
+            <AuditData />
+             <BankData  />  */}
         </React.Fragment>
         
     );
