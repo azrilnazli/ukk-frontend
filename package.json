@@ -13,6 +13,7 @@
     "collect.js": "^4.31.3",
     "formik": "^2.2.9",
     "hls.js": "^1.1.5",
+    "pdf-viewer-reactjs": "^2.2.3",
     "query-string": "^7.1.1",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
@@ -20,6 +21,7 @@
     "react-hls": "0.0.8",
     "react-hls-player": "^3.0.7",
     "react-paginate": "^8.1.2",
+    "react-pdf": "^5.7.2",
     "react-player": "^2.9.0",
     "react-router-bootstrap": "^0.26.1",
     "react-router-dom": "^5.1.2",
@@ -51,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.16.7"
   }
 }

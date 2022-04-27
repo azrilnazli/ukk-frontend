@@ -27,6 +27,7 @@ const MyCompany = () => {
             <KkmmSwastaData />
             <KkmmSyndicatedData />
             <BumiputeraData />
+            <AuditData />
 
             {/* <KkmmData/>
             <AuditData />
