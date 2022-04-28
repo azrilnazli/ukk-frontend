@@ -15,7 +15,7 @@ const ProfileData = () => {
   const initialValues = {
     id: { value: null ,error: '' },
     name: { value: null ,error: '' },
-    registration_date: { value: '' ,error: '' },
+    // registration_date: { value: '' ,error: '' },
     email: { value: '' ,error: '' },
     phone: { value: '' ,error: '' },
     address: { value: '' ,error: '' },
@@ -102,15 +102,15 @@ const handleSubmit = (e) => {
   // post the data
   apiClient.post('/api/company/update_profile', {
       name: state.name.value,
-      registration_date: state.registration_date.value,
+      //registration_date: state.registration_date.value,
       email: state.email.value,
       phone: state.phone.value,
       address: state.address.value,
       postcode: state.postcode.value,
       city: state.city.value,
       states: state.states.value,
-      board_of_directors: state.board_of_directors.value,
-      experiences: state.experiences.value,
+      //board_of_directors: state.board_of_directors.value,
+      //experiences: state.experiences.value,
 
   }).then(response => {
       //console.log(response);
@@ -212,8 +212,8 @@ console.log(state.id.value)
                 <dt className="col-sm-3">Name</dt>
                 <dd className="col-sm-9">{state.name.value}</dd>
 
-                <dt className="col-sm-3">Registration Date</dt>
-                <dd className="col-sm-9">{state.registration_date.value}</dd>
+                {/* <dt className="col-sm-3">Registration Date</dt>
+                <dd className="col-sm-9">{state.registration_date.value}</dd> */}
 
                 <dt className="col-sm-3">Email</dt>
                 <dd className="col-sm-9">{state.email.value}</dd>
@@ -298,7 +298,7 @@ console.log(state.id.value)
           
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
             <TextField
               label="Registration Date"
               name="registration_date"
@@ -309,7 +309,7 @@ console.log(state.id.value)
               error={state.registration_date.error}
              
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group className="mb-3">
             <TextField
