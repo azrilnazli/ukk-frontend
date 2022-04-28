@@ -168,6 +168,7 @@ const handleUpload = (e) => {
       setShow(false) // open the modal
       console.log(response.data.is_bank_cert_uploaded)
       updateStateValue('is_current_audit_year_cert_uploaded',response.data.is_current_audit_year_cert_uploaded )
+      updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
       //console.error(error)
       setShow(true) // open the modal

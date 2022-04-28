@@ -164,6 +164,7 @@ const handleUpload = (e) => {
     }).then(response => {
       console.log(response.data.is_mof_cert_uploaded)
       updateStateValue('is_mof_cert_uploaded',response.data.is_mof_cert_uploaded )
+      updateStateValue('id',response.data.id ) // to be used for PDF display
       setShow(false) // open the modal
     }).catch(error => {
       //console.error(error)
