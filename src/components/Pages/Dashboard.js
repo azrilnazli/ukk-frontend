@@ -5,62 +5,58 @@ import UserData from '../Widgets/UserData';
 
 const Dashboard = () => {
 
-    const [user, setUser]           = React.useState(false);
-    const [isPending, setIsPending] = React.useState(true);
-    const [profile, setProfile]     = React.useState(
-        JSON.parse(localStorage.getItem('userObject'))
-    );
 
-    const [videos, setVideos]       = React.useState([]);
-    const [duration, setDuration]   = React.useState();
-    const [volume, setVolume]       = React.useState();
+  const [isPending, SetIsPending] = React.useState(false)
+  const [profile,setProfile] = React.useState(false)  
 
-    // useEffect()
-    React.useEffect(() => {
-        const abortCont = new AbortController();
-        apiClient.get('/api/user', { signal: abortCont.signal} )
-        .then(response => {
-            return response.data
-        })
-        .then( data =>{
-            setUser(data)
-            //console.log(data)
-            
-            // Put the object into storage
-            sessionStorage.setItem('userObject', JSON.stringify(data));
-            setIsPending(false) // data loaded, set false
-        })
-        .catch(error => console.error(error));
-        return () => abortCont.abort();    
-    }, [] ); // Empty array [] means this only run on first render
+  React.useEffect(() => {
 
-    // statistics
-    React.useEffect(() => {
-        const abortCont = new AbortController();
-        apiClient.get('/api/user/statistics', { signal: abortCont.signal} )
-        .then(response => {
-            return response.data
-        })
-        .then( data => {
-  
-            console.log(data)
-            setDuration(data.duration)
-            setVolume(data.volume)
-            data.videos && setVideos(data.videos)
-  
-        })
-        .catch(error => console.error(error));
-        return () => abortCont.abort();    
-    }, [] ); // Empty array [] means this only run on first render
+    apiClient.get('/api/company/check_profile')
+    .then(response => {
+        setProfile(response.data.status)
+        SetIsPending(true)
+    })
+    .catch(error => console.error(error));
+        
+    }, []);
+
+    console.log(profile)
     
     return (
 
-        <div className='container container-fluid bg-light rounded p-3'>
+    <div className='container container-fluid bg-light rounded p-3'>
 
-            { isPending && <div>Loading...</div> }
-            { user &&  <UserData user={user} videos={videos} duration={duration} volume={volume}/>}
-        
-        </div>
+      <div className="alert alert-warning text-danger" role="alert">
+      <i className="fa fa-exclamation-triangle"></i> System is still under development.
+      </div>
+
+      <div className="alert alert-success" role="alert">
+      <h4>Your company info</h4>
+
+      { isPending ? 
+        <ul>
+          <li>
+            
+            {profile ? 
+            <>
+            <span className="text-primary">Company Profile </span>
+            <span className="badge rounded-pill bg-success"><i className="fa fa-check"></i></span> 
+            </>
+            :
+            <>
+            <span className="text-danger">Company Profile </span>
+            <span className="badge rounded-pill bg-danger"><i className="fa fa-times"></i></span>  
+            </>
+            }
+            </li>
+        </ul>
+        :
+        <p>Loading data ...</p>
+          }
+      </div>
+      <button className='btn btn-primary disabled'>Submit for Approval</button>
+
+    </div>
     );
 };
 

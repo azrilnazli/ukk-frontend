@@ -21,6 +21,9 @@ const MyCompany = () => {
 
     return (
         <React.Fragment>
+            <div className="alert alert-warning" role="alert">
+                Please complete all the required forms before Submit.
+            </div>
             <ProfileData/>
             <BoardOfDirectors />
             <ExperiencesData />
