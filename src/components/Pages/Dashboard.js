@@ -2,25 +2,10 @@ import React from 'react';
 import apiClient from '../../services/api';
 import { Redirect } from 'react-router-dom';
 import UserData from '../Widgets/UserData';
+import CheckData from '../MyCompany/CheckData';
 
 const Dashboard = () => {
 
-
-  const [isPending, SetIsPending] = React.useState(false)
-  const [profile,setProfile] = React.useState(false)  
-
-  React.useEffect(() => {
-
-    apiClient.get('/api/company/check_profile')
-    .then(response => {
-        setProfile(response.data.status)
-        SetIsPending(true)
-    })
-    .catch(error => console.error(error));
-        
-    }, []);
-
-    console.log(profile)
     
     return (
 
@@ -33,26 +18,25 @@ const Dashboard = () => {
       <div className="alert alert-success" role="alert">
       <h4>Your company info</h4>
 
-      { isPending ? 
-        <ul>
-          <li>
-            
-            {profile ? 
-            <>
-            <span className="text-primary">Company Profile </span>
-            <span className="badge rounded-pill bg-success"><i className="fa fa-check"></i></span> 
-            </>
-            :
-            <>
-            <span className="text-danger">Company Profile </span>
-            <span className="badge rounded-pill bg-danger"><i className="fa fa-times"></i></span>  
-            </>
-            }
-            </li>
-        </ul>
-        :
-        <p>Loading data ...</p>
-          }
+      <ul>
+          <CheckData module="check_profile" title="Profile" />
+          <CheckData module="check_board_of_directors" title="Board Of Directors" />
+          <CheckData module="check_experiences" title="Experiences" />
+
+          <CheckData module="check_ssm" title="SSM" />
+          <CheckData module="check_mof" title="MOF" />
+
+          <CheckData module="check_finas_fp" title="FINAS (PF)" />
+          <CheckData module="check_finas_fd" title="FINAS (DF)" />
+
+          <CheckData module="check_kkmm_swasta" title="KKMM ( Swasta )" />
+          <CheckData module="check_kkmm_syndicated" title="KKMM ( Syndicated )" />
+         
+          <CheckData module="check_bumiputera" title="Bumiputera Status" />
+          <CheckData module="check_bank" title="Banking Informations" />
+          <CheckData module="check_credit" title="Credit Facilities" />
+      </ul>
+   
       </div>
       <button className='btn btn-primary disabled'>Submit for Approval</button>
 
