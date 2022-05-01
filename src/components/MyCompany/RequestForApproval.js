@@ -52,7 +52,7 @@ const RequestForApproval = () => {
 
     return (
         <div className='mt-2'>
-            { isCompleted === false ?
+            { isCompleted == false ?
             <button onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
             :
             <button disabled className='btn btn-secondary'>Waiting for Approval</button>

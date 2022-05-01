@@ -27,17 +27,32 @@ const Dashboard = () => {
 
       <div className="col-6">
 
+      <div className='row mt-0'>
+          <div className="card border-primary">
+ 
+            <div className="card-body">
+              <h5 className="card-title">Approval Status</h5>
+              <p className="card-text">Still pending.</p>
+            
+            </div>
+          </div>
+        </div>
+
         <div className='row mt-3'>
 
+{/* 
+          <div className="alert alert-primary" role="alert">
+          New message from UKK.
+          </div>
           <div className="alert alert-primary" role="alert">
           You've submitted for Approval to UKK.
-          </div>
-
+          </div> */}
 
           <div className="card border-primary">
    
             <div className="card-body">
               
+              <h5 className="card-title">Company Profile</h5>
               <p className="card-text">Please complete all the required fields before you're able to apply for approval.
               Please check the minimal requirements for submission.</p>
               <ul className='list-group'>
@@ -63,16 +78,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className='row mt-3'>
-          <div className="card border-primary">
- 
-            <div className="card-body">
-              <h5 className="card-title">Status</h5>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" className="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+
 
 
       </div>
