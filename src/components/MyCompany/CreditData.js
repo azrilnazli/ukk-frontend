@@ -27,7 +27,7 @@ const CreditData = () => {
     .catch(error => console.error(error));
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
-  console.log('is_credit_cert_uploaded')
+  //console.log('is_credit_cert_uploaded')
 
   // credit related fields
   const initialValues = {
