@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import UserData from '../Widgets/UserData';
 import CheckData from '../MyCompany/CheckData';
 import RequestForApproval from '../MyCompany/RequestForApproval';
+import ApprovalStatus from '../MyCompany/ApprovalStatus';
+import Comment from '../MyCompany/Comment';
 
 const Dashboard = () => {
 
@@ -27,16 +29,9 @@ const Dashboard = () => {
 
       <div className="col-6">
 
-      <div className='row mt-0'>
-          <div className="card border-primary">
- 
-            <div className="card-body">
-              <h5 className="card-title">Approval Status</h5>
-              <p className="card-text">Still pending.</p>
-            
-            </div>
-          </div>
-        </div>
+        <ApprovalStatus />
+
+        <Comment />
 
         <div className='row mt-3'>
 
@@ -55,7 +50,7 @@ const Dashboard = () => {
               <h5 className="card-title">Company Profile</h5>
               <p className="card-text">Please complete all the required fields before you're able to apply for approval.
               Please check the minimal requirements for submission.</p>
-              <ul className='list-group'>
+              <ul className='list-group mb-3'>
                   <CheckData module="check_profile" title="Profile" />
                   <CheckData module="check_board_of_directors" title="Board Of Directors" />
                   <CheckData module="check_experiences" title="Experiences" />
