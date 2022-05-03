@@ -14,12 +14,10 @@ const SsmData = () => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/ssm', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
- 
+        setIsPending(false)
         const fields = collect(response.data.data);
        // console.log(fields)
          fields.each( (value,field) => {
-  
              //console.log(field + ":" + value)
              updateStateValue(field, value)
          })
@@ -32,13 +30,13 @@ const SsmData = () => {
   const initialValues = {
     id: { value: '' ,error: '' },
     ssm_registration_number: { value: null ,error: '' },
-    //is_ssm_active: { value: '' ,error: '' },
     is_ssm_cert_uploaded: { value: '' ,error: '' },
     ssm_expiry_date: { value: '' ,error: '' },
     selectedFile: { value: '' ,error: '' },
   }
 
   const [state, setState] = React.useState(initialValues)
+  const [isPending, setIsPending] = React.useState(true)
 
   //change input value dynamically
   const updateStateValue = (field,value) => {
@@ -109,29 +107,17 @@ const handleSubmit = (e) => {
   // post the data
   apiClient.post('/api/company/update_ssm', {
       ssm_registration_number: state.ssm_registration_number.value,
-      //is_ssm_active: state.is_ssm_active.value,
       is_ssm_cert_uploaded: state.is_ssm_cert_uploaded.value,
       ssm_expiry_date:  state.ssm_expiry_date.value
   }).then(response => {
-      //console.log(response);
-    
       if (response.status === 200) {
-       
-        console.log(response.data)
-          // upload file
-
         if(selectedFile){
-          console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal
         }
-
-        
       }
   }).catch(error => {
-     
-        console.error(error)
       if (error.response.status === 422) {
           const errors = collect(error.response.data.errors); 
           errors.each( (error,field) => {
@@ -193,16 +179,14 @@ const [fullscreen, setFullscreen] = React.useState(true);
     return (
       <div className="card mt-3">
         <h5 className="card-header">          
-        <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">Suruhanjaya Syarikat Malaysia</span>
-
-        <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
-        
-        </div>
+          <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
+            <span className="float-start">Suruhanjaya Syarikat Malaysia</span>
+            <a className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
+          </div>
         </h5>  
         
+        { !isPending ?
         <div className="card-body">
-
           { state.ssm_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -211,15 +195,6 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
                 <dt className="col-sm-3">Expiry Date</dt>
                 <dd className="col-sm-9">{state.ssm_expiry_date.value}</dd>
-
-                {/* <dt className="col-sm-3">ssm Status</dt>
-                <dd className="col-sm-9">
-                  {state.is_ssm_active.value == 1 ? 
-                  <span className="badge rounded-pill bg-success">Active</span> 
-                  : 
-                  <span className="badge rounded-pill bg-danger">Inactive</span> 
-                  } 
-                </dd> */}
 
                 <dt className="col-sm-3">SSM Certificate</dt>
                 <dd className="col-sm-9">
@@ -231,11 +206,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your SSM data</span>
-          }
-
-      </div>
+          : <span className='text-danger'>No data</span> }
+        </div>
+      : <div className="card-body">...loading</div> }
 
 
   <>

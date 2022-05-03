@@ -9,12 +9,15 @@ const collect = require('collect.js');
 
 const KkmmSwastaData = () => {
 
+  const [isPending, setIsPending] = React.useState(true)
+
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/kkmm_swasta', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
+        //console.log(response)
+        setIsPending(false)
  
         const fields = collect(response.data.data);
        // console.log(fields)
@@ -98,7 +101,7 @@ const KkmmSwastaData = () => {
 const handleSubmit = (e) => {
 
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
 
   // reset the error
   const fields = collect(state);
@@ -149,7 +152,6 @@ const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
    
-
     // JS formData
     const formData = new FormData();
     formData.append('document', 'kkmm_swasta_cert.pdf'); // force the filename on server
@@ -164,7 +166,7 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      console.log(response.data.is_kkmm_swasta_cert_uploaded)
+      //console.log(response.data.is_kkmm_swasta_cert_uploaded)
       updateStateValue('is_kkmm_swasta_cert_uploaded',response.data.is_kkmm_swasta_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
@@ -173,13 +175,12 @@ const handleUpload = (e) => {
       if (error.response.status === 422) {
 
         const errors = collect(error.response.data.errors); 
-        console.log(errors)
+        //console.log(errors)
         errors.each( (error,field) => {
             updateStateError(field,error)  
         })
       }
     })
-
 }
 
 const handleFileSelect = (event) => {
@@ -201,8 +202,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
-
           { state.kkmm_swasta_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -211,15 +212,6 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
                 <dt className="col-sm-3">Expiry Date</dt>
                 <dd className="col-sm-9">{state.kkmm_swasta_expiry_date.value}</dd>
-
-                {/* <dt className="col-sm-3">kkmm_swasta Status</dt>
-                <dd className="col-sm-9">
-                  {state.is_kkmm_swasta_active.value == 1 ? 
-                  <span className="badge rounded-pill bg-success">Active</span> 
-                  : 
-                  <span className="badge rounded-pill bg-danger">Inactive</span> 
-                  } 
-                </dd> */}
 
                 <dt className="col-sm-3">kkmm_swasta Certificate</dt>
                 <dd className="col-sm-9">
@@ -231,12 +223,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your KKMM Swasta data</span>
-          }
-
-      </div>
-
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>

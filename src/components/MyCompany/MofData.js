@@ -14,8 +14,8 @@ const MofData = () => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/mof', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
- 
+        //console.log(response)
+        setIsPending(false)
         const fields = collect(response.data.data);
        // console.log(fields)
          fields.each( (value,field) => {
@@ -114,20 +114,16 @@ const handleSubmit = (e) => {
       mof_expiry_date:  state.mof_expiry_date.value
   }).then(response => {
       //console.log(response);
-      console.log(state.is_mof_active.value)
+      //console.log(state.is_mof_active.value)
       if (response.status === 200) {
-       
-        console.log(response.data)
-          // upload file
-
+ 
+        // upload file
         if(selectedFile){
-          console.log('upload')
+          //console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal
         }
-
-        
       }
   }).catch(error => {
      
@@ -147,8 +143,7 @@ const [selectedFile, setSelectedFile] = React.useState(null);
 const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
-   
-
+  
     // JS formData
     const formData = new FormData();
     formData.append('document', 'mof_cert.pdf'); // force the filename on server
@@ -162,7 +157,7 @@ const handleUpload = (e) => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
-      console.log(response.data.is_mof_cert_uploaded)
+      //console.log(response.data.is_mof_cert_uploaded)
       updateStateValue('is_mof_cert_uploaded',response.data.is_mof_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
       setShow(false) // open the modal
@@ -172,13 +167,12 @@ const handleUpload = (e) => {
       if (error.response.status === 422) {
 
         const errors = collect(error.response.data.errors); 
-        console.log(errors)
+        //console.log(errors)
         errors.each( (error,field) => {
             updateStateError(field,error)  
         })
       }
     })
-
 }
 
 const handleFileSelect = (event) => {
@@ -186,6 +180,7 @@ const handleFileSelect = (event) => {
 }
 
 const [fullscreen, setFullscreen] = React.useState(true);
+const [isPending, setIsPending] = React.useState(true)
 
 //console.log(state.mof_registration_number.value)
 
@@ -200,8 +195,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
-
           { state.mof_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -230,11 +225,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your MOF data</span>
-          }
-
-      </div>
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
 
   <>

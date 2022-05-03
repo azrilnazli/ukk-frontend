@@ -4,22 +4,22 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import FileUpload from './FileUpload';
 import config from '../../config.json'
 import TextField from '../Widgets/TextField';
-
 const collect = require('collect.js'); 
 
 const FinasFDData = () => {
+
+  const [isPending, setIsPending] = React.useState(true)
 
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/finas_fd', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
- 
+        //console.log(response)
+        setIsPending(false)
         const fields = collect(response.data.data);
-       // console.log(fields)
+        //console.log(fields)
          fields.each( (value,field) => {
-  
              //console.log(field + ":" + value)
              updateStateValue(field, value)
          })
@@ -43,13 +43,13 @@ const FinasFDData = () => {
   //change input value dynamically
   const updateStateValue = (field,value) => {
 
-      setState(prevState => ({
-          ...prevState,
-          [field]: {
-              ...prevState[field],
-              value: value,   
-              }
-          }));
+    setState(prevState => ({
+        ...prevState,
+        [field]: {
+            ...prevState[field],
+            value: value,   
+            }
+        }));
   };
 
   // change input value dynamically
@@ -98,7 +98,7 @@ const FinasFDData = () => {
 const handleSubmit = (e) => {
 
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
 
   // reset the error
   const fields = collect(state);
@@ -117,11 +117,11 @@ const handleSubmit = (e) => {
     
       if (response.status === 200) {
        
-        console.log(response.data)
+        //console.log(response.data)
           // upload file
 
         if(selectedFile){
-          console.log('upload')
+          //console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal
@@ -149,7 +149,6 @@ const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
    
-
     // JS formData
     const formData = new FormData();
     formData.append('document', 'finas_fd_cert.pdf'); // force the filename on server
@@ -201,8 +200,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </div>
         </h5>  
         
+        { !isPending ?
         <div className="card-body">
-
           { state.finas_fd_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -211,15 +210,6 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
                 <dt className="col-sm-3">Expiry Date</dt>
                 <dd className="col-sm-9">{state.finas_fd_expiry_date.value}</dd>
-
-                {/* <dt className="col-sm-3">finas_fd Status</dt>
-                <dd className="col-sm-9">
-                  {state.is_finas_fd_active.value == 1 ? 
-                  <span className="badge rounded-pill bg-success">Active</span> 
-                  : 
-                  <span className="badge rounded-pill bg-danger">Inactive</span> 
-                  } 
-                </dd> */}
 
                 <dt className="col-sm-3">FINAS (DF) Certificate</dt>
                 <dd className="col-sm-9">
@@ -231,11 +221,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your FINAS (DF) data</span>
-          }
-
-      </div>
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
 
   <>
@@ -255,7 +243,6 @@ const [fullscreen, setFullscreen] = React.useState(true);
       ></embed>
       </Modal.Body>
     </Modal>
-
 
     <Modal size="md" show={show} onHide={handleClose}>
       <Modal.Header closeButton>

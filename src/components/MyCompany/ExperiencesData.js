@@ -127,13 +127,15 @@ const handleSubmit = (e) => {
 
 
 const [fullscreen, setFullscreen] = React.useState(true);
+const [isPending, setIsPending] = React.useState(true);
 console.log(state.id.value)
     // load data from server
     React.useEffect(() => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/experiences', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response)
+            //console.log(response)
+            setIsPending(false)
         
             const fields = collect(response.data.data);
             // console.log(fields)
@@ -164,8 +166,8 @@ console.log(state.id.value)
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
-
           { state.experiences.value != null ? 
           <div>
             <dl className="row">
@@ -174,12 +176,9 @@ console.log(state.id.value)
 
             </dl>
           </div>
-          :
-            <span>Please update your company experiences</span>
-          }
-
-      </div>
-
+          : <span className='text-danger'>No data</span> }
+        </div>
+        : <div className="card-body">...loading</div> }
 
   <>
 

@@ -41,7 +41,7 @@ const CheckData = (props) => {
                 }
             </li>      
         :
-            <li className="list-group-item d-flex justify-content-between align-items-center">Loading data ...</li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">Checking ...</li>
         }
     </>
 

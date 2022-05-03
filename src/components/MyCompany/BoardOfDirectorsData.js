@@ -9,20 +9,12 @@ const collect = require('collect.js');
 
 const BoardOfDirectors = () => {
 
-
-
   // mof related fields
   const initialValues = {
     id: { value: null ,error: '' },
     board_of_directors: { value: '' ,error: '' },
-
-
   }
-
   const [state, setState] = React.useState(initialValues)
-
-
-
 
   //change input value dynamically
   const updateStateValue = (field,value) => {
@@ -125,15 +117,16 @@ const handleSubmit = (e) => {
 
 } // handleSubmit
 
-
 const [fullscreen, setFullscreen] = React.useState(true);
-console.log(state.id.value)
+const [isPending, setIspending] = React.useState(true);
+
     // load data from server
     React.useEffect(() => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/board_of_directors', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response)
+            //console.log(response)
+            setIspending(false)
         
             const fields = collect(response.data.data);
             // console.log(fields)
@@ -163,8 +156,8 @@ console.log(state.id.value)
         </div>
         </h5>  
         
+        { !isPending ?
         <div className="card-body">
-
           { state.board_of_directors.value != null ? 
           <div>
             <dl className="row">
@@ -173,17 +166,10 @@ console.log(state.id.value)
 
             </dl>
           </div>
-          :
-            <span>Please update your Company Board of Directors</span>
-          }
-
+          : <span className='text-danger'>No data</span> }
       </div>
-
-
+      : <div className="card-body">...loading</div> }
   <>
-
-
-
     <Modal size="md" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Board of Directors</Modal.Title>
