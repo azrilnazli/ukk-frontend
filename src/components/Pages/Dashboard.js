@@ -3,7 +3,7 @@ import React from 'react';
 //import { Redirect } from 'react-router-dom';
 //import UserData from '../Widgets/UserData';
 import CheckData from '../MyCompany/CheckData';
-//import RequestForApproval from '../MyCompany/RequestForApproval';
+import RequestForApproval from '../MyCompany/RequestForApproval';
 import ApprovalStatus from '../MyCompany/ApprovalStatus';
 import Comment from '../MyCompany/Comment';
 
@@ -73,8 +73,8 @@ const Dashboard = () => {
                   <CheckData module="check_bank" title="Banking Informations" />
                   <CheckData module="check_credit" title="Credit Facilities" />
               </ul>
-              <div class="d-flex justify-content-start">
-                {/* <RequestForApproval /> */}
+              <div class="d-flex justify-content-end">
+                <RequestForApproval />
               </div>
             </div>
           </div>

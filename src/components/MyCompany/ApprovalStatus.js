@@ -1,6 +1,7 @@
 import React from 'react';
 import apiClient from '../../services/api';
 import RequestForApproval from './RequestForApproval';
+import IsApproved from './IsApproved';
 
 const ApprovalStatus = () => {
 
@@ -24,10 +25,10 @@ const ApprovalStatus = () => {
     <div className='row mt-0 ms-1'>
         <div className="card border-success">
           <div className="card-body">
-            <h5 className="card-title">Request for Approval</h5>
+            <h5 className="card-title">Approval Status</h5>
             <p className="card-text">
-
-            {isCompleted ? 'Submitted for approval' : 'Not submitted yet'}
+        
+            {isCompleted ? <IsApproved /> : null }
 
             </p>
           </div>
@@ -37,12 +38,13 @@ const ApprovalStatus = () => {
     <div className='row mt-0 ms-1'>
     <div className="card border-primary">
       <div className="card-body">
+      <h5 className="card-title">Approval status</h5>
+            <p className="card-text">
 
-        <h5 className="card-title">Request for Approval</h5>
-        <div class="d-flex justify-content-between">
-        <div className="card-text">Make sure all the required documents were completed before requesting.</div>
-        <RequestForApproval />
-        </div>
+            Your current approval status is <strong><IsApproved /></strong>
+
+            </p>
+
       </div>
     </div>
 </div>

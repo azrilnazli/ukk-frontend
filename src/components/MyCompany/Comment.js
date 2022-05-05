@@ -7,7 +7,6 @@ const Comment = () => {
 
     const [comments,setComments] = React.useState(null)
 
-
     React.useEffect(() => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/get_comments', { signal: abortCont.signal} )
