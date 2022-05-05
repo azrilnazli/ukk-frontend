@@ -3,7 +3,7 @@ import apiClient from '../../services/api';
 
 const ApprovalStatus = () => {
 
-    const [isApproved,setIsApproved] = React.useState()
+    const [isApproved,setIsApproved] = React.useState('Not submitted')
     const [isPending, setIsPending] = React.useState(true)
 
     React.useEffect(() => {
