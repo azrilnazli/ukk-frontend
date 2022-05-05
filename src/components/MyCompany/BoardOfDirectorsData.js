@@ -170,7 +170,7 @@ const [isPending, setIspending] = React.useState(true);
       </div>
       : <div className="card-body">...loading</div> }
   <>
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Board of Directors</Modal.Title>
       </Modal.Header>

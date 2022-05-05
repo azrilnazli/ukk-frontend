@@ -189,7 +189,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
 
   <>
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Company Profile</Modal.Title>
       </Modal.Header>

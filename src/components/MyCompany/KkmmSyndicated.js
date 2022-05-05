@@ -257,7 +257,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
     </Modal>
 
 
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>FINAS DF</Modal.Title>
       </Modal.Header>

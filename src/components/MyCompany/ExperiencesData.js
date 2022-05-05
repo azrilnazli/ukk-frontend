@@ -184,7 +184,7 @@ console.log(state.id.value)
 
 
 
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Experiences</Modal.Title>
       </Modal.Header>

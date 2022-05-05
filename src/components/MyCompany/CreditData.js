@@ -241,7 +241,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
     </Modal>
 
 
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Credit Informations</Modal.Title>
       </Modal.Header>
