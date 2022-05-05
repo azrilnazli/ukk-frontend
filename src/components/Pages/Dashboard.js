@@ -1,9 +1,9 @@
 import React from 'react';
-import apiClient from '../../services/api';
-import { Redirect } from 'react-router-dom';
-import UserData from '../Widgets/UserData';
+//import apiClient from '../../services/api';
+//import { Redirect } from 'react-router-dom';
+//import UserData from '../Widgets/UserData';
 import CheckData from '../MyCompany/CheckData';
-import RequestForApproval from '../MyCompany/RequestForApproval';
+//import RequestForApproval from '../MyCompany/RequestForApproval';
 import ApprovalStatus from '../MyCompany/ApprovalStatus';
 import Comment from '../MyCompany/Comment';
 
@@ -16,24 +16,29 @@ const Dashboard = () => {
 
 
 
-      <div className="alert alert-warning text-danger" role="alert">
+      {/* <div className="alert alert-warning text-danger" role="alert">
       <i className="fa fa-exclamation-triangle"></i> System is still under development.
-      </div>
+      </div> */}
 
     <div className="row align-items-start pe-3">
 
       <div className="col-6">
-        <img src="/img/requirements.jpg" className="img-fluid rounded" />
-        
+        {/* <img src="/img/requirements.jpg" className="img-fluid rounded" /> */}
+          <div className="alert alert-primary" role="alert">
+          <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please install Adobe Acrobat Reader.
+          </div>
+          <div className='row'>
+            <ApprovalStatus />
+          </div>
+          <div className='row'>
+            <Comment />
+          </div>
+
+
       </div>
 
       <div className="col-6">
-
-        <ApprovalStatus />
-
-        <Comment />
-
-        <div className='row mt-3'>
+        <div className='row'>
 
 {/* 
           <div className="alert alert-primary" role="alert">
@@ -43,7 +48,7 @@ const Dashboard = () => {
           You've submitted for Approval to UKK.
           </div> */}
 
-          <div className="card border-primary">
+          <div className="card border-light">
    
             <div className="card-body">
               
@@ -68,14 +73,12 @@ const Dashboard = () => {
                   <CheckData module="check_bank" title="Banking Informations" />
                   <CheckData module="check_credit" title="Credit Facilities" />
               </ul>
-              <RequestForApproval />
+              <div class="d-flex justify-content-start">
+                {/* <RequestForApproval /> */}
+              </div>
             </div>
           </div>
         </div>
-
-
-
-
       </div>
   </div>
 
