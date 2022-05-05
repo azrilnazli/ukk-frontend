@@ -158,7 +158,7 @@ const [isPending, setIspending] = React.useState(true);
         
         { !isPending ?
         <div className="card-body">
-          { state.board_of_directors.value != null ? 
+          { state.board_of_directors.value != '' ? 
           <div>
             <dl className="row">
 

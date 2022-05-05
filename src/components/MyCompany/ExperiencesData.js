@@ -168,7 +168,7 @@ console.log(state.id.value)
         
         { !isPending ? 
         <div className="card-body">
-          { state.experiences.value != null ? 
+          { state.experiences.value != '' ? 
           <div>
             <dl className="row">
 
@@ -194,18 +194,16 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextArea
-                    label=""          
+                    label=""     
+                    className="form-control h-25"    
                     name="experiences"
+                    rows="5"
                     onChange={handleChange}
                     value={state.experiences.value}
                     placeholder="Enter your company experiences"
                     error={state.experiences.error}
                 />
           </Form.Group>
-
-
-
-
         </Form>
       </Modal.Body>
       <Modal.Footer>
