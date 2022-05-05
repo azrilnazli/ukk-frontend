@@ -3,7 +3,7 @@ import apiClient from '../../services/api';
 
 const ApprovalStatus = () => {
 
-    const [isApproved,setIsApproved] = React.useState('Not submitted')
+    const [isApproved,setIsApproved] = React.useState()
     const [isPending, setIsPending] = React.useState(true)
 
     React.useEffect(() => {
@@ -20,7 +20,7 @@ const ApprovalStatus = () => {
 
     return (
     <>
-        {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved}</span> : 'checking ...'}
+        {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved ? isApproved : 'Not submitted'}</span> : 'checking ...'}
 {/* 
         {(() => {
             switch (isApproved) {
