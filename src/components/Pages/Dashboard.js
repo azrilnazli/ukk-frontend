@@ -64,16 +64,17 @@ const Dashboard = () => {
                   <CheckData module="check_mof" title="MOF" />
 
                   <CheckData module="check_finas_fp" title="FINAS (PF)" />
-                  <CheckData module="check_finas_fd" title="FINAS (DF)" />
+                  {/* <CheckData module="check_finas_fd" title="FINAS (DF)" /> */}
 
                   <CheckData module="check_kkmm_swasta" title="KKMM ( Swasta )" />
-                  <CheckData module="check_kkmm_syndicated" title="KKMM ( Syndicated )" />
+                  {/* <CheckData module="check_kkmm_syndicated" title="KKMM ( Syndicated )" /> */}
                 
-                  <CheckData module="check_bumiputera" title="Bumiputera Status" />
+                  {/* <CheckData module="check_bumiputera" title="Bumiputera Status" /> */}
+                  <CheckData module="check_audit" title="Audit Informations" />
                   <CheckData module="check_bank" title="Banking Informations" />
-                  <CheckData module="check_credit" title="Credit Facilities" />
+                  {/* <CheckData module="check_credit" title="Credit Facilities" /> */}
               </ul>
-              <div class="d-flex justify-content-end">
+              <div className="d-flex justify-content-end">
                 <RequestForApproval />
               </div>
             </div>

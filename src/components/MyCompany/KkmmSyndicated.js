@@ -224,7 +224,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                   } 
                 </dd> */}
 
-                <dt className="col-sm-3">KKMM SYndicated Certificate</dt>
+                <dt className="col-sm-3">KKMM Syndicated Certificate</dt>
                 <dd className="col-sm-9">
                     { state.is_kkmm_syndicated_cert_uploaded.value ? 
                     <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>

@@ -248,7 +248,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>FINAS DF</Modal.Title>
+        <Modal.Title>KKMM Swasta</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

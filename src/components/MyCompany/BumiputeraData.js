@@ -34,7 +34,7 @@ const BumiputeraData = () => {
   const initialValues = {
     id: { value: '' ,error: '' },
     bumiputera_registration_number: { value: null ,error: '' },
-    is_bumiputera: { value: '' ,error: '' },
+    is_bumiputera: { value: '0' ,error: '' },
     is_bumiputera_cert_uploaded: { value: '' ,error: '' },
     bumiputera_expiry_date: { value: '' ,error: '' },
     selectedFile: { value: '' ,error: '' },
