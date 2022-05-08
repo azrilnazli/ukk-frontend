@@ -236,7 +236,7 @@ const [isPending, setIsPending] = React.useState(true)
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
+
       <embed
         src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
         type="application/pdf"
@@ -324,11 +324,11 @@ const [isPending, setIsPending] = React.useState(true)
               type="file" 
             /> */}
                    <TextField
-                    label="MOF Certificate"          
-                    name="mof_expiry_date"
+                    label="MOF Certificate (PDF Format)"          
+                    name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.mof_expiry_date.value}
+                    accept="application/pdf"
                     placeholder="Upload your company MOF certificate"
                     error={state.selectedFile.error}
                 />

@@ -22,7 +22,7 @@ const MyCompany = () => {
     return (
         <React.Fragment>
             <div className="alert alert-primary" role="alert">
-                <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please fill up the form. All data are required.
+                <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please fill up the form. Document must be in PDF format.
             </div>
             <ProfileData/>
             <BoardOfDirectors />

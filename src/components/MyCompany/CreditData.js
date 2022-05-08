@@ -228,7 +228,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Modal.Title>Credit</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/credit_cert.pdf"}
+      
       <embed
         src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/credit_cert.pdf"}
         type="application/pdf"
@@ -256,10 +256,10 @@ const [fullscreen, setFullscreen] = React.useState(true);
             /> */}
                    <TextField
                     label="Credit Certificate"          
-                    name="credit_cert"
+                    name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.ssm_expiry_date.value}
+                    accept="application/pdf"
                     placeholder="Upload your company credit certificate"
                     error={state.selectedFile.error}
                 />

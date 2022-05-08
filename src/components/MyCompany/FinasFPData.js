@@ -229,7 +229,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Modal.Title>FINAS (PF)</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf"}
+     
       <embed
         src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf"}
         type="application/pdf"
@@ -276,10 +276,11 @@ const [fullscreen, setFullscreen] = React.useState(true);
  
                    <TextField
                     label="FINAS (PF) Certificate"          
-                    name="finas_fp_expiry_date"
+                    name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    placeholder="Upload your company FINAS (PF) certificate"
+                    accept="application/pdf"
+                    placeholder="Upload your company FINAS (PF) certificate ( PDF Format )"
                     error={state.selectedFile.error}
                 />
           </Form.Group>

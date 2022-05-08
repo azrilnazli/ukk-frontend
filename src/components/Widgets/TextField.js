@@ -13,6 +13,7 @@ const TextField = (props) => {
         placeholder={props.placeholder}
         value={props.value}    
         onChange={props.onChange}
+        accept={ props.accept ? props.accept : ''} 
     />
     
     {props.error ? 

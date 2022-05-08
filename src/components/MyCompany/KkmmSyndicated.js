@@ -244,7 +244,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/kkmm_syndicated_cert.pdf"}
+    
       <embed
         src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/kkmm_syndicated_cert.pdf"}
         type="application/pdf"
@@ -297,11 +297,11 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
-                    label="KKMM Syndicated Certificate"          
-                    name="kkmm_syndicated_expiry_date"
+                    label="KKMM Syndicated Certificate (PDF Format)"          
+                    name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.kkmm_syndicated_expiry_date.value}
+                    accept="application/pdf"
                     placeholder="Upload your company kkmm_syndicated certificate"
                     error={state.selectedFile.error}
                 />

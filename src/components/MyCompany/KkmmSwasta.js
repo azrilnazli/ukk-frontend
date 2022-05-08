@@ -233,7 +233,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/kkmm_swasta_cert.pdf"}
+   
       <embed
         src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/kkmm_swasta_cert.pdf"}
         type="application/pdf"
@@ -286,11 +286,11 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
-                    label="KKMM Swasta Certificate"          
-                    name="kkmm_swasta_expiry_date"
+                    label="KKMM Swasta Certificate (PDF Format)"          
+                    name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.kkmm_swasta_expiry_date.value}
+                    accept="application/pdf"
                     placeholder="Upload your company kkmm_swasta certificate"
                     error={state.selectedFile.error}
                 />
