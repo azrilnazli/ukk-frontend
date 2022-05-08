@@ -16,9 +16,9 @@ const RequestForApproval = () => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/check_for_approval', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data.status) 
+            console.log(response.data.is_completed) 
             setAllowRequest(response.data.status) // check if vendor completed the required form
-            setIsCompleted(true)
+            setIsCompleted(response.data.is_completed) // server should return is_completed for first time submission
         })
         .catch(error => console.error(error));
         return () => abortCont.abort();    
@@ -56,8 +56,8 @@ const RequestForApproval = () => {
 
     return (
         <div className='mt-2'>
-            { isCompleted == true ?
-            <button disabled onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
+            { !isCompleted == true ?
+            <button  onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
             :
             <button className='btn btn-secondary'>Already requested</button>
             }

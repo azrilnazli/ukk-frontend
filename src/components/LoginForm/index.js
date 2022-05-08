@@ -122,10 +122,15 @@ const LoginForm = (props) => {
                 
                                 {authError ? <SystemMsg msg={errorMsg} type='danger' /> : null }
                                
-                                <h3><i className="fa fa-cog"></i> Login</h3>
+                                {/* <h3><i className="fa fa-cog"></i> Login</h3> */}
                                 
-                                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        
+                                <h2> Selamat Datang ke Sistem RTM TV CMS. </h2>
+                                <p className="card-text">Para Pembekal perlu mendaftar terlebih dahulu, sebelum boleh log masuk bagi proses penyerahan dokumen-dokumen pendaftaran dan penyerahan kandungan-kandungan media berkaitan dengan tajuk program pembekalan yang berkenaan.</p>
+                                <p className="card-text">Pembekal boleh rujuk video dan dokumen ringkasan cara mendaftar dan penyerahan dokumen-dokumen berkaitan syarikat yang diperlukan.</p>
+                                <p className="card-text">
+                                URUS SETIA, UNIT KANDUNGAN KREATIF (UKK)<br />
+                                RADIO TELEVISYEN MALAYSIA (RTM)
+                                </p>
                                 <Form 
                                 
                                     authError={authError} 
