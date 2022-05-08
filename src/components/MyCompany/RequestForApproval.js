@@ -56,11 +56,19 @@ const RequestForApproval = () => {
 
     return (
         <div className='mt-2'>
-            { !isCompleted == true ?
-            <button  onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
+
+        { allowRequest == true ?
+            <> 
+                { !isCompleted == true ?
+                <button  onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
+                :
+                <button className='btn btn-secondary'>Already requested</button>
+                }
+            </>
             :
-            <button className='btn btn-secondary'>Already requested</button>
-            }
+            <button  disabled className='btn btn-primary'>Request for Approval</button>
+        }
+
         </div>
     );
 };
