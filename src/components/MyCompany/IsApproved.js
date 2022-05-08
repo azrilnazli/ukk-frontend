@@ -25,7 +25,7 @@ const ApprovalStatus = () => {
         {(() => {
             switch (isApproved) {
               case 'pending':
-                return  <span className="badge bg-green text-uppercase">{isApproved}</span>
+                return  <span className="badge bg-success text-uppercase">{isApproved}</span>
               case 'rejected':
                 return <span className="badge bg-danger text-uppercase">{isApproved}</span>
               case 'pending':
