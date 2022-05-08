@@ -20,21 +20,36 @@ const ApprovalStatus = () => {
 
     return (
     <>
-        {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved ? isApproved : 'Not submitted'}</span> : 'checking ...'}
+        {/* {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved ? isApproved : 'Not submitted'}</span> : 'checking ...'} */}
 
-        {(() => {
-            switch (isApproved) {
-              case 'approved':
-                return  <span className="badge bg-success text-uppercase">{isApproved}</span>
-              case 'rejected':
-                return <span className="badge bg-danger text-uppercase">{isApproved}</span>
-              case 'pending':
-                return <span className="badge bg-info text-uppercase">{isApproved}</span>
-     
-              default:
-                return  <span className="badge bg-info text-uppercase">{isApproved}</span>
-            }
-          })()}
+      {!isPending ? 
+      <>
+        { isApproved ? 
+                <>
+                {(() => {
+                    switch (isApproved) {
+                      case 'approved':
+                        return  <span className="badge bg-success text-uppercase">{isApproved}</span>
+                      case 'rejected':
+                        return <span className="badge bg-danger text-uppercase">{isApproved}</span>
+                      case 'pending':
+                        return <span className="badge bg-info text-uppercase">{isApproved}</span>
+
+                      case 'pending':
+                      return <span className="badge bg-info text-uppercase">{isApproved}</span>
+            
+                      default:
+                        return  <span className="badge bg-info text-uppercase">{isApproved}</span>
+                    }
+                  })()}
+                  </>
+                  :
+                  <span className="badge bg-primary text-uppercase">Not submitted</span>
+                }
+          </>
+          :
+          'checking status ...'
+        }
     </>
     );
 };
