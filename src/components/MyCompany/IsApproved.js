@@ -32,7 +32,7 @@ const ApprovalStatus = () => {
                 return <span className="badge bg-info text-uppercase">{isApproved}</span>
      
               default:
-                return null
+                return  <span className="badge bg-info text-uppercase">{isApproved}</span>
             }
           })()}
     </>
