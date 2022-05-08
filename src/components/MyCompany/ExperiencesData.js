@@ -127,13 +127,15 @@ const handleSubmit = (e) => {
 
 
 const [fullscreen, setFullscreen] = React.useState(true);
+const [isPending, setIsPending] = React.useState(true);
 console.log(state.id.value)
     // load data from server
     React.useEffect(() => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/experiences', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response)
+            //console.log(response)
+            setIsPending(false)
         
             const fields = collect(response.data.data);
             // console.log(fields)
@@ -164,9 +166,9 @@ console.log(state.id.value)
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
-
-          { state.experiences.value != null ? 
+          { state.experiences.value != '' ? 
           <div>
             <dl className="row">
 
@@ -174,18 +176,15 @@ console.log(state.id.value)
 
             </dl>
           </div>
-          :
-            <span>Please update your company experiences</span>
-          }
-
-      </div>
-
+          : <span className='text-danger'>No data</span> }
+        </div>
+        : <div className="card-body">...loading</div> }
 
   <>
 
 
 
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Experiences</Modal.Title>
       </Modal.Header>
@@ -195,18 +194,16 @@ console.log(state.id.value)
           
           <Form.Group className="mb-3">
           <TextArea
-                    label=""          
+                    label=""     
+                    className="form-control h-25"    
                     name="experiences"
+                    rows="5"
                     onChange={handleChange}
                     value={state.experiences.value}
                     placeholder="Enter your company experiences"
                     error={state.experiences.error}
                 />
           </Form.Group>
-
-
-
-
         </Form>
       </Modal.Body>
       <Modal.Footer>

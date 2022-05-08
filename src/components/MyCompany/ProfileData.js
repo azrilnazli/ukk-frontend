@@ -28,9 +28,7 @@ const ProfileData = () => {
   }
 
   const [state, setState] = React.useState(initialValues)
-
-
-
+  const [isPending, setIsPending] = React.useState(true) // loading indicator
 
   //change input value dynamically
   const updateStateValue = (field,value) => {
@@ -102,30 +100,15 @@ const handleSubmit = (e) => {
   // post the data
   apiClient.post('/api/company/update_profile', {
       name: state.name.value,
-      //registration_date: state.registration_date.value,
       email: state.email.value,
       phone: state.phone.value,
       address: state.address.value,
       postcode: state.postcode.value,
       city: state.city.value,
       states: state.states.value,
-      //board_of_directors: state.board_of_directors.value,
-      //experiences: state.experiences.value,
-
   }).then(response => {
-      //console.log(response);
-      //updateStateValue('id', response.data.id)
-     
       if (response.status === 200) {
-        console.log(response.data)
         setShow(false) // close the modal
-     
-        
-        // upload file
-        // if(selectedFile){
-        //   console.log('upload')
-        //   handleUpload(e)
-        // }
       }
   }).catch(error => {
      
@@ -141,51 +124,18 @@ const handleSubmit = (e) => {
 
 } // handleSubmit
 
-// // file related constants
-// const [selectedFile, setSelectedFile] = React.useState(null);
-// const [isFileUploaded, setIsFileUploaded] = React.useState(null);
-
-// const handleUpload = (e) => {
-   
-
-//     // JS formData
-//     const formData = new FormData();
-//     formData.append('document', 'mof_cert.pdf'); // force the filename on server
-//     formData.append("selectedFile", selectedFile); // input name = selectedFile
-
-//     // axios 
-//     apiClient({
-//         method: "post",
-//         url: "/api/company/upload",
-//         data: formData,
-//         headers: { "Content-Type": "multipart/form-data" },
-//     }).then(response => {
-//       console.log(response.data.is_mof_cert_uploaded)
-//       updateStateValue('is_mof_cert_uploaded',response.data.is_mof_cert_uploaded )
-//     }).catch(error => {
-//       console.error(error)
-//     })
-
-// }
-
-// const handleFileSelect = (event) => {
-//   setSelectedFile(event.target.files[0])
-// }
 
 const [fullscreen, setFullscreen] = React.useState(true);
-console.log(state.id.value)
+
     // load data from server
     React.useEffect(() => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/profile', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response)
-        
+            setIsPending(false)
             const fields = collect(response.data.data);
-            // console.log(fields)
+  
                 fields.each( (value,field) => {
-        
-                    //console.log(field + ":" + value)
                     updateStateValue(field, value)
                 })
         })
@@ -204,6 +154,7 @@ console.log(state.id.value)
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
 
           { state.name.value != null ? 
@@ -211,9 +162,6 @@ console.log(state.id.value)
             <dl className="row">
                 <dt className="col-sm-3">Name</dt>
                 <dd className="col-sm-9">{state.name.value}</dd>
-
-                {/* <dt className="col-sm-3">Registration Date</dt>
-                <dd className="col-sm-9">{state.registration_date.value}</dd> */}
 
                 <dt className="col-sm-3">Email</dt>
                 <dd className="col-sm-9">{state.email.value}</dd>
@@ -232,48 +180,21 @@ console.log(state.id.value)
 
                 <dt className="col-sm-3">State</dt>
                 <dd className="col-sm-9">{state.states.value}</dd>
-{/* 
-                <dt className="col-sm-3">Board of Directors</dt>
-                <dd className="col-sm-9">{state.board_of_directors.value}</dd>
-
-                <dt className="col-sm-3">Experiences</dt>
-                <dd className="col-sm-9">{state.experiences.value}</dd> */}
 
             </dl>
           </div>
-          :
-            <span>Please update your Company Profile</span>
-          }
-
-      </div>
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
 
   <>
-    {/* <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
-      <Modal.Header closeButton>
-        <Modal.Title>Ministry of Finance</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-      <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/mof_cert.pdf"}
-        type="application/pdf"
-        frameBorder="0"
-        scrolling="auto"
-        height="100%"
-        width="100%"
-      ></embed>
-      </Modal.Body>
-    </Modal> */}
-
-
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Company Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
-
-          
+        <Form>   
           <Form.Group className="mb-3">
 
             <TextField
@@ -285,31 +206,8 @@ console.log(state.id.value)
                   placeholder="Enter your company name"
                   error={state.name.error}
             />
-            {/* <Form.Control
-              name="name"
-              onChange={handleChange}
-              type="text"
-              value={state.name.value}
-              placeholder="Enter your company name"
-
-            />
-           
-            <span className="invalid-feedback" ><strong>error</strong></span>  */}
           
           </Form.Group>
-
-          {/* <Form.Group className="mb-3">
-            <TextField
-              label="Registration Date"
-              name="registration_date"
-              onChange={handleChange}
-              type="date"
-              value={state.registration_date.value}
-              placeholder="Company registration date"
-              error={state.registration_date.error}
-             
-            />
-          </Form.Group> */}
 
           <Form.Group className="mb-3">
             <TextField
@@ -387,37 +285,6 @@ console.log(state.id.value)
                     error={state.states.error}
                 />
           </Form.Group>
-
-          
-          {/* <Form.Group className="mb-3">
-          <TextField
-                    label="board_of_directors"          
-                    name="board_of_directors"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.board_of_directors.value}
-                    placeholder="Enter your company board_of_directors"
-                    error={state.board_of_directors.error}
-                />
-          </Form.Group> */}
-
-  
-
-{/*           
-          <Form.Group className="mb-3">
-          <TextField
-                    label="experiences"          
-                    name="experiences"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.experiences.value}
-                    placeholder="Enter your company experiences"
-                    error={state.experiences.error}
-                />
-          </Form.Group> */}
-
-
-
         </Form>
       </Modal.Body>
       <Modal.Footer>

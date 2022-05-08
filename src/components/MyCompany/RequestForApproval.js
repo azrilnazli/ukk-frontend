@@ -5,15 +5,20 @@ import apiClient from '../../services/api';
 const RequestForApproval = () => {
 
     const collect = require('collect.js'); 
+
+    const [status, setStatus] = React.useState('')
+    const [allowRequest,setAllowRequest] = React.useState(false)
     const [isCompleted,setIsCompleted] = React.useState(false)
     const [isCompletedError,setIsCompletedError] = React.useState(0)
 
+    // to check is_completed status
     React.useEffect(() => {
         const abortCont = new AbortController();
-        apiClient.get('/api/company/check_is_completed', { signal: abortCont.signal} )
+        apiClient.get('/api/company/check_for_approval', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data.status)
-            setIsCompleted(response.data.status)
+            console.log(response.data.status) 
+            setAllowRequest(response.data.status) // check if vendor completed the required form
+            setIsCompleted(true)
         })
         .catch(error => console.error(error));
         return () => abortCont.abort();    
@@ -26,7 +31,6 @@ const RequestForApproval = () => {
         const formData = new FormData();
         formData.append('is_completed', true); // force the filename on server
 
-    
         // axios 
         apiClient({
             method: "post",
@@ -34,7 +38,7 @@ const RequestForApproval = () => {
             data: formData,
         }).then(response => {
             console.log(response.data.status)
-            setIsCompleted(response.data.status)
+            setIsCompleted(response.data.status) // true or false
         }).catch(error => {
 
           if (error.response.status === 422) {
@@ -52,10 +56,10 @@ const RequestForApproval = () => {
 
     return (
         <div className='mt-2'>
-            { isCompleted === false ?
-            <button onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
+            { isCompleted == true ?
+            <button disabled onClick={handleSubmit} className='btn btn-primary'>Request for Approval</button>
             :
-            <button disabled className='btn btn-secondary'>Waiting for Approval</button>
+            <button className='btn btn-secondary'>Already requested</button>
             }
         </div>
     );

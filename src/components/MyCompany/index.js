@@ -21,8 +21,8 @@ const MyCompany = () => {
 
     return (
         <React.Fragment>
-            <div className="alert alert-warning" role="alert">
-                Please complete all the required forms before Submit.
+            <div className="alert alert-primary" role="alert">
+                <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please fill up the form. All data are required.
             </div>
             <ProfileData/>
             <BoardOfDirectors />

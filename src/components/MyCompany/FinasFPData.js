@@ -9,15 +9,16 @@ const collect = require('collect.js');
 
 const FinasFPData = () => {
 
+  const [isPending, setIsPending] = React.useState(true)
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/finas_fp', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
- 
+        //console.log(response)
+        setIsPending(false)
         const fields = collect(response.data.data);
-       // console.log(fields)
+        //console.log(fields)
          fields.each( (value,field) => {
   
              //console.log(field + ":" + value)
@@ -98,7 +99,7 @@ const FinasFPData = () => {
 const handleSubmit = (e) => {
 
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
 
   // reset the error
   const fields = collect(state);
@@ -117,11 +118,11 @@ const handleSubmit = (e) => {
     
       if (response.status === 200) {
        
-        console.log(response.data)
+        //console.log(response.data)
           // upload file
 
         if(selectedFile){
-          console.log('upload')
+          //console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal
@@ -164,22 +165,20 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      console.log(response.data.is_finas_fp_cert_uploaded)
+      //console.log(response.data.is_finas_fp_cert_uploaded)
       updateStateValue('is_finas_fp_cert_uploaded',response.data.is_finas_fp_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
       //console.error(error)
       setShow(true) // open the modal
       if (error.response.status === 422) {
-
         const errors = collect(error.response.data.errors); 
-        console.log(errors)
+        //console.log(errors)
         errors.each( (error,field) => {
             updateStateError(field,error)  
         })
       }
     })
-
 }
 
 const handleFileSelect = (event) => {
@@ -187,8 +186,6 @@ const handleFileSelect = (event) => {
 }
 
 const [fullscreen, setFullscreen] = React.useState(true);
-
-//console.log(state.finas_fp_registration_number.value)
 
     return (
       <div className="card mt-3">
@@ -201,8 +198,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </div>
         </h5>  
         
+      { !isPending ?
         <div className="card-body">
-
           { state.finas_fp_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -211,15 +208,6 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
                 <dt className="col-sm-3">Expiry Date</dt>
                 <dd className="col-sm-9">{state.finas_fp_expiry_date.value}</dd>
-
-                {/* <dt className="col-sm-3">finas_fp Status</dt>
-                <dd className="col-sm-9">
-                  {state.is_finas_fp_active.value == 1 ? 
-                  <span className="badge rounded-pill bg-success">Active</span> 
-                  : 
-                  <span className="badge rounded-pill bg-danger">Inactive</span> 
-                  } 
-                </dd> */}
 
                 <dt className="col-sm-3">FINAS (PF) Certificate</dt>
                 <dd className="col-sm-9">
@@ -231,15 +219,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your FINAS (PF) data</span>
-          }
-
-      </div>
-
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
   <>
-  <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
+    <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
         <Modal.Title>FINAS (PF)</Modal.Title>
       </Modal.Header>
@@ -256,14 +241,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
       </Modal.Body>
     </Modal>
 
-
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-
           <Form.Group className="mb-3">
           <TextField
                     label="FINAS (PF) Registration Number"          
@@ -290,18 +273,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
 
           <Form.Group className="mb-3">
-            {/* <Form.Label>Upload finas_fp Certificate</Form.Label>
-            <Form.Control 
-              onChange={handleFileSelect}
-              accept=".pdf"
-              type="file" 
-            /> */}
+ 
                    <TextField
                     label="FINAS (PF) Certificate"          
                     name="finas_fp_expiry_date"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.finas_fp_expiry_date.value}
                     placeholder="Upload your company FINAS (PF) certificate"
                     error={state.selectedFile.error}
                 />
@@ -318,9 +295,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       </Modal.Footer>
     </Modal>
   </>
-
-      </div>
-    );
+  </div>
+  );
 };
-
 export default FinasFPData;

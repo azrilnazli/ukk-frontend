@@ -9,20 +9,22 @@ const collect = require('collect.js');
 
 const BumiputeraData = () => {
 
+  const [isPending, setIsPending] = React.useState(true)
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
     apiClient.get('/api/company/bumiputera', { signal: abortCont.signal} )
     .then(response => {
-        console.log(response)
+      setIsPending(false)
+        //console.log(response)
  
-        const fields = collect(response.data.data);
-       // console.log(fields)
-         fields.each( (value,field) => {
-  
-             //console.log(field + ":" + value)
-             updateStateValue(field, value)
-         })
+      const fields = collect(response.data.data);
+      // console.log(fields)
+        fields.each( (value,field) => {
+
+            //console.log(field + ":" + value)
+            updateStateValue(field, value)
+        })
     })
     .catch(error => console.error(error));
     return () => abortCont.abort();    
@@ -32,7 +34,7 @@ const BumiputeraData = () => {
   const initialValues = {
     id: { value: '' ,error: '' },
     bumiputera_registration_number: { value: null ,error: '' },
-    is_bumiputera: { value: '' ,error: '' },
+    is_bumiputera: { value: '0' ,error: '' },
     is_bumiputera_cert_uploaded: { value: '' ,error: '' },
     bumiputera_expiry_date: { value: '' ,error: '' },
     selectedFile: { value: '' ,error: '' },
@@ -98,7 +100,7 @@ const BumiputeraData = () => {
 const handleSubmit = (e) => {
 
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
 
   // reset the error
   const fields = collect(state);
@@ -114,10 +116,10 @@ const handleSubmit = (e) => {
       bumiputera_expiry_date:  state.bumiputera_expiry_date.value
   }).then(response => {
       //console.log(response);
-      console.log(state.id.value)
+      //console.log(state.id.value)
       if (response.status === 200) {
        
-        console.log(response.data)
+        //console.log(response.data)
           // upload file
 
         if(selectedFile){
@@ -126,8 +128,6 @@ const handleSubmit = (e) => {
         } else {
           setShow(false) // close the modal
         }
-
-        
       }
   }).catch(error => {
      
@@ -162,7 +162,7 @@ const handleUpload = (e) => {
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
-      console.log(response.data.is_bumiputera_cert_uploaded)
+      //console.log(response.data.is_bumiputera_cert_uploaded)
       updateStateValue('is_bumiputera_cert_uploaded',response.data.is_bumiputera_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
       setShow(false) // open the modal
@@ -172,7 +172,7 @@ const handleUpload = (e) => {
       if (error.response.status === 422) {
 
         const errors = collect(error.response.data.errors); 
-        console.log(errors)
+        //console.log(errors)
         errors.each( (error,field) => {
             updateStateError(field,error)  
         })
@@ -200,8 +200,8 @@ const [fullscreen, setFullscreen] = React.useState(true);
         </div>
         </h5>  
         
+        { !isPending ? 
         <div className="card-body">
-
           { state.bumiputera_registration_number.value != null ? 
           <div>
             <dl className="row">
@@ -230,12 +230,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 </dd>
             </dl>
           </div>
-          :
-            <span>Please update your Bumiputera data</span>
-          }
-
-      </div>
-
+          : <span className='text-danger'>No data</span> }
+          </div>
+        : <div className="card-body">...loading</div> }
 
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
@@ -256,7 +253,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
     </Modal>
 
 
-    <Modal size="md" show={show} onHide={handleClose}>
+    <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Ministry of Finance</Modal.Title>
       </Modal.Header>
