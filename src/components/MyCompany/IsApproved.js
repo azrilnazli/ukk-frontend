@@ -20,7 +20,7 @@ const ApprovalStatus = () => {
 
     return (
     <>
-        {/* {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved ? isApproved : 'Not submitted'}</span> : 'checking ...'} */}
+        {!isPending ? <span className="badge bg-primary text-uppercase">{isApproved ? isApproved : 'Not submitted'}</span> : 'checking ...'}
 
         {(() => {
             switch (isApproved) {
