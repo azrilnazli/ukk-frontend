@@ -72,7 +72,7 @@ const NavbarMenu = (
 
             <Navbar bg="primary" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">{config.APP}</Navbar.Brand>
+                <Navbar.Brand>{config.APP}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
