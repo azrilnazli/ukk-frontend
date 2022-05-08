@@ -13,6 +13,7 @@ const CheckData = (props) => {
 
     apiClient.get('/api/company/' + props.module)
     .then(response => {
+        console.log(response)
         setProfile(response.data.status)
         SetIsPending(true)
     })
