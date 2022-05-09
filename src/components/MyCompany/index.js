@@ -22,7 +22,7 @@ const MyCompany = () => {
     return (
         <React.Fragment>
             <div className="alert alert-primary" role="alert">
-                <i className='fas fa-circle-info' style={{color: 'red'}}></i> Please fill up the form. Document must be in PDF format.
+                <i className='fa fa-info-circle'></i> Please fill up the form. Document must be in PDF format.
             </div>
             <ProfileData/>
             <BoardOfDirectors />

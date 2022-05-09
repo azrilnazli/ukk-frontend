@@ -31,7 +31,8 @@
     "redux": "^4.1.2",
     "video.js": "^7.17.0",
     "xhook": "^1.4.9",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@babel/plugin-proposal-class-properties": "^7.16.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.16.7"
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.16.7",
+    "@babel/preset-react": "^7.16.7"
   }
 }

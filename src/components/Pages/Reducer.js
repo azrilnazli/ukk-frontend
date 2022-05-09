@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik';
 import TextField from '../Widgets/ReducerTextField';
 import * as Yup from 'yup';
 
+
 const Reducer = () => {
 
     // const validate = Yup.object({
@@ -84,6 +85,7 @@ const Reducer = () => {
   
     
     return (
+        
     <Formik
         initialValues={{
             firstname: '',
@@ -136,6 +138,8 @@ const Reducer = () => {
             </div>
         )}
     </Formik>
+
+    
     );
 };
 
