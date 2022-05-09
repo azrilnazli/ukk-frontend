@@ -88,6 +88,7 @@ const BumiputeraData = () => {
     console.log(e.target.value)
     const { name, value } = e.target; // object
 
+    // set the state
     setState(prevState => ({
         ...prevState,
         [name]: {
@@ -148,7 +149,6 @@ const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
    
-
     // JS formData
     const formData = new FormData();
     formData.append('document', 'bumiputera_cert.pdf'); // force the filename on server
@@ -186,8 +186,6 @@ const handleFileSelect = (event) => {
 }
 
 const [fullscreen, setFullscreen] = React.useState(true);
-
-//console.log(state.bumiputera_registration_number.value)
 
     return (
       <div className="card mt-3">
@@ -259,32 +257,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       </Modal.Header>
       <Modal.Body>
         <Form>
-
-          <Form.Group className="mb-3">
-          <TextField
-                    label="Bumiputera Registration Number"          
-                    name="bumiputera_registration_number"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.bumiputera_registration_number.value}
-                    placeholder="Enter your company Bumiputera registration number"
-                    error={state.bumiputera_registration_number.error}
-                />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-          <TextField
-                    label="Bumiputera Expiry Date"          
-                    name="bumiputera_expiry_date"
-                    onChange={handleChange}
-                    type="date"
-                    value={state.bumiputera_expiry_date.value}
-                    placeholder="Enter your company Bumiputera Expiry Date"
-                    error={state.bumiputera_expiry_date.error}
-                />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
+        <Form.Group className="mb-3">
             <Form.Label>Bumiputera Status ?</Form.Label>
             <Form.Check 
               name="is_bumiputera"
@@ -314,6 +287,33 @@ const [fullscreen, setFullscreen] = React.useState(true);
             }
           </Form.Group>
 
+          <Form.Group className="mb-3">
+          <TextField
+                    is_disabled={state.is_bumiputera.value}
+                    label="Bumiputera Registration Number"          
+                    name="bumiputera_registration_number"
+                    onChange={handleChange}
+                    type="text"
+                    value={state.bumiputera_registration_number.value}
+                    placeholder="Enter your company Bumiputera registration number"
+                    error={state.bumiputera_registration_number.error}
+                />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+          <TextField
+                    is_disabled={state.is_bumiputera.value}
+                    label="Bumiputera Expiry Date"          
+                    name="bumiputera_expiry_date"
+                    onChange={handleChange}
+                    type="date"
+                    value={state.bumiputera_expiry_date.value}
+                    placeholder="Enter your company Bumiputera Expiry Date"
+                    error={state.bumiputera_expiry_date.error}
+                />
+          </Form.Group>
+
+
           {state.is_bumiputera.error ? 
             <span className="invalid-feedback" ><strong>{state.is_bumiputera.error}</strong></span> 
           : 
@@ -328,6 +328,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
+                    is_disabled={state.is_bumiputera.value}
                     label="Bumiputera Certificate"          
                     name="bumiputera_expiry_date"
                     onChange={handleFileSelect}
