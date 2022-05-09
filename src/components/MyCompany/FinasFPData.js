@@ -243,7 +243,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Ministry of Finance</Modal.Title>
+        <Modal.Title>Finas (PF)</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
