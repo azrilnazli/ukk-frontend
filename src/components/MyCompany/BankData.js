@@ -197,7 +197,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">Banking Data</span>
+        <span className="float-start">Banking Account Informations</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
@@ -260,7 +260,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Ministry of Finance</Modal.Title>
+        <Modal.Title>Bank Account Informations</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
