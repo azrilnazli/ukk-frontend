@@ -96,7 +96,7 @@ const LoginForm = (props) => {
 
     // user redirect after successful login
     if (toHome === true) {
-        return <Redirect to='/faq' />
+        return <Redirect to='/dashboard' />
     }
     
     // redirect to register route
