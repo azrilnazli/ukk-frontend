@@ -197,7 +197,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">Banking Account Informations</span>
+        <span className="float-start">Banking Account Information</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
@@ -242,7 +242,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
-        <Modal.Title>Audit</Modal.Title>
+        <Modal.Title>Bank Account Information</Modal.Title>
       </Modal.Header>
       <Modal.Body>
       { config.SERVER_URL + "/storage/companies/" + state.id.value + "/bank_cert.pdf"}
@@ -260,7 +260,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Bank Account Informations</Modal.Title>
+        <Modal.Title>Bank Account Information</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
