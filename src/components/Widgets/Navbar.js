@@ -32,6 +32,10 @@ const NavbarMenu = (
     ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
     : null
 
+    const faqLink = loggedIn 
+    ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
+    : null
+
 
     const accountLink = loggedIn 
     ?  
@@ -51,6 +55,7 @@ const NavbarMenu = (
         <NavDropdown.Item >
             <NavLink as={Link} to='/change_password' className="dropdown-item"><i className="fa fa-lock" aria-hidden="true"></i> Password</NavLink>
         </NavDropdown.Item>
+
         <NavDropdown.Item >
            
         </NavDropdown.Item>
@@ -78,6 +83,7 @@ const NavbarMenu = (
                 <Nav className="me-auto">
                     {homeLink}
                     {companyLink}
+                    {faqLink}
                 </Nav>
                 <Nav>
                 {accountLink}
