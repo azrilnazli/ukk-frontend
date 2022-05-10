@@ -32,9 +32,15 @@ const NavbarMenu = (
     ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
     : null
 
+    const proposalLink = loggedIn 
+    ? <NavLink as={Link} to='/my_proposal' className="nav-link">My Proposal</NavLink> 
+    : null
+
+
     const faqLink = loggedIn 
     ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
     : null
+
 
 
     const accountLink = loggedIn 
@@ -83,6 +89,7 @@ const NavbarMenu = (
                 <Nav className="me-auto">
                     {homeLink}
                     {companyLink}
+                    {proposalLink}
                     {faqLink}
                 </Nav>
                 <Nav>

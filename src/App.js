@@ -21,6 +21,7 @@ import Navbar from './components/Widgets/Navbar';
 import MyAccount from './components/MyAccount';
 import MyCompany from './components/MyCompany';
 import Faq from './components/Pages/Faq';
+import MyProposal from './components/MyProposal';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
 
@@ -50,9 +51,6 @@ const App = () => {
   ? null 
   : <LoginLink />
 
-  
-
-
   return (
     
     <Router>
@@ -80,6 +78,7 @@ const App = () => {
               <PrivateRoute path='/dashboard'    loggedIn={loggedIn} component={Dashboard} />
               <PrivateRoute path='/my_company' loggedIn={loggedIn} component={MyCompany} />
               <PrivateRoute path='/my_account' loggedIn={loggedIn} component={MyAccount} />
+              <PrivateRoute path='/my_proposal' loggedIn={loggedIn} component={MyProposal} />
               <PrivateRoute path='/change_password' loggedIn={loggedIn} component={Password} />
               <PrivateRoute path='/movies'  loggedIn={loggedIn} component={Movies} />
               <PrivateRoute path='/movie/:id/play'  loggedIn={loggedIn} component={MoviePlay} />
