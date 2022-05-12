@@ -8,6 +8,7 @@ const MyProposal = () => {
     const [filename,setFilename] = useState('Choose file');
     const [uploaded, setUploaded] = useState('');
     const [errors, setErrors] = useState('');
+    const [uploadPercentage, setUploadPercentage] = useState(0);
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
@@ -26,6 +27,9 @@ const MyProposal = () => {
             url: "/api/company/upload_proposal_video",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
+            onUploadProgress: {
+               // setUploadPercentage(parseInt(Math.round(ProgressEvent.loaded * 100 /  ProgressEvent.total )))
+            }
         }).then(response => {
             console.log('uploaded')
             setUploaded('File successfully uploaded')
