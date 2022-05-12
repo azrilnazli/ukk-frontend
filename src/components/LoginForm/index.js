@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import apiClient from '../../services/api';
 import Form from './form.js';
 import SystemMsg from '../Alerts/SystemMsg';
+import logo from './logo.png';
+
 
 const LoginForm = (props) => {
 
@@ -110,7 +112,7 @@ const LoginForm = (props) => {
         <Fragment>
             <div className="row">
                     <div className="col-4">
-                        <img className="img-fluid rounded" src="/img/login.jpg" alt="" />
+                        <img className="img-fluid rounded" src={logo} alt="Logo" />
                     </div>
                     
                     <div className="col-8">
