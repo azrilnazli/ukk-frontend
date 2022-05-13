@@ -9,7 +9,7 @@ const MyProposal = () => {
     return (
         <>
             <Video />
-            <Pdf />
+            {/* <Pdf /> */}
         </>
     );
 };

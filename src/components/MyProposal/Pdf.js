@@ -63,9 +63,9 @@ const Pdf = () => {
         <>
         <div className='container container-fluid bg-light rounded p-3 col-md-12 mt-5'>
       
-            <div class="alert alert-secondary" role="alert">
-                <h4 class="alert-heading">PDF</h4>
-                <p>Please compress the video before uploading. Accepted codecs are H264/MP3 with .mov and .mp4 container.</p>
+            <div className="alert alert-secondary" role="alert">
+                <h4 className="alert-heading">PDF</h4>
+                <p>Please convert you proposal into PDF format.</p>
             </div>
 
             <form onSubmit={handleSubmit}>

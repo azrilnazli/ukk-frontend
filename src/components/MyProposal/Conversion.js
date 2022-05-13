@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Progress = ({percentage}) => {
+const Conversion = ({percentage}) => {
     return (
-    <div className="progress">
+    <div className="progress mt-2">
         <div 
         className="progress-bar" 
         role="progressbar" 
         style={{ width: `${percentage}%` }}
-        >Uploading {percentage}%</div>
+        >Encoding {percentage}%</div>
     </div>
     );
 };
 
-export default Progress;
+export default Conversion;

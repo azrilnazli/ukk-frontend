@@ -1,6 +1,8 @@
-import React , { useState }  from 'react';
+import React , { useState, useEffect }  from 'react';
 import apiClient from '../../services/api';
 import Progress from './Progress';
+import Conversion from './Conversion';
+import VideoJSPlayer from '../VideoJS';
 const collect = require('collect.js'); 
 
 const Video = () => {
@@ -10,18 +12,72 @@ const Video = () => {
     const [uploaded, setUploaded] = useState('');
     const [errors, setErrors] = useState('');
     const [uploadPercentage, setUploadPercentage] = useState(0);
+    const [conversionPercentage, setConversionPercentage] = useState(0);
+    const [videoId, setVideoId] = useState('');
+    const [systemMsg, setSystemMsg] = useState('');
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [showVideo, setShowVideo] = useState(false);
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
         setFilename(e.target.files[0].name)
     }
 
+    const getCurrentVideo = () => {
+        apiClient.get('/api/proposal/get_video') // axios call to txt file
+        .then((response) => {
+            console.log(response.data)  
+            if(response.data.exists === true){
+                setVideoId(response.data.video_id)
+                setShowVideo(true)
+            }          
+        })
+        .catch((e) => {
+            console.log("Error");
+            setConversionPercentage(0); // set counter to zero
+        });
+    }
+    React.useEffect(() => getCurrentVideo(), [videoId]); 
+
+    const getVideoProgress = () => {
+  
+        if(videoId != '' && conversionPercentage < 100 ) { //if videoId is present and conversionPercentage below 100%
+            setIsDisabled(true)
+            let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
+                apiClient.get(`/api/video/${videoId}/conversion_progress`) // axios call to txt file
+                .then((response) => {
+                    //console.log(response.data.progress)
+                    
+                    if (response.data.progress > 0 || response.data.progress < 99){
+                        setConversionPercentage(response.data.progress); // setter 
+                        if(response.data.progress > 99 && response.data.progress < 100){
+                            setIsDisabled(false)
+                            setShowVideo(true)
+                            //console.log('above 95')
+                            setSystemMsg('Your video was proccessed.')
+                        }
+                    } else {
+                        clearInterval(timer); // cleaning machine  
+                    }             
+                })
+                .catch((e) => {
+                    console.log("Error");
+                    setConversionPercentage(0); // set counter to zero
+                });
+            }, 1000);
+        }
+    }
+
+    React.useEffect(() => getVideoProgress(), [videoId]); // only run useEffect when videoId is changed
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsDisabled(true)
         setErrors('')
         const formData = new FormData(); // JavaScript
         formData.append('file', file) // selected file
 
+        setSystemMsg('Your video is being uploaded')
         // axios 
         apiClient({
             method: "post",
@@ -43,8 +99,12 @@ const Video = () => {
 
             
         }).then(response => {
-            console.log('uploaded')
-            setUploaded('File successfully uploaded')
+            setSystemMsg('Your video was uploaded successfully')
+            console.log(response.data.uploaded)
+            setUploaded(response.data.uploaded)
+            setVideoId(response.data.video_id)
+            setIsDisabled(false)
+      
        
         }).catch(error => {
             if (error.response.status === 500) {
@@ -58,16 +118,27 @@ const Video = () => {
         })
     }
 
+    const handleConversion = () => {
+        setSystemMsg('Your video has been processed')
+    }
+
+  
 
     return (
         <>
         <div className='container container-fluid bg-light rounded p-3 col-md-12'>
       
-            <div class="alert alert-secondary" role="alert">
-                <h4 class="alert-heading">Video</h4>
+            { showVideo ? 
+                <div className="alert alert-secondary" role="alert">
+                   <h4 className="alert-heading">Video</h4>
+                   <VideoJSPlayer id={videoId} />
+               </div>     
+            :
+            <div className="alert alert-secondary" role="alert">
+                <h4 className="alert-heading">Video</h4>
                 <p>Please compress the video before uploading. Accepted codecs are H264/MP3 with .mov and .mp4 container.</p>
             </div>
-
+            }
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <input 
@@ -87,7 +158,7 @@ const Video = () => {
                         <>
                         { uploaded ? 
                             <div  className="valid-feedback">
-                                {uploaded}
+                               {systemMsg}
                             </div> 
                         :
                             null 
@@ -99,11 +170,22 @@ const Video = () => {
                 <div className="col-12 mb-3">
                 { uploadPercentage ? 
                 <Progress percentage={uploadPercentage} />
+               
                 :
-                null
+                null 
+                }
+
+                { conversionPercentage != 100 && conversionPercentage != 0 ? 
+                <Conversion percentage={conversionPercentage} />
+                :
+                <>{handleConversion}</>
                 }
                 </div>
-            <button type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
+                { isDisabled ? 
+                    <button disabled type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
+                :
+                    <button type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
+                }
             </form>
         </div>
 
