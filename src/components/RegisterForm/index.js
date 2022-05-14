@@ -23,7 +23,18 @@ const RegisterForm = () => {
     const [emailErrorMsg, setEmailErrorMsg] = React.useState(false);
     const [passwordErrorMsg, setPasswordErrorMsg] = React.useState(false);
 
+    const [date,setDate] = React.useState( new Date().toLocaleString() )
 
+
+    // disable registration date
+    let date1 = new Date();
+    let date2 = new Date('May 14, 2022 23:59:00');
+
+    if(date1 > date2){
+        // redirect to login
+       
+        return <Redirect to='/login' />
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -84,6 +95,8 @@ const RegisterForm = () => {
     if (toRegister === true) {
         return <Redirect to='/register' />
     }
+
+  
     
     return (
         <div className="row">
@@ -96,6 +109,7 @@ const RegisterForm = () => {
             <div className="card"  >
 
                 <div className="card-body">
+                    {date}
                 {authError ? <SystemMsg msg= { errorMsg ? errorMsg : 'Error while submitting' } type='danger' /> : null }
                 <h3> <i className="fa fa-cog"></i> Register</h3>
                 <p className="card-text">Please use valid email for registration.</p>

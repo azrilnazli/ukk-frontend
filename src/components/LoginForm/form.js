@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState,Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 
 
@@ -23,6 +23,23 @@ const LoginForm = ({
                 
                 }) => {
 
+    const [showRegister, setShowRegister] = useState('true');
+
+    function checkDate(){
+        // disable registration date
+        let date1 = new Date();
+        let date2 = new Date('May 14, 2022 23:59:00');
+    
+        if(date1 > date2){
+            // redirect to login
+            setShowRegister(false)
+          //console.log('dah lepas')
+        }
+    }
+
+    React.useEffect(() => checkDate(), []); 
+    
+                    
     return (
         <Fragment>       
         <form onSubmit={handleSubmit}>
@@ -66,7 +83,12 @@ const LoginForm = ({
                 &nbsp;Log In
                 </button>
             
+                { showRegister ? 
                 <button onClick={handleClick} type="button" className="m-2 btn btn-warning">Register</button>
+                :
+                null 
+                }
+
                 <NavLink  to='/password-email' className="btn btn-link">Forgot Your Password ?</NavLink>
             </div>
         </div>
