@@ -126,12 +126,15 @@ const LoginForm = (props) => {
                                
                                 {/* <h3><i className="fa fa-cog"></i> Login</h3> */}
                                 
-                                <h2> Selamat Datang ke Sistem RTM TV CMS. </h2>
-                                <p className="card-text"> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 telah tamat pada Jam 11:59 malam, 14 Mei 2022</p>
-                                <p className="card-text">Pembekal boleh rujuk video dan dokumen ringkasan cara mendaftar dan penyerahan dokumen-dokumen berkaitan syarikat yang diperlukan.</p>
+                                <h2> Selamat Datang ke Sistem RTM TVCMS. </h2>
                                 <p className="card-text">
-                                URUS SETIA, UNIT KANDUNGAN KREATIF (UKK)<br />
-                                RADIO TELEVISYEN MALAYSIA (RTM)
+                                    MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 telah tamat pada Jam 11:59 malam, 14 Mei 2022 
+                                    <br />
+                                    Pihak Pembekal yang telah mendaftar boleh menghantar semula dokumen yang berkaitan sebelum 20 Mei 2022.
+                                    <br />
+                                    Sila rujuk tatacara memuat naik dokumen, proposal dan video pada ruangan FAQ.
+
+
                                 </p>
                                 <Form 
                                 
