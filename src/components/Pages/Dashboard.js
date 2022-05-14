@@ -51,9 +51,9 @@ const Dashboard = () => {
       
     <div className='container container-fluid bg-light rounded p-3'>
     <Alert />
-    //   <div className="alert alert-warning text-danger" role="alert">
-    //   <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
-    //   </div>
+    {/*    <div className="alert alert-warning text-danger" role="alert">
+       <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
+       </div> */}
 
       
 
