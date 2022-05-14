@@ -127,7 +127,7 @@ const LoginForm = (props) => {
                                 {/* <h3><i className="fa fa-cog"></i> Login</h3> */}
                                 
                                 <h2> Selamat Datang ke Sistem RTM TV CMS. </h2>
-                                <p className="card-text">Para Pembekal perlu mendaftar terlebih dahulu, sebelum boleh log masuk bagi proses penyerahan dokumen-dokumen pendaftaran dan penyerahan kandungan-kandungan media berkaitan dengan tajuk program pembekalan yang berkenaan.</p>
+                                <p className="card-text"> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14 Mei 2022</p>
                                 <p className="card-text">Pembekal boleh rujuk video dan dokumen ringkasan cara mendaftar dan penyerahan dokumen-dokumen berkaitan syarikat yang diperlukan.</p>
                                 <p className="card-text">
                                 URUS SETIA, UNIT KANDUNGAN KREATIF (UKK)<br />
