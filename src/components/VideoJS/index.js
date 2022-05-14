@@ -23,7 +23,7 @@ const VideoJSPlayer = (props) => {
   );
 
   const videoJsOptions = { // lookup the options in the docs for more options
-    autoplay: true,
+    autoplay: false,
     controls: true,
     responsive: true,
     fluid: true,

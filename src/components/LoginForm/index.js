@@ -111,11 +111,11 @@ const LoginForm = (props) => {
     return (
         <Fragment>
             <div className="row">
-                    <div className="col-4">
+                    <div className="col-lg-4">
                         <img className="img-fluid rounded" src={logo} alt="Logo" />
                     </div>
                     
-                    <div className="col-8">
+                    <div className="col-lg-8">
                     
                         <div className="card"  >
 

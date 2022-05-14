@@ -5,6 +5,7 @@ import Conversion from './Conversion';
 import VideoJSPlayer from '../VideoJS';
 const collect = require('collect.js'); 
 
+
 const Video = () => {
 
     const [file,setFile] = useState('');
@@ -17,6 +18,7 @@ const Video = () => {
     const [systemMsg, setSystemMsg] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
+    const [isNewVideo, setIsNewVideo] = useState(false)
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
@@ -28,36 +30,45 @@ const Video = () => {
         .then((response) => {
             console.log(response.data)  
             if(response.data.exists === true){
+                console.log('showing video with id ' + response.data.video_id)
                 setVideoId(response.data.video_id)
                 setShowVideo(true)
+               
             }          
         })
         .catch((e) => {
+            console.log(e.error);
             console.log("Error");
             setConversionPercentage(0); // set counter to zero
         });
     }
-    React.useEffect(() => getCurrentVideo(), [videoId]); 
+    React.useEffect(() => getCurrentVideo(), [isNewVideo]); 
 
     const getVideoProgress = () => {
-  
+        
         if(videoId != '' && conversionPercentage < 100 ) { //if videoId is present and conversionPercentage below 100%
-            setIsDisabled(true)
+            
             let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
                 apiClient.get(`/api/video/${videoId}/conversion_progress`) // axios call to txt file
                 .then((response) => {
-                    //console.log(response.data.progress)
-                    
-                    if (response.data.progress > 0 || response.data.progress < 99){
+                
+                    setIsDisabled(true)
+                    if (response.data.progress != 0 || response.data.progress < 101){
                         setConversionPercentage(response.data.progress); // setter 
-                        if(response.data.progress > 99 && response.data.progress < 100){
+                        setIsDisabled(true)
+                        if(response.data.progress > 97 && response.data.progress < 100){
                             setIsDisabled(false)
+                    
+                            
+                            console.log('set show video')
                             setShowVideo(true)
-                            //console.log('above 95')
                             setSystemMsg('Your video was proccessed.')
+                          
                         }
                     } else {
+                        
                         clearInterval(timer); // cleaning machine  
+                        
                     }             
                 })
                 .catch((e) => {
@@ -68,7 +79,7 @@ const Video = () => {
         }
     }
 
-    React.useEffect(() => getVideoProgress(), [videoId]); // only run useEffect when videoId is changed
+   React.useEffect(() => getVideoProgress(), [uploaded]); // only run useEffect when videoId is changed
  
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -104,8 +115,8 @@ const Video = () => {
             setUploaded(response.data.uploaded)
             setVideoId(response.data.video_id)
             setIsDisabled(false)
+
       
-       
         }).catch(error => {
             if (error.response.status === 500) {
                 console.log('Error 500'); 
@@ -118,16 +129,14 @@ const Video = () => {
         })
     }
 
-    const handleConversion = () => {
-        setSystemMsg('Your video has been processed')
-    }
+ 
 
   
 
     return (
         <>
         <div className='container container-fluid bg-light rounded p-3 col-md-12'>
-      
+     
             { showVideo ? 
                 <div className="alert alert-secondary" role="alert">
                    <h4 className="alert-heading">Video</h4>
@@ -158,8 +167,8 @@ const Video = () => {
                         <>
                         { uploaded ? 
                             <div  className="valid-feedback">
-                               {systemMsg}
-                            </div> 
+                               {systemMsg}.
+                             </div> 
                         :
                             null 
                         }
@@ -178,7 +187,7 @@ const Video = () => {
                 { conversionPercentage != 100 && conversionPercentage != 0 ? 
                 <Conversion percentage={conversionPercentage} />
                 :
-                <>{handleConversion}</>
+                null
                 }
                 </div>
                 { isDisabled ? 

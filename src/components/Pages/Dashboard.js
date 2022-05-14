@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     <div className="row align-items-start pe-3">
 
-      <div className="col-6">
+      <div className="col-lg-6">
         {/* <img src="/img/requirements.jpg" className="img-fluid rounded" /> */}
           <div className="alert alert-primary" role="alert">
           <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please install Adobe Acrobat Reader.
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
       </div>
 
-      <div className="col-6">
+      <div className="col-lg-6">
         <div className='row'>
 
 {/* 

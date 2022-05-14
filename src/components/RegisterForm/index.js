@@ -87,11 +87,11 @@ const RegisterForm = () => {
     
     return (
         <div className="row">
-            <div className="col-4">
+            <div className="col-lg-4">
                 <img className="img-fluid rounded" src="/img/login.jpg" alt="" />
             </div>
             
-            <div className="col-8">
+            <div className="col-lg-8">
             
             <div className="card"  >
 
