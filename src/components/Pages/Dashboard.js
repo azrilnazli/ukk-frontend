@@ -28,7 +28,9 @@ const Dashboard = () => {
           </Modal.Header>
           <Modal.Body>
 
-          <p>Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 12.01 pagi, 15/Mei/2022*</p>
+          <p>
+          MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14 Mei 2022
+          </p>
       
           </Modal.Body>
           <Modal.Footer>
@@ -47,11 +49,11 @@ const Dashboard = () => {
     return (
 
       
-    <div className='container container-fluid bg-light rounded p-3'>
-    <Alert />
-      {/* <div className="alert alert-warning text-danger" role="alert">
-      <i className="fa fa-exclamation-triangle"></i> System is still under development.
-      </div> */}
+    // <div className='container container-fluid bg-light rounded p-3'>
+    // <Alert />
+    //   <div className="alert alert-warning text-danger" role="alert">
+    //   <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
+    //   </div>
 
       
 
