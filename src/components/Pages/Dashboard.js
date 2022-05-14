@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
+import {Modal, Button, Form} from 'react-bootstrap';
 //import apiClient from '../../services/api';
 //import { Redirect } from 'react-router-dom';
 //import UserData from '../Widgets/UserData';
@@ -9,16 +10,50 @@ import Comment from '../MyCompany/Comment';
 
 const Dashboard = () => {
 
-    
+  function Alert() {
+    const [show, setShow] = useState(true);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  
+    return (
+      <>
+        {/* <Button variant="primary" onClick={handleShow}>
+          Launch demo modal
+        </Button> */}
+  
+        <Modal show={show} size="lg" onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>MAKLUMAN</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+
+          <p>Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 12.01 pagi, 15/Mei/2022*</p>
+      
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+     
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
+
+  
     return (
 
+      
     <div className='container container-fluid bg-light rounded p-3'>
-
-
-
+    <Alert />
       {/* <div className="alert alert-warning text-danger" role="alert">
       <i className="fa fa-exclamation-triangle"></i> System is still under development.
       </div> */}
+
+      
 
     <div className="row align-items-start pe-3">
 
