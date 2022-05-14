@@ -16,8 +16,6 @@ const Dashboard = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
-  
     return (
       <>
         {/* <Button variant="primary" onClick={handleShow}>
@@ -52,7 +50,7 @@ const Dashboard = () => {
 
       
     <div className='container container-fluid bg-light rounded p-3'>
-    <Alert />
+    {/* <Alert /> */}
     
     {/*    <div className="alert alert-warning text-danger" role="alert">
        <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
@@ -64,18 +62,47 @@ const Dashboard = () => {
 
       <div className="col-lg-6">
         {/* <img src="/img/requirements.jpg" className="img-fluid rounded" /> */}
-          <div className="alert alert-primary" role="alert">
+          
+
+        <div className="alert alert-warning " role="alert">
+         <h2><i className="fa fa-exclamation-triangle"></i> Info Terkini</h2>
+           <p>
+            Assalamualaikum & Salam Sejahtera kepada syarikat-syarikat yang telah mendapat pengesahan pendaftaran pada sistem RTM UKK TVCMS.
+           <br />
+           <br />
+
+
+Untuk makluman, pihak Urusetia mengambil kira cuti umum Wesak dan kerja-Kerja kemaskini yang sedang dijalankan oleh pihak teknikal sistem RTM UKK TVCMS bagi memastikan kelancaran proses penyerahan proposal secara muat naik dalam talian pada Sistem RTM UKK TVCMS dapat dilakukan, maka tarikh baru penyerahan proposal akan bermula pada Selasa 17 Mei 2022 Hingga Ahad 22 Mei 2022.
+<br />
+<br />
+Pihak syarikat yang telah mendapat pengesahan pendaftaran boleh  mengakses semula ke Sistem RTM UKK TVCMS mulai tarikh berkenaan. 
+<br />
+<br />
+Harap Maklum.
+<br />
+<br />
+Sekian, Terima Kasih.<br />
+Urusetia, Unit Kandungan Kreatif (UKK),<br />
+Radio Televisyen Malaysia (RTM)<br />
+           </p>
+          </div> 
+
+          <div className="alert alert-warning text-danger" role="alert">
+          <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
+          </div> 
+
+          {/* <div className="alert alert-primary" role="alert">
           <i className='fas fa-exclamation-triangle' style={{color: 'red'}}></i> Please install Adobe Acrobat Reader.
-          </div>
+          </div> */}
+
+
           <div className='row'>
             <ApprovalStatus />
           </div>
           <div className='row'>
             <Comment />
           </div>
-
-
-      </div>
+        </div>
 
       <div className="col-lg-6">
         <div className='row'>
