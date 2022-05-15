@@ -50,20 +50,14 @@ const Dashboard = () => {
 
       
     <div className='container container-fluid bg-light rounded p-3'>
-    {/* <Alert /> */}
-    
-    {/*    <div className="alert alert-warning text-danger" role="alert">
-       <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
-       </div> */}
+
 
       
 
     <div className="row align-items-start pe-3">
 
       <div className="col-lg-6">
-        {/* <img src="/img/requirements.jpg" className="img-fluid rounded" /> */}
-          
-
+    
         <div className="alert alert-warning " role="alert">
          <h2><i className="fa fa-exclamation-triangle"></i> Info Terkini</h2>
            <p>
