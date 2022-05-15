@@ -1,5 +1,4 @@
 {
-    "SERVER_URL": "https://admin-ukk.rtm.gov.my",
+    "SERVER_URL": "http://ukk-backend.test",
     "APP" : "RTM TVCMS"
-
 }
