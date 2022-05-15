@@ -50,10 +50,6 @@ const Dashboard = () => {
 
       
     <div className='container container-fluid bg-light rounded p-3'>
-
-
-      
-
     <div className="row align-items-start pe-3">
 
       <div className="col-lg-6">
@@ -62,22 +58,20 @@ const Dashboard = () => {
          <h2><i className="fa fa-exclamation-triangle"></i> Info Terkini</h2>
            <p>
             Assalamualaikum & Salam Sejahtera kepada syarikat-syarikat yang telah mendapat pengesahan pendaftaran pada sistem RTM UKK TVCMS.
-           <br />
-           <br />
-
-
-Untuk makluman, pihak Urusetia mengambil kira cuti umum Wesak dan kerja-Kerja kemaskini yang sedang dijalankan oleh pihak teknikal sistem RTM UKK TVCMS bagi memastikan kelancaran proses penyerahan proposal secara muat naik dalam talian pada Sistem RTM UKK TVCMS dapat dilakukan, maka tarikh baru penyerahan proposal akan bermula pada Selasa 17 Mei 2022 Hingga Ahad 22 Mei 2022.
-<br />
-<br />
-Pihak syarikat yang telah mendapat pengesahan pendaftaran boleh  mengakses semula ke Sistem RTM UKK TVCMS mulai tarikh berkenaan. 
-<br />
-<br />
-Harap Maklum.
-<br />
-<br />
-Sekian, Terima Kasih.<br />
-Urusetia, Unit Kandungan Kreatif (UKK),<br />
-Radio Televisyen Malaysia (RTM)<br />
+            <br />
+            <br />
+            Untuk makluman, pihak Urusetia mengambil kira cuti umum Wesak dan kerja-Kerja kemaskini yang sedang dijalankan oleh pihak teknikal sistem RTM UKK TVCMS bagi memastikan kelancaran proses penyerahan proposal secara muat naik dalam talian pada Sistem RTM UKK TVCMS dapat dilakukan, maka tarikh baru penyerahan proposal akan bermula pada Selasa 17 Mei 2022 Hingga Ahad 22 Mei 2022.
+            <br />
+            <br />
+            Pihak syarikat yang telah mendapat pengesahan pendaftaran boleh  mengakses semula ke Sistem RTM UKK TVCMS mulai tarikh berkenaan. 
+            <br />
+            <br />
+            Harap Maklum.
+            <br />
+            <br />
+            Sekian, Terima Kasih.<br />
+            Urusetia, Unit Kandungan Kreatif (UKK),<br />
+            Radio Televisyen Malaysia (RTM)<br />
            </p>
           </div> 
 
