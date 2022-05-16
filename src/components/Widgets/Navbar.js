@@ -28,42 +28,66 @@ const NavbarMenu = (
     // ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
     // : null
 
-    const companyLink = loggedIn 
+    const MyCompanyLink = loggedIn 
     ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
     : null
 
-    const proposalLink = loggedIn 
+    const MyProposalLink = loggedIn 
     ? <NavLink as={Link} to='/my_proposal' className="nav-link">My Proposal</NavLink> 
     : null
 
+    const MyTenderLink = loggedIn 
+    ? <NavLink as={Link} to='/my_tender' className="nav-link">My Tender</NavLink> 
+    : null
 
     const faqLink = loggedIn 
     ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
     : null
 
 
-
-    const accountLink = loggedIn 
-    ?  
+    const tenderLink = loggedIn ?  
     
     <NavDropdown 
-               
-    title={
-        <span>
-            <i className="fa fa-lock" aria-hidden="true"></i> My Account
-        </span>
-    }
+                
+        title={
+            <span>
+                <i className="fa fa-list" ></i> Tender
+            </span>
+        }
+        >
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/requirements' className="dropdown-item"><i className="fa fa-question" ></i> REQUIREMENTS</NavLink> 
+        </NavDropdown.Item>
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/tender_sambung_siri' className="dropdown-item"><i className="fa fa-search" ></i> SAMBUNG SIRI</NavLink> 
+        </NavDropdown.Item>
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/tender_swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-user" ></i> My Tender</NavLink>
+        </NavDropdown.Item>
+        
+    </NavDropdown>
+    : 
+    null
+
+    const accountLink = loggedIn ?  
     
-    >
+    <NavDropdown 
+                
+        title={
+            <span>
+                <i className="fa fa-lock" aria-hidden="true"></i> My Account
+            </span>
+        }
+        >
         <NavDropdown.Item >
             <NavLink as={Link} to='/my_account' className="dropdown-item"><i className="fa fa-user" aria-hidden="true"></i> Profile</NavLink> 
         </NavDropdown.Item>
         <NavDropdown.Item >
             <NavLink as={Link} to='/change_password' className="dropdown-item"><i className="fa fa-lock" aria-hidden="true"></i> Password</NavLink>
-        </NavDropdown.Item>
-
-        <NavDropdown.Item >
-           
         </NavDropdown.Item>
         
         <NavDropdown.Divider />
@@ -76,8 +100,7 @@ const NavbarMenu = (
     null
 
 
-  
-  
+
 
      return ( 
 
@@ -88,8 +111,14 @@ const NavbarMenu = (
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     {homeLink}
-                    {companyLink}
-                    {/* {proposalLink} */}
+
+                    {MyCompanyLink}
+
+                    {tenderLink}
+{/*                     
+                    {MyProposalLink}
+                    {MyTenderLink} */}
+                    
                     {faqLink}
                 </Nav>
                 <Nav>

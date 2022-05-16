@@ -24,6 +24,7 @@ const ProfileData = () => {
     states: { value: '' ,error: '' },
     board_of_directors: { value: '' ,error: '' },
     experiences: { value: '' ,error: '' },
+     experiences: { value: '' ,error: '' },
 
   }
 

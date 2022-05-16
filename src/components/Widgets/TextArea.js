@@ -13,7 +13,8 @@ const TextField = (props) => {
         placeholder={props.placeholder}
         rows="5"
         onChange={props.onChange}
-    >{props.value}</textarea>
+        value={props.value}
+    />
     
     {props.error ? 
         <span className="invalid-feedback" ><strong>{props.error}</strong></span> 

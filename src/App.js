@@ -20,11 +20,12 @@ import MoviePlay from './components/Movies/MoviePlay';
 import Navbar from './components/Widgets/Navbar';
 import MyAccount from './components/MyAccount';
 import MyCompany from './components/MyCompany';
-import Faq from './components/Pages/Faq';
 import MyProposal from './components/MyProposal';
+import TenderSambungSiri from './components/Tender/SambungSiri.js';
+import Faq from './components/Pages/Faq';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
-
+import Apply from './components/Tender/Apply';
 
 
 const App = () => {
@@ -79,6 +80,10 @@ const App = () => {
               <PrivateRoute path='/my_company' loggedIn={loggedIn} component={MyCompany} />
               <PrivateRoute path='/my_account' loggedIn={loggedIn} component={MyAccount} />
               <PrivateRoute path='/my_proposal' loggedIn={loggedIn} component={MyProposal} />
+              
+              <PrivateRoute path='/tender_sambung_siri'   loggedIn={loggedIn} component={TenderSambungSiri} />
+              <PrivateRoute path='/tender/:id/apply'  loggedIn={loggedIn} component={Apply} />
+
               <PrivateRoute path='/change_password' loggedIn={loggedIn} component={Password} />
               <PrivateRoute path='/movies'  loggedIn={loggedIn} component={Movies} />
               <PrivateRoute path='/movie/:id/play'  loggedIn={loggedIn} component={MoviePlay} />
