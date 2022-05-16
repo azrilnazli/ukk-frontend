@@ -1,31 +1,63 @@
-import React , { useState }  from 'react';
+import React , { useState, useEffect }  from 'react';
 import apiClient from '../../services/api';
 import Progress from './Progress';
+import {Modal, Button, Form} from 'react-bootstrap';
 const collect = require('collect.js'); 
 
-const Pdf = () => {
+
+const Pdf = ({proposal_id,tender_id}) => {
 
     const [file,setFile] = useState('');
     const [filename,setFilename] = useState('Choose file');
-    const [uploaded, setUploaded] = useState('');
+    const [uploaded, setUploaded] = useState(false);
     const [errors, setErrors] = useState('');
     const [uploadPercentage, setUploadPercentage] = useState(0);
+
+    const [systemMsg, setSystemMsg] = useState('');
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [showPdf, setShowPdf] = useState(false);
+
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
         setFilename(e.target.files[0].name)
     }
 
+    const getCurrentPdf = () => {
+
+        // get current video id
+        apiClient.get(`/api/proposal/${proposal_id}/get_pdf`) // to check if PDF exist for this TenderSubmissionID/proposal_id
+        .then((response) => {
+            console.log(response)  
+            if(response.data.exists === true){
+                console.log('showing pdf')
+                setShowPdf(true)
+            }          
+        })
+        .catch((e) => {
+            console.log(e.error);
+            console.log("Error");
+        });
+
+       
+    }
+    React.useEffect(() => getCurrentPdf(), []); 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsDisabled(true)
         setErrors('')
         const formData = new FormData(); // JavaScript
+        formData.append('proposal_id', proposal_id) // selected file
+        formData.append('tender_id', tender_id) // selected file
         formData.append('file', file) // selected file
 
+        setSystemMsg('Your PDF is being uploaded')
         // axios 
         apiClient({
             method: "post",
-            url: "/api/company/upload_proposal_video",
+            url: "/api/proposal/upload_pdf",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
             onUploadProgress: progressEvent => {
@@ -43,9 +75,12 @@ const Pdf = () => {
 
             
         }).then(response => {
-            console.log('uploaded')
-            setUploaded('File successfully uploaded')
-       
+            setSystemMsg('Your PDF was uploaded successfully.')
+            console.log(response.data.uploaded)
+            setUploaded(true)
+            setIsDisabled(false)
+
+      
         }).catch(error => {
             if (error.response.status === 500) {
                 console.log('Error 500'); 
@@ -58,50 +93,132 @@ const Pdf = () => {
         })
     }
 
+    function ShowPDFDocument() {
+        const [show, setShow] = useState(false);
+      
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+    
+        return (
+          <>
+            <Button variant="primary" onClick={handleShow}>
+              Show PDF
+            </Button>
+      
+            <Modal show={show} size="lg" onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>PDF VIEWER</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+    
+                    pdf should be here
+          
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+         
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
+
 
     return (
         <>
-        <div className='container container-fluid bg-light rounded p-3 col-md-12 mt-5'>
-      
-            <div className="alert alert-secondary" role="alert">
-                <h4 className="alert-heading">PDF</h4>
-                <p>Please convert you proposal into PDF format.</p>
-            </div>
-
+    
             <form onSubmit={handleSubmit}>
-                <div className="input-group mb-3">
-                    <input 
-                    type="file"
-                    accept="video/mp4,video/x-m4v,video/*"
-                    className={"form-control" + (errors ? ' is-invalid' : uploaded ? ' is-valid' : '' )}
-                    onChange={handleChange} 
-                    />
-                    
-                    <>
-                    { errors ? 
-                        <div className="invalid-feedback">
-                            {errors}
-                        </div> 
-                    :
-                        <>
-                        { uploaded ? 
-                            <div  className="valid-feedback">
-                                {uploaded}
-                            </div> 
-                        :
-                            null 
-                        }
-                        </> 
-                    }
-                    </>
-                </div>
-                <div className="col-12 mb-3">
-                <Progress percentage={uploadPercentage} />
-                </div>
-            <button type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
-            </form>
-        </div>
+               
+                <div className='row' >
 
+                        <div className='col-4'>
+                            { showPdf ? 
+                            <div className="alert alert-secondary" role="alert">
+                                <div className='row' >
+                                    <div className='col text-center'><ShowPDFDocument/></div>
+                                    <div className='col ml-2'> 
+                                    <p>You've successfully attached a PDF Document to this proposal.</p></div>
+                                </div>
+                            </div>     
+                            :
+                            <div className="alert alert-secondary" role="alert">
+                                <p>Please convert you DOCUMENT into PDF Formt before uploading.</p>
+                            </div>
+                            }
+                        </div>
+                        <div className='col-8'>
+                            <div className='row'>
+
+                                <div className='col-10'>
+                                    <div className="input-group mb-3">
+
+                                        { !isDisabled ? 
+                                            <input 
+                                            type="file"
+                                            required
+                                            accept="application/pdf"
+                                            className={"form-control" + (errors ? ' is-invalid' : uploaded ? ' is-valid' : '' )}
+                                            onChange={handleChange} 
+                                            />
+                                        :
+                                            <input 
+                                            type="file"
+                                            disabled
+                                            accept="application/pdf"
+                                            className={"form-control" + (errors ? ' is-invalid' : uploaded ? ' is-valid' : '' )}
+                                            onChange={handleChange} 
+                                            />
+                                        }
+
+                                        <>
+                                        { errors ? 
+                                            <div className="invalid-feedback">
+                                                {errors}
+                                            </div> 
+                                        :
+                                            <>
+                                            { uploaded ? 
+                                                <div  className="valid-feedback">
+                                                {systemMsg}.
+                                                </div> 
+                                            :
+                                                null 
+                                            }
+                                            </> 
+                                        }
+                                        </>
+                                    </div>
+                                    <p>Max PDF Document size is 10MB.</p>
+                                    { uploadPercentage ? 
+                                    <Progress percentage={uploadPercentage} />
+                                    :
+                                    null 
+                                    }
+
+                    
+                                </div>
+
+                                
+                                <div className='col-2'>
+                                        { isDisabled ? 
+                                        <button disabled type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
+                                        :
+                                        <button type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
+                                        }
+                                </div>
+                            </div>
+                                
+                        </div>
+
+             
+                    </div>
+                    <div className="col-12 mb-3">
+                   
+                    </div>
+            </form>
+     
 
 </>
 

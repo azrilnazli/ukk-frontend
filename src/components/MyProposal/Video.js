@@ -19,7 +19,7 @@ const Video = ({proposal_id,tender_id}) => {
     const [systemMsg, setSystemMsg] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
-    const [isNewVideo, setIsNewVideo] = useState(false)
+    const [isVideoPlayable, setIsVideoPlayable] = useState(false)
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
@@ -36,6 +36,7 @@ const Video = ({proposal_id,tender_id}) => {
                 console.log('showing video with id ' + response.data.video_id)
                 setVideoId(response.data.video_id)
                 setShowVideo(true)
+
                 if(response.data.video_id){
                     // check existing conversion status
                     console.log('video is is ' + response.data.video_id)
@@ -47,6 +48,25 @@ const Video = ({proposal_id,tender_id}) => {
                             setShowVideo(false)
                             setUploaded(true); // setter 
                             console.log('checked : is converting')
+                        }          
+                    })
+                    .catch((e) => {
+                        console.log(e.error);
+                        console.log("Error");
+                        setConversionPercentage(0); // set counter to zero
+                    });
+                } // check videoID
+
+                // check is video playable
+                if(response.data.video_id){
+                    // check existing conversion status
+                    console.log('check video playable ' + response.data.video_id)
+                    apiClient.get(`/api/video/${response.data.video_id}/is_playable`)
+                    .then((response) => {
+                        console.log(response)  
+                        if(response.data.is_playable === true){ // is converting
+                            console.log('is playable : yes')
+                            setIsVideoPlayable(true)
                         }          
                     })
                     .catch((e) => {
@@ -89,6 +109,7 @@ const Video = ({proposal_id,tender_id}) => {
                             console.log('done converting')
                             setSystemMsg('Your video was proccessed.')
                             setShowVideo(true)
+                            setIsVideoPlayable(true)
                             setIsDisabled(false)
                             setConversionPercentage(0);
                             setUploaded(false)
@@ -218,7 +239,7 @@ const Video = ({proposal_id,tender_id}) => {
                 <div className='row' >
 
                         <div className='col-4'>
-                            { showVideo ? 
+                            { isVideoPlayable ? 
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
                                     <div className='col text-center'><ShowVideoPlayer/></div>

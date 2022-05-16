@@ -4,6 +4,7 @@ import TextField from '../Widgets/TextField';
 import TextArea from '../Widgets/TextArea';
 import {Modal, Button, Form} from 'react-bootstrap';
 import Video from '../MyProposal/Video';
+import Pdf from '../MyProposal/Pdf';
 const collect = require('collect.js'); 
 
 const SubmissionForm = ({tender_id}) => {
@@ -175,7 +176,7 @@ const SubmissionForm = ({tender_id}) => {
    
             <div className="card mt-3">
                 <div className="card-header">
-                        <h5>SEND PROPOSAL</h5>
+                        <h5>PROPOSAL DETAILS</h5>
                 </div>
 
         
@@ -186,7 +187,10 @@ const SubmissionForm = ({tender_id}) => {
                         You proposals successfully updated. Your ID is {tenderSubmissionId}.
                     </div>
                     :
-                    null }
+                    <div className='alert alert-info'>
+                        Please complete this form before being able to upload VIDEO or PDF.
+                    </div>
+                    }
 
                     <Form>
                         <Form.Group className=" mb-3 col-lg-6">
@@ -273,7 +277,7 @@ const SubmissionForm = ({tender_id}) => {
 
                 <div className="card-body">
                         
-                 PDF 
+                  <Pdf tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} />
                 </div>
             </div>
             : null }
