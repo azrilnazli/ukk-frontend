@@ -21,7 +21,12 @@ import Navbar from './components/Widgets/Navbar';
 import MyAccount from './components/MyAccount';
 import MyCompany from './components/MyCompany';
 import MyProposal from './components/MyProposal';
+
 import TenderSambungSiri from './components/Tender/SambungSiri.js';
+import TenderSwasta from './components/Tender/Swasta.js';
+import Requirements from './components/Tender/Requirements';
+
+
 import Faq from './components/Pages/Faq';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
@@ -81,7 +86,9 @@ const App = () => {
               <PrivateRoute path='/my_account' loggedIn={loggedIn} component={MyAccount} />
               <PrivateRoute path='/my_proposal' loggedIn={loggedIn} component={MyProposal} />
               
-              <PrivateRoute path='/tender_sambung_siri'   loggedIn={loggedIn} component={TenderSambungSiri} />
+              <PrivateRoute path='/tender/requirements'   loggedIn={loggedIn} component={Requirements} />
+              <PrivateRoute path='/tender/sambung_siri'   loggedIn={loggedIn} component={TenderSambungSiri} />
+              <PrivateRoute path='/tender/swasta'   loggedIn={loggedIn} component={TenderSwasta} />
               <PrivateRoute path='/tender/:id/apply'  loggedIn={loggedIn} component={Apply} />
 
               <PrivateRoute path='/change_password' loggedIn={loggedIn} component={Password} />

@@ -2,6 +2,7 @@ import React , { useState, useEffect }  from 'react';
 import apiClient from '../../services/api';
 import Progress from './Progress';
 import {Modal, Button, Form} from 'react-bootstrap';
+import config from '../../config.json'
 const collect = require('collect.js'); 
 
 
@@ -28,6 +29,7 @@ const Pdf = ({proposal_id,tender_id}) => {
         // get current video id
         apiClient.get(`/api/proposal/${proposal_id}/get_pdf`) // to check if PDF exist for this TenderSubmissionID/proposal_id
         .then((response) => {
+            console.log('checking pdf')
             console.log(response)  
             if(response.data.exists === true){
                 console.log('showing pdf')
@@ -90,6 +92,8 @@ const Pdf = ({proposal_id,tender_id}) => {
                 console.log(error.response)
                 setErrors(error.response.data.errors.file[0]);
             }
+
+            setIsDisabled(false)
         })
     }
 
@@ -98,6 +102,7 @@ const Pdf = ({proposal_id,tender_id}) => {
       
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
+        const [fullscreen, setFullscreen] = React.useState(true);
     
         return (
           <>
@@ -105,13 +110,20 @@ const Pdf = ({proposal_id,tender_id}) => {
               Show PDF
             </Button>
       
-            <Modal show={show} size="lg" onHide={handleClose}>
+            <Modal fullscreen={fullscreen}  show={show} size="lg" onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>PDF VIEWER</Modal.Title>
               </Modal.Header>
               <Modal.Body>
     
-                    pdf should be here
+              <embed
+                src={ config.SERVER_URL + "/storage/proposals/" + proposal_id + "/proposal.pdf"}
+                type="application/pdf"
+                frameBorder="0"
+                scrolling="auto"
+                height="100%"
+                width="100%"
+            ></embed>
           
               </Modal.Body>
               <Modal.Footer>
@@ -137,9 +149,16 @@ const Pdf = ({proposal_id,tender_id}) => {
                             { showPdf ? 
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
-                                    <div className='col text-center'><ShowPDFDocument/></div>
-                                    <div className='col ml-2'> 
-                                    <p>You've successfully attached a PDF Document to this proposal.</p></div>
+                                    <div className="d-flex justify-content-center align-items-center">
+
+                                        <div className='col text-center'><ShowPDFDocument/></div>
+                                        <div className='col ml-2'> 
+                                         <p>You've successfully attached a PDF Document to this proposal.</p>
+                                        </div>
+
+
+                                    </div>
+                                    
                                 </div>
                             </div>     
                             :

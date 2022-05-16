@@ -64,10 +64,12 @@ const Video = ({proposal_id,tender_id}) => {
                     apiClient.get(`/api/video/${response.data.video_id}/is_playable`)
                     .then((response) => {
                         console.log(response)  
-                        if(response.data.is_playable === true){ // is converting
+                        if(response.data.is_playable == true){ // is converting
                             console.log('is playable : yes')
                             setIsVideoPlayable(true)
-                        }          
+                        } else {
+                            console.log('is playable : no')
+                        }      
                     })
                     .catch((e) => {
                         console.log(e.error);
@@ -134,6 +136,7 @@ const Video = ({proposal_id,tender_id}) => {
                 .catch((e) => {
                     console.log("Error");
                     setConversionPercentage(0); // set counter to zero
+                    clearInterval(timer)
                 });
             }, 1000);
 
@@ -242,9 +245,11 @@ const Video = ({proposal_id,tender_id}) => {
                             { isVideoPlayable ? 
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
-                                    <div className='col text-center'><ShowVideoPlayer/></div>
-                                    <div className='col ml-2'> 
-                                    <p>You've successfully attached a video to this proposal.</p></div>
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <div className='col text-center'><ShowVideoPlayer/></div>
+                                        <div className='col ml-2'> 
+                                        <p>You've successfully attached a video to this proposal.</p></div>
+                                    </div>
                                 </div>
                             </div>     
                             :

@@ -51,18 +51,18 @@ const NavbarMenu = (
                 
         title={
             <span>
-                <i className="fa fa-list" ></i> Tender
+                <i className="fa fa-list" ></i> Proposal
             </span>
         }
         >
         <NavDropdown.Item >
-            <NavLink as={Link} to='/requirements' className="dropdown-item"><i className="fa fa-question" ></i> REQUIREMENTS</NavLink> 
+            <NavLink as={Link} to='/tender/requirements' className="dropdown-item"><i className="fa fa-question" ></i> REQUIREMENTS</NavLink> 
         </NavDropdown.Item>
         <NavDropdown.Item >
-            <NavLink as={Link} to='/tender_sambung_siri' className="dropdown-item"><i className="fa fa-search" ></i> SAMBUNG SIRI</NavLink> 
+            <NavLink as={Link} to='/tender/sambung_siri' className="dropdown-item"><i className="fa fa-search" ></i> SAMBUNG SIRI</NavLink> 
         </NavDropdown.Item>
         <NavDropdown.Item >
-            <NavLink as={Link} to='/tender_swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
+            <NavLink as={Link} to='/tender/swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
         </NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item >
