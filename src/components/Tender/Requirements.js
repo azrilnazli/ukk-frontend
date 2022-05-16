@@ -108,6 +108,38 @@ const Requirements = () => {
             <li>Keperluan Perolehan Program TV Tempatan (Swasta Baharu & Sambung Siri) Bagi 2022 / 2023</li>
         </ol>
 
+        <p>Langkah-langkah penting bagi muat-naik proposal:</p>
+
+        <ol>
+            <li>Memilih kod program yang betul dengan tepat mengikut “Need Statement” seperti tersenarai di dalam sistem TVCMS:
+
+                <ul>
+                  
+                   <li>	Saluran </li>
+                   <li>	Kategori </li>
+                   <li>	Kod Kategori </li>
+                   <li>	Bahasa </li>
+                   <li>	Jumlah Episod </li>
+                   <li>	Durasi </li>
+                   <li>	Need Statement </li>
+
+                </ul>
+            </li>
+
+            <li>Memasukkan maklumat seperti dibawah yang diperlukan bagi setiap penyerahan sebelum melampirkan dan memuatnaik konten proposal di dalam format video atau/dan PDF dokumen. 
+            <ul>
+                  
+                  <li>	Tema </li>
+                  <li>	Genre </li>
+                  <li>  Konsep </li>
+                  <li>	Sinopsis </li>
+          
+               </ul>
+
+            </li>
+        </ol>
+
+
         <div className="d-flex bf-highlight">
             <div className="p-2 bd-highlight"> <PDFRequirements /></div>
             <div className="p-2 bd-highlight"> <PDFNeedStatement /></div>

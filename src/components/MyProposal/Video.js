@@ -254,7 +254,7 @@ const Video = ({proposal_id,tender_id}) => {
                             </div>     
                             :
                             <div className="alert alert-secondary" role="alert">
-                                <p>Please compress the video before uploading. Accepted codecs are H264/MP3 with .mov and .mp4 container.</p>
+                                <p>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 ) </p>
                             </div>
                             }
                         </div>
@@ -300,7 +300,8 @@ const Video = ({proposal_id,tender_id}) => {
                                         }
                                         </>
                                     </div>
-                                    <p>Max Video size is 2GB and please convert you video to MOV or MP4 with H264 Video Codec</p>
+                                    <p>Pihak Pembekal, diminta menggunakan H.264 codec bagi menukar konten Video ke format .MOV dan .MP4 sahaja.
+Bagi memastikan proses muatnaik yang optimum, saiz MAKSIMUM adalah 2GB.</p>
                                     { uploadPercentage ? 
                                     <Progress percentage={uploadPercentage} />
                                     :

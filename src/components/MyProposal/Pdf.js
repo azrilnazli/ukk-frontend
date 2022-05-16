@@ -163,7 +163,7 @@ const Pdf = ({proposal_id,tender_id}) => {
                             </div>     
                             :
                             <div className="alert alert-secondary" role="alert">
-                                <p>Please convert you DOCUMENT into PDF Formt before uploading.</p>
+                                <p>Please convert you DOCUMENT into PDF before uploading.</p>
                             </div>
                             }
                         </div>
@@ -209,7 +209,7 @@ const Pdf = ({proposal_id,tender_id}) => {
                                         }
                                         </>
                                     </div>
-                                    <p>Max PDF Document size is 10MB.</p>
+                                    <p>Sila lampirkan konten berbentuk dokumen PDF. Saiz MAKSIMUM dokumen PDF yang disarankan adalah 25MB.</p>
                                     { uploadPercentage ? 
                                     <Progress percentage={uploadPercentage} />
                                     :
