@@ -81,6 +81,8 @@ const Pdf = ({proposal_id,tender_id}) => {
             console.log(response.data.uploaded)
             setUploaded(true)
             setIsDisabled(false)
+            console.log('showing pdf')
+            setShowPdf(true)
 
       
         }).catch(error => {

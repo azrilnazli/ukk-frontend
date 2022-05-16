@@ -64,10 +64,10 @@ const NavbarMenu = (
         <NavDropdown.Item >
             <NavLink as={Link} to='/tender/swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
         </NavDropdown.Item>
-        <NavDropdown.Divider />
+        {/* <NavDropdown.Divider />
         <NavDropdown.Item >
             <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-user" ></i> My Tender</NavLink>
-        </NavDropdown.Item>
+        </NavDropdown.Item> */}
         
     </NavDropdown>
     : 
