@@ -171,13 +171,14 @@ const Video = ({proposal_id,tender_id}) => {
                                     )
                             )
                     );
-                
+                //setUploadPercentage(0)
                 // clear percentage
                 //setTimeout( () => setUploadPercentage(0), 10000 );
             }
 
             
         }).then(response => {
+            setUploadPercentage(0)
             setSystemMsg('Your video was uploaded successfully. Now sent for encoding. Please wait...')
             console.log(response.data.uploaded)
             setUploaded(true)
