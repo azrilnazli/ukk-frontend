@@ -13,7 +13,7 @@ const Requirements = () => {
         const [fullscreen, setFullscreen] = React.useState(true);
     
         return (
-          <>
+            <>
             <Button variant="primary" onClick={handleShow}>
              Requirements
             </Button>
@@ -87,7 +87,10 @@ const Requirements = () => {
       }
 
     return (
-        <div className='container container-fluid bg-light rounded p-3 col-md-12'>
+        <>
+   
+
+        <div className='container container-fluid bg-light rounded p-3 col-md-12 mt-3'>
             <h1>Syarat Penyertaan</h1>
         <p>
         Sorotan penting daripada dokumen syarat penyertaan perolehan Request for Proposal (RFP) Pembekalan Program TV Terbitan Tempatan (Swasta Baharu) Bagi Tahun 2022/2023
@@ -148,6 +151,7 @@ const Requirements = () => {
         {/* <ShowPDFDocument title="Syarat Penyertaan" file={pdf_requirements}/>
         <ShowPDFDocument title="Need Statements" file={pdf_need_statement}/> */}
         </div>
+        </>
     );
 };
 
