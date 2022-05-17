@@ -31,7 +31,8 @@ const Video = ({proposal_id,tender_id}) => {
         // get current video id
         apiClient.get(`/api/proposal/${proposal_id}/get_video`) // axios call to txt file
         .then((response) => {
-            console.log(response)  
+            //console.log(response) 
+
             if(response.data.exists === true){
                 console.log('showing video with id ' + response.data.video_id)
                 setVideoId(response.data.video_id)
@@ -39,7 +40,7 @@ const Video = ({proposal_id,tender_id}) => {
 
                 if(response.data.video_id){
                     // check existing conversion status
-                    console.log('video is is ' + response.data.video_id)
+                    //console.log('video is is ' + response.data.video_id)
                     apiClient.get(`/api/video/${response.data.video_id}/conversion_progress`)
                     .then((response) => {
                         console.log(response)  
@@ -88,19 +89,16 @@ const Video = ({proposal_id,tender_id}) => {
 
        
     }
-    React.useEffect(() => getCurrentVideo(), []); 
+    React.useEffect(() => getCurrentVideo(), []); // check if video was uploaded
 
     const getVideoProgress = () => {
         
-        if(videoId !== '') { //if videoId is present and conversionPercentage below 100%
+        if(videoId !== '') { //if videoId is present 
             
             let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
                 apiClient.get(`/api/video/${videoId}/conversion_progress`) // axios call to txt file
                 .then((response) => {
-                    console.log(response.data)
-                    //setIsDisabled(true)
-
-                    //if (response.data.progress != 0 || response.data.progress < 101){
+                
                         
                         if(response.data.converting == true){
                             setIsDisabled(true)
@@ -109,28 +107,13 @@ const Video = ({proposal_id,tender_id}) => {
                             console.log('is converting')
                         } else {
                             console.log('done converting')
-                            setSystemMsg('Your video was proccessed.')
+                            setSystemMsg('Your video was successfully uploaded and processed.')
                             setShowVideo(true)
                             setIsVideoPlayable(true)
                             setIsDisabled(false)
                             setConversionPercentage(0);
-                            setUploaded(false)
                             clearInterval(timer)
                         }
-
-                       // setIsDisabled(true)
-                   // }
-                    
-                    // if(response.data.progress == 100){
-                    //     console.log('done converting')
-                    //     console.log('set show video')
-                    //     setShowVideo(true)
-                    //     setIsDisabled(false)
-                    //     setSystemMsg('Your video was proccessed.')
-                    //     setConversionPercentage(0);
-                    //     clearInterval(timer)
-                    // }
-
           
                 })
                 .catch((e) => {
@@ -138,14 +121,13 @@ const Video = ({proposal_id,tender_id}) => {
                     setConversionPercentage(0); // set counter to zero
                     clearInterval(timer)
                 });
-            }, 1000);
-
-      
+            }, 1000); // update evey 1 sec
+            
         }
     }
 
-  // React.useEffect(() => getVideoProgress(), [videoId]); // only run useEffect when videoId is changed
-   React.useEffect(() => getVideoProgress(), [uploaded]); // only run useEffect when videoId is changed
+    // React.useEffect(() => getVideoProgress(), [videoId]); // only run useEffect when videoId is changed
+    React.useEffect(() => getVideoProgress(), [uploaded,videoId]); // only run useEffect when videoId is changed
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -180,11 +162,14 @@ const Video = ({proposal_id,tender_id}) => {
         }).then(response => {
             setUploadPercentage(0)
             setSystemMsg('Your video was uploaded successfully. Now sent for encoding. Please wait...')
+            
+            console.log('video was uploaded')
             console.log(response.data.uploaded)
-            setUploaded(true)
+            console.log(response.data.id)
             setVideoId(response.data.video_id)
+            setUploaded(true)
             setIsDisabled(false)
-
+           
       
         }).catch(error => {
             if (error.response.status === 500) {
@@ -263,6 +248,7 @@ const Video = ({proposal_id,tender_id}) => {
                             <div className='row'>
 
                                 <div className='col-10'>
+               
                                     <div className="input-group mb-3">
 
                                         { !isDisabled ? 
@@ -297,8 +283,12 @@ const Video = ({proposal_id,tender_id}) => {
                                             :
                                                 null 
                                             }
+
                                             </> 
                                         }
+
+                                        
+                           
                                         </>
                                     </div>
                                     <p>Pihak Pembekal, diminta menggunakan H.264 codec bagi menukar konten Video ke format .MOV dan .MP4 sahaja.

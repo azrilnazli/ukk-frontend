@@ -72,11 +72,12 @@ const Pdf = ({proposal_id,tender_id}) => {
                     );
                 
                     // clear percentage
-                setTimeout( () => setUploadPercentage(0), 10000 );
+                //setTimeout( () => setUploadPercentage(0), 10000 );
             }
 
             
         }).then(response => {
+            setUploadPercentage(0)
             setSystemMsg('Your PDF was uploaded successfully.')
             console.log(response.data.uploaded)
             setUploaded(true)
