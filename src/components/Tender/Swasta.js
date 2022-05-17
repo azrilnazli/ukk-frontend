@@ -1,11 +1,13 @@
 import React from 'react';
 import apiClient from '../../services/api';
 import Detail from './Detail';
+import IsApproved from '../../services/IsApproved';
 const collect = require('collect.js'); 
 
 
 const TenderSwasta = () => {
 
+    
     const [tenders, setTenders] = React.useState([]);
     const getTenderList = () => {
         apiClient.get('/api/tenders/swasta')
@@ -22,6 +24,7 @@ const TenderSwasta = () => {
     );
 
     return (
+    
         <div>{tenderList}</div>
     );
 };

@@ -31,12 +31,14 @@ import Faq from './components/Pages/Faq';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
 import Apply from './components/Tender/Apply';
+import Restricted from './components/Pages/Restricted';
 
 
 const App = () => {
 
   const [user, setUser] = React.useState('');
   const [loggedIn, setLoggedIn] = React.useState(false);
+ 
 
   const login = () => {
     setLoggedIn(true);
@@ -95,6 +97,8 @@ const App = () => {
               <PrivateRoute path='/movies'  loggedIn={loggedIn} component={Movies} />
               <PrivateRoute path='/movie/:id/play'  loggedIn={loggedIn} component={MoviePlay} />
               <PrivateRoute path='/faq' loggedIn={loggedIn} component={Faq} />
+
+              <PrivateRoute path='/pages/restricted' loggedIn={loggedIn} component={Restricted} />
               
           </Switch>
 

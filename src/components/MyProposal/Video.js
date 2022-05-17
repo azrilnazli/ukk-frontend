@@ -172,8 +172,8 @@ const Video = ({proposal_id,tender_id}) => {
                             )
                     );
                 
-                    // clear percentage
-                setTimeout( () => setUploadPercentage(0), 10000 );
+                // clear percentage
+                //setTimeout( () => setUploadPercentage(0), 10000 );
             }
 
             
