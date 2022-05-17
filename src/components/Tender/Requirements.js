@@ -95,8 +95,8 @@ const Requirements = () => {
 
         <p>Jumlah maksimum penghantaran proposal yang dibenarkan adalah seperti berikut:</p>
         <ol>
-            <li>Jumlah maksimum penghantaran proposal yang dibenarkan adalah seperti berikut:-</li>
-            <li>Jumlah maksimum penghantaran proposal yang dibenarkan adalah seperti berikut:-</li>
+            <li>Perolehan <b>Swasta Baharu: 2 Tajuk</b> untuk mana-mana Kategori</li>
+            <li>Perolehan <b>Sambung Siri : 1 Tajuk</b></li>
         </ol>
 
         <p>
