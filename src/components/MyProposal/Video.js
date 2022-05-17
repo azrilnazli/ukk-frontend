@@ -118,6 +118,7 @@ const Video = ({proposal_id,tender_id}) => {
                 })
                 .catch((e) => {
                     console.log("Error");
+                    setIsDisabled(true)
                     setConversionPercentage(0); // set counter to zero
                     clearInterval(timer)
                 });
@@ -133,9 +134,28 @@ const Video = ({proposal_id,tender_id}) => {
         e.preventDefault();
         setIsDisabled(true)
         setErrors('')
+        
+        
+        /**
+         * MySQL date
+         * @param {Date} [date] Optional date object
+         * @returns {string}
+         */
+        function mysqlDate(date = new Date()) {
+            return date.toISOString().split('T')[0];
+        }
+        
+        const date = mysqlDate();
+
+        const datetime = new Date().toJSON().slice(0, 19).replace('T', ' ')
+
+        
         const formData = new FormData(); // JavaScript
+
+        
         formData.append('proposal_id', proposal_id) // selected file
         formData.append('tender_id', tender_id) // selected file
+        formData.append('start_time', datetime)
         formData.append('file', file) // selected file
 
         setSystemMsg('Your video is being uploaded')
@@ -180,6 +200,7 @@ const Video = ({proposal_id,tender_id}) => {
                 console.log(error.response)
                 setErrors(error.response.data.errors.file[0]);
             }
+            setIsDisabled(false)
         })
     }
 
