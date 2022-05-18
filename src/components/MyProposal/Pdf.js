@@ -148,11 +148,11 @@ const Pdf = ({proposal_id,tender_id}) => {
                
                 <div className='row' >
 
-                        <div className='col-4'>
+                        <div className='col-lg-4'>
                             { showPdf ? 
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
-                                    <div className="d-flex justify-content-center align-items-center">
+                                    <div className="d-lg-flex justify-content-center align-items-center">
 
                                         <div className='col text-center'><ShowPDFDocument/></div>
                                         <div className='col ml-2'> 
@@ -170,10 +170,10 @@ const Pdf = ({proposal_id,tender_id}) => {
                             </div>
                             }
                         </div>
-                        <div className='col-8'>
+                        <div className='col-lg-8'>
                             <div className='row'>
 
-                                <div className='col-10'>
+                                <div className='col-lg-10'>
                                     <div className="input-group mb-3">
 
                                         { !isDisabled ? 

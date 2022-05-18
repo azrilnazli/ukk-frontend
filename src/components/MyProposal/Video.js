@@ -283,21 +283,21 @@ const Video = ({proposal_id,tender_id}) => {
                
                 <div className='row' >
 
-                        <div className='col-4'>
+                        <div className='col-lg-4'>
                             { isVideoPlayable ? 
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
-                                    <div className="d-flex justify-content-center align-items-center">
+                                    <div className="d-lg-flex justify-content-center align-items-center">
                                         { isDisabled ? 
-                                            <div className='col text-center'><i class="fas fa-sync fa-spin"></i></div> 
+                                            <div className='col-lg text-center'><i class="fas fa-sync fa-spin"></i></div> 
                                         : 
-                                            <div className='col text-center'><ShowVideoPlayer/></div>
+                                            <div className='col-lg text-center'><ShowVideoPlayer/></div>
                                         }
-                                        <div className='col ml-2'> 
+                                        <div className='col-lg ml-2'> 
                                         { isDisabled ? 
-                                            <div className='col text-center'>Video being processed.</div> 
+                                            <div className='col-lg'>Video is being processed.</div> 
                                         : 
-                                            <div className='col text-center'>
+                                            <div className='col-lg'>
                                                  <p>You've successfully attached a video to this proposal.</p>
                                             </div>
                                         }
@@ -312,10 +312,10 @@ const Video = ({proposal_id,tender_id}) => {
                             </div>
                             }
                         </div>
-                        <div className='col-8'>
+                        <div className='col-lg-8'>
                             <div className='row'>
 
-                                <div className='col-10'>
+                                <div className='col-lg-10'>
                
                                     <div className="input-group mb-3">
 
@@ -354,13 +354,10 @@ const Video = ({proposal_id,tender_id}) => {
 
                                             </> 
                                         }
-
-                                        
-                           
                                         </>
                                     </div>
                                     <p>Pihak Pembekal, diminta menggunakan H.264 codec bagi menukar konten Video ke format .MOV dan .MP4 sahaja.
-Bagi memastikan proses muatnaik yang optimum, saiz MAKSIMUM adalah 2GB.</p>
+Bagi memastikan proses muatnaik yang optimum.</p>
                                     { uploadPercentage ? 
                                     <Progress percentage={uploadPercentage} />
                                     :
@@ -375,7 +372,7 @@ Bagi memastikan proses muatnaik yang optimum, saiz MAKSIMUM adalah 2GB.</p>
                                 </div>
 
                                 
-                                <div className='col-2'>
+                                <div className='col-lg-2'>
                                         { isDisabled ? 
                                         <button disabled type="submit" className="btn btn-primary btn-block mt-1">Upload</button>
                                         :
@@ -388,10 +385,7 @@ Bagi memastikan proses muatnaik yang optimum, saiz MAKSIMUM adalah 2GB.</p>
 
              
                     </div>
-                    <div className="col-12 mb-3">
-                   
-                    </div>
-              
+  
 
             </form>
      
