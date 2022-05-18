@@ -119,10 +119,7 @@ const Video = ({proposal_id,tender_id}) => {
         if(videoId !== '') { //if videoId is present 
             
             console.log('result : videoId is set :' + videoId)
-            //setIsDisabled(true)
-           // setShowVideo(false)
-            
-            
+    
             let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
                 console.log('check : get conversion_process')
                
@@ -140,8 +137,7 @@ const Video = ({proposal_id,tender_id}) => {
                         } else {
                             console.log('result : not converting')
                             setSystemMsg('Your video was successfully uploaded and processed.')
-                            //setIsDisabled(false)
-                            //setShowVideo(true)
+                            setIsDisabled(false)
                             setIsVideoPlayable(true)
                            
                             setConversionPercentage(0);
@@ -173,6 +169,7 @@ const Video = ({proposal_id,tender_id}) => {
         e.preventDefault();
         
         setErrors('')
+        setIsDisabled(true) // enabled if error
         
         
         /**
@@ -241,6 +238,7 @@ const Video = ({proposal_id,tender_id}) => {
                 console.log('Error : upload video validation error');
                 setErrors(error.response.data.errors.file[0]);
             }
+            setIsDisabled(false) // enabled if error
             
         })
     }
@@ -290,9 +288,21 @@ const Video = ({proposal_id,tender_id}) => {
                             <div className="alert alert-secondary" role="alert">
                                 <div className='row' >
                                     <div className="d-flex justify-content-center align-items-center">
-                                        <div className='col text-center'><ShowVideoPlayer/></div>
+                                        { isDisabled ? 
+                                            <div className='col text-center'><i class="fas fa-sync fa-spin"></i></div> 
+                                        : 
+                                            <div className='col text-center'><ShowVideoPlayer/></div>
+                                        }
                                         <div className='col ml-2'> 
-                                        <p>You've successfully attached a video to this proposal.</p></div>
+                                        { isDisabled ? 
+                                            <div className='col text-center'>Video being processed.</div> 
+                                        : 
+                                            <div className='col text-center'>
+                                                 <p>You've successfully attached a video to this proposal.</p>
+                                            </div>
+                                        }
+                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>     
