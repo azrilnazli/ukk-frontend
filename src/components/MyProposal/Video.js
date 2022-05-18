@@ -119,8 +119,8 @@ const Video = ({proposal_id,tender_id}) => {
         if(videoId !== '') { //if videoId is present 
             
             console.log('result : videoId is set :' + videoId)
-            setIsDisabled(true)
-            setShowVideo(false)
+            //setIsDisabled(true)
+           // setShowVideo(false)
             
             
             let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
@@ -140,8 +140,8 @@ const Video = ({proposal_id,tender_id}) => {
                         } else {
                             console.log('result : not converting')
                             setSystemMsg('Your video was successfully uploaded and processed.')
-                            setIsDisabled(false)
-                            setShowVideo(true)
+                            //setIsDisabled(false)
+                            //setShowVideo(true)
                             setIsVideoPlayable(true)
                            
                             setConversionPercentage(0);
