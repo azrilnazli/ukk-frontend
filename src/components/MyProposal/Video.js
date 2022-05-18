@@ -52,7 +52,7 @@ const Video = ({proposal_id,tender_id}) => {
                         }          
                     })
                     .catch((e) => {
-                        setIsDisabled(true)
+                        setIsDisabled(false)
                         console.log(e.error);
                         console.log("Error");
                         setConversionPercentage(0); // set counter to zero
