@@ -45,14 +45,14 @@ const Video = ({proposal_id,tender_id}) => {
                     .then((response) => {
                         console.log(response)  
                         if(response.data.converting === true){ // is converting
-                            setIsDisabled(true)
+                          
                             setShowVideo(false)
                             setUploaded(true); // setter 
                             console.log('checked : is converting')
                         }          
                     })
                     .catch((e) => {
-                        setIsDisabled(false)
+                      
                         console.log(e.error);
                         console.log("Error");
                         setConversionPercentage(0); // set counter to zero
@@ -80,7 +80,9 @@ const Video = ({proposal_id,tender_id}) => {
                     });
                 } // check videoID
 
-            }          
+            } else {
+                console.log('User has no video')
+            }         
         })
         .catch((e) => {
             console.log(e.error);
@@ -102,7 +104,7 @@ const Video = ({proposal_id,tender_id}) => {
                 
                         
                         if(response.data.converting == true){
-                            setIsDisabled(true)
+                           
                             setShowVideo(false)
                             setConversionPercentage(response.data.progress); // setter 
                             console.log('is converting')
@@ -111,7 +113,7 @@ const Video = ({proposal_id,tender_id}) => {
                             setSystemMsg('Your video was successfully uploaded and processed.')
                             setShowVideo(true)
                             setIsVideoPlayable(true)
-                            setIsDisabled(false)
+                           
                             setConversionPercentage(0);
                             clearInterval(timer)
                         }
@@ -119,7 +121,7 @@ const Video = ({proposal_id,tender_id}) => {
                 })
                 .catch((e) => {
                     console.log("Error");
-                    setIsDisabled(true)
+                   
                     setConversionPercentage(0); // set counter to zero
                     clearInterval(timer)
                 });
@@ -133,7 +135,7 @@ const Video = ({proposal_id,tender_id}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsDisabled(true)
+        
         setErrors('')
         
         
@@ -189,7 +191,7 @@ const Video = ({proposal_id,tender_id}) => {
             console.log(response.data.id)
             setVideoId(response.data.video_id)
             setUploaded(true)
-            setIsDisabled(false)
+            
            
       
         }).catch(error => {
@@ -201,7 +203,7 @@ const Video = ({proposal_id,tender_id}) => {
                 console.log(error.response)
                 setErrors(error.response.data.errors.file[0]);
             }
-            setIsDisabled(false)
+            
         })
     }
 
