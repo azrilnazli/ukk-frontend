@@ -19,10 +19,15 @@ const TenderSambungSiri = () => {
             setTenders(response.data.tenders)
         })
         .catch(error => { 
+            console.log('ada error')
             console.error(error.response.data)
             if (error.response.status === 422) {
                 setTitle(error.response.data.title); 
                 setError(error.response.data.message);
+               
+            } else {
+                setTitle('Restricted area'); 
+                setError('You don\'t have permission to enter this area.');
                
             }
         });
