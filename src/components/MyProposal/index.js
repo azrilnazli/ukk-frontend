@@ -8,7 +8,7 @@ import Detail from './Detail';
 const MyProposal = () => {
 
     const [isPending, setIsPending] = useState(false)
-    const [proposals, setProposals] = useState([false])
+    const [proposals, setProposals] = useState([])
 
     const getProposal = () => {
         setIsPending(true)
@@ -32,17 +32,27 @@ const MyProposal = () => {
     }
     React.useEffect(() => getProposal(), []); // GET request to server
 
-    const proposalList = proposals.map((proposal) => 
-        <Detail tender={proposal.tender} />
-    );
+    const proposalList = proposals.map((proposal) => {
+       console.log(proposal.id)
+       if(proposals){
+            return (
+                    <Detail proposal={proposal} tender={proposal.tender} created_at={proposal.created_at} />
+            )
+        }else{
+            return null;
+        } 
+        
+    });
 
     return (
-        <div className='container container-fluid bg-light rounded p-3 col-md-12'>
+        <div>
         { isPending ? 
-            'loading...'
+            <div  className='container container-fluid bg-light rounded p-3 col-md-12'>loading...</div>
             :
-          'load data'
+            <>{proposalList}</>
         }
+
+
         </div>
     );
 };
