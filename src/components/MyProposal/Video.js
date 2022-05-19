@@ -352,8 +352,9 @@ const Video = ({proposal_id,tender_id}) => {
                                         }
                                         </>
                                     </div>
-                                    <p>Pihak Pembekal, diminta menggunakan H.264 codec bagi menukar konten Video ke format .MOV dan .MP4 sahaja.
-Bagi memastikan proses muatnaik yang optimum.</p>
+                                    <p>Untuk memastikan video lancar untuk dimuatnaik, pihak pembekal disarankan untuk 'compress'
+                                        video anda ke format MP4,MOV atau MPG ( H264 / AAC ) dengan resolusi 1080p (5Mbps bitrate).
+                                        Boleh gunakan perisian <strong>Handbrake</strong> untuk encode video anda sebelum upload. ( <a target="_blank" href="https://handbrake.fr">https://handbrake.fr</a> )</p>
                                     { uploadPercentage ? 
                                     <Progress percentage={uploadPercentage} />
                                     :
