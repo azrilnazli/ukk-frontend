@@ -19,7 +19,7 @@ const TenderSambungSiri = () => {
             setTenders(response.data.tenders)
         })
         .catch(error => { 
-            console.log('ada error')
+           
             console.error(error.response.data)
             if (error.response.status === 422) {
                 setTitle(error.response.data.title); 
