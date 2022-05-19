@@ -121,7 +121,7 @@ const Detail = ({proposal,tender,created_at}) => {
                          
                             <p className="card-text">
                             <h5>Your Proposal ID</h5>
-                            {proposal.id}
+                            <h5><span className="badge bg-warning text-dark">{proposal.id}</span></h5>
                             </p>
 
                             <p className="card-text">
