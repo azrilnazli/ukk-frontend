@@ -130,7 +130,7 @@ const Video = ({proposal_id,tender_id}) => {
                     console.log('check : if converting is true ?')
 
                         if(response.data.converting == true){
-                            console.log('result : is converting')
+                            console.log('result : is converting = ' + response.data.progress + '%')
                        
                             setConversionPercentage(response.data.progress); // setter 
                         
