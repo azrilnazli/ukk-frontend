@@ -158,8 +158,7 @@ const Video = ({proposal_id,tender_id}) => {
             console.log('result : videoId is not being set')
         }
     }
-
-    // React.useEffect(() => getVideoProgress(), [videoId]); // only run useEffect when videoId is changed
+    
     React.useEffect(() => getVideoProgress(), [uploaded,videoId]); // only run useEffect when videoId is changed
 
     const handleSubmit = (e) => {
@@ -221,13 +220,10 @@ const Video = ({proposal_id,tender_id}) => {
             setUploadPercentage(0)
             setSystemMsg('Your video was uploaded successfully. Now sent for encoding. Please wait...')
             
-            console.log('video was uploaded')
             console.log(response.data.uploaded)
             console.log(response.data.id)
             setVideoId(response.data.video_id)
             setUploaded(true)
-            
-           
       
         }).catch(error => {
             if (error.response.status === 500) {
