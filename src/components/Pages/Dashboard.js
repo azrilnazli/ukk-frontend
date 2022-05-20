@@ -49,8 +49,8 @@ const Dashboard = () => {
     return (
 
     <>
-    <div className="alert alert-warning d-flex align-items-center" role="alert">
-    <strong>Message from UKK :</strong> <Comment />
+    <div className="alert alert-warning" role="alert">
+    <strong><i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i> Message from UKK : </strong> <Comment />
     </div>
       
     <div className='container container-fluid bg-light rounded p-3'>
