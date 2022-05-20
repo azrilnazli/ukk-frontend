@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 
-const Detail = ({tender}) => {
+const Detail = ({key,tender}) => {
 
     const languageList =tender.languages.map((language) => 
         <span className="badge bg-secondary">{language}</span>
@@ -17,7 +17,7 @@ const Detail = ({tender}) => {
     }
 
     return (
-            <div className="card mt-3">
+            <div key={key} className="card mt-3">
                 <div className="card-header">
                     <div className="d-lg-flex flex-row justify-content-center mt-2">
                         <div className="ms-1 me-1 "><p>ID : <span className="badge bg-secondary">{tender.id}</span></p></div>

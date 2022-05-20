@@ -10,6 +10,7 @@ const TenderSambungSiri = () => {
     const [error,setError] = React.useState('')
     const [title,setTitle] = React.useState('')
     const [tenders, setTenders] = React.useState([]);
+    
     const getTenderList = () => {
 
         // need to check user.company.is_approved = true
@@ -28,15 +29,17 @@ const TenderSambungSiri = () => {
             } else {
                 setTitle('Restricted area'); 
                 setError('You don\'t have permission to enter this area.');
-               
             }
         });
     }
     React.useEffect(() => getTenderList(), []); 
 
     const tenderList = tenders.map((tender) => 
-        <Detail tender={tender} />
+        <Detail key={tender.id} tender={tender} />
+        //<p>{tender.id}</p>    
     );
+    //React.useEffect(() => tenderList, []); 
+
 
     return (
         <>

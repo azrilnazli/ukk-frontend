@@ -34,8 +34,10 @@ const TenderSwasta = () => {
     React.useEffect(() => getTenderList(), []); 
 
     const tenderList = tenders.map((tender) => 
-        <Detail tender={tender} />
+        <Detail key={tender.id} tender={tender} />
+        // <p>{tender.id}</p>
     );
+    //React.useEffect(() => tenderList, []); 
 
     return (
         <>
