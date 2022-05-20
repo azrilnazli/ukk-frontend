@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Detail = ({key,tender}) => {
 
     const languageList =tender.languages.map((language) => 
-        <span className="badge bg-secondary">{language}</span>
+        <span key={language} className="badge bg-secondary">{language}</span>
     );
 
     function NewLineToBr({children = ""}){
