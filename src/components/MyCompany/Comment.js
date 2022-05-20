@@ -21,18 +21,17 @@ const Comment = () => {
     return (
     <>
     { comments ? 
-    <div className='row mt-3 ms-1'>
-        <div className="card border-danger">
-          <div className="card-body">
-            <h5 className="card-title">Comment from UKK</h5>
-            <p className="card-text">
-
-            {comments}
-
-            </p>
-          </div>
-        </div>
-    </div>
+    // <div className='row mt-3 ms-1'>
+    //     <div className="card border-danger">
+    //       <div className="card-body">
+    //         <h5 className="card-title">Comment from UKK</h5>
+    //         <p className="card-text">
+    <>{comments}</>
+         
+    //         </p>
+    //       </div>
+    //     </div>
+    // </div>
     : null }
     </>
     );

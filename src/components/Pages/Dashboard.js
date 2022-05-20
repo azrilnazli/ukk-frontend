@@ -48,13 +48,17 @@ const Dashboard = () => {
   
     return (
 
+    <>
+    <div className="alert alert-warning d-flex align-items-center" role="alert">
+    <strong>Message from UKK :</strong> <Comment />
+    </div>
       
     <div className='container container-fluid bg-light rounded p-3'>
     <div className="row align-items-start pe-3">
 
       <div className="col-lg-6">
     
-        <div className="alert alert-warning " role="alert">
+        <div className="alert alert-secondary " role="alert">
          <h2><i className="fa fa-exclamation-triangle"></i> Info Terkini</h2>
            <p>
             Assalamualaikum & Salam Sejahtera kepada syarikat-syarikat yang telah mendapat pengesahan pendaftaran pada sistem RTM UKK TVCMS.
@@ -75,7 +79,7 @@ const Dashboard = () => {
            </p>
           </div> 
 
-          <div className="alert alert-warning text-danger" role="alert">
+          <div className="alert alert-secondary text-danger" role="alert">
           <i className="fa fa-exclamation-triangle"></i> MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 akan tamat pada Jam 11:59 malam, 14/Mei/2022
           </div> 
 
@@ -84,29 +88,26 @@ const Dashboard = () => {
           </div> */}
 
 
-          <div className='row'>
-            <ApprovalStatus />
-          </div>
-          <div className='row'>
+     
+          {/* <div className='row'>
             <Comment />
-          </div>
+          </div> */}
         </div>
 
       <div className="col-lg-6">
         <div className='row'>
 
-{/* 
-          <div className="alert alert-primary" role="alert">
-          New message from UKK.
-          </div>
-          <div className="alert alert-primary" role="alert">
-          You've submitted for Approval to UKK.
-          </div> */}
+
 
           <div className="card border-light">
    
-            <div className="card-body">
-              
+
+            <div className="card-body"> 
+              <ApprovalStatus />
+            </div>
+
+
+            <div className="card-body">              
               <h5 className="card-title">Company Profile</h5>
               <p className="card-text">Please complete all the required fields before you're able to apply for approval.
               Please check the minimal requirements for submission.</p>
@@ -138,11 +139,8 @@ const Dashboard = () => {
       </div>
   </div>
 
-
-
-      
-
     </div>
+    </>
     );
 };
 
