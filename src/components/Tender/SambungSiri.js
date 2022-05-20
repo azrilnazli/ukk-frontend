@@ -5,7 +5,7 @@ import GetTender from './GetTender';
 const TenderSambungSiri = () => {
 
     return (
-        <GetTender type="sambung_siri" />
+        <GetTender type="SAMBUNG SIRI" />
     );
 };
 

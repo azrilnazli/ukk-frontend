@@ -7,8 +7,8 @@ const TenderDetails = ({tender}) => {
     const collection = collect(tender.languages)
 
     const languageList = collection.map((language) => 
-    <span className="badge bg-secondary">{language}</span>
-);
+        <span className="badge bg-secondary">{language}</span>
+    );
     // collection.each((item) => {
     //     console.log(item)
     // })

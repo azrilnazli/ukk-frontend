@@ -5,7 +5,7 @@ import GetTender from './GetTender';
 const TenderSwasta = () => {
 
     return (
-        <GetTender type="swasta" />
+        <GetTender type="SWASTA" />
     );
 };
 

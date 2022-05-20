@@ -2,12 +2,15 @@ import React , { useState }  from 'react';
 import Pdf from './Pdf';
 import Video from './Video';
 import apiClient from '../../services/api';
+import ErrorMsg from './ErrorMsg';
 import Detail from './Detail';
 
 
 const MyProposal = () => {
 
     const [isPending, setIsPending] = useState(false)
+    const [error,setError] = React.useState('')
+    const [title,setTitle] = React.useState('')
     const [proposals, setProposals] = useState([])
 
     const getProposal = () => {
@@ -24,10 +27,18 @@ const MyProposal = () => {
             console.log(response.data)
             setProposals(response.data.proposals)
         })
-        .catch((e) => {
+        .catch((error) => {
             setIsPending(false)
-            console.log(e.error);
-            console.log("Error getting data");
+            console.error(error.response.data)
+            if (error.response.status === 422) {
+                setTitle(error.response.data.title); 
+                setError(error.response.data.message);
+               
+            } else {
+                setTitle('Restricted area'); 
+                setError('You don\'t have permission to enter this area.');
+               
+            }
         });
     }
     React.useEffect(() => getProposal(), []); // GET request to server
@@ -49,10 +60,12 @@ const MyProposal = () => {
         { isPending ? 
             <div  className='container container-fluid bg-light rounded p-3 col-md-12'>loading...</div>
             :
-            <>{proposalList}</>
+            <>
+            { error ? <ErrorMsg title={title} message={error} /> :
+                <div>{proposalList}</div>
+            }
+            </>
         }
-
-
         </div>
     );
 };

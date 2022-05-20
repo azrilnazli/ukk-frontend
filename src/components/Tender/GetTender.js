@@ -12,7 +12,7 @@ const GetTender = ({type}) => {
     const [title,setTitle] = React.useState('')
     const [tenders, setTenders] = React.useState([]);
     const getTenderList = () => {
-        apiClient.get('/api/tenders/' + type)
+        apiClient.get('/api/tenders/' + type + '/get_tenders') 
         .then(response => {
            // console.log(response.data)
             setTenders(response.data.tenders)
