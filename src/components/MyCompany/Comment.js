@@ -6,12 +6,15 @@ import apiClient from '../../services/api';
 const Comment = () => {
 
     const [comments,setComments] = React.useState(null)
+    const [isPending, setIsPending] = React.useState(false)
 
     React.useEffect(() => {
+        setIsPending(true)
         const abortCont = new AbortController();
         apiClient.get('/api/company/get_comments', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data)
+            //console.log(response.data)
+            setIsPending(false)
             setComments(response.data.messages)
         })
         .catch(error => console.error(error));
@@ -20,19 +23,14 @@ const Comment = () => {
 
     return (
     <>
-    { comments ? 
-    // <div className='row mt-3 ms-1'>
-    //     <div className="card border-danger">
-    //       <div className="card-body">
-    //         <h5 className="card-title">Comment from UKK</h5>
-    //         <p className="card-text">
-    <>{comments}</>
+    { isPending ? 
+
+    <span>loading...</span>
          
-    //         </p>
-    //       </div>
-    //     </div>
-    // </div>
-    : null }
+
+    : 
+    <span>{comments}</span>
+    }
     </>
     );
 };
