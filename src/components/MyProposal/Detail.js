@@ -3,15 +3,24 @@ import { NavLink } from "react-router-dom";
 import { format } from 'date-fns';
 import VideoJSPlayer from '../VideoJS';
 import {Modal, Button, Form} from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import apiClient from '../../services/api';
+import ErrorMsg from './ErrorMsg';
 import config from '../../config.json'
 
 
-const Detail = ({proposal,tender,created_at}) => {
+const Detail = ({setDestroyed,proposal,tender,created_at}) => {
 
+  const [isPending,setIsPending] = useState(false)
+  const [error,setError] = React.useState('')
+  const [title,setTitle] = React.useState('')
     const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
     const languageList =tender.languages.map((language) => 
         <span className="badge bg-secondary">{language}</span>
     );
+
+    const [edit,setEdit] = React.useState(false)
+    const [destroy,setDestroy] = React.useState(false)
 
     function NewLineToBr({children = ""}){
         return children.split('\n').reduce(function (arr,line) {
@@ -25,7 +34,6 @@ const Detail = ({proposal,tender,created_at}) => {
     function ShowVideoPlayer() {
 
         const [show, setShow] = useState(false);
-      
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
     
@@ -48,7 +56,6 @@ const Detail = ({proposal,tender,created_at}) => {
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
-         
               </Modal.Footer>
             </Modal>
           </>
@@ -88,6 +95,86 @@ const Detail = ({proposal,tender,created_at}) => {
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
+
+      function DeleteProposal() {
+        const [show, setShow] = useState(false);
+
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+
+        function handleDestroy(){
+            setShow(false)
+            console.log('delete')
+            
+            
+            // start request delete
+            setIsPending(true)
+            console.log('.............................')
+            console.log('Initiate Deleting data from Server')
+            console.log('.............................')
+            // get current video id
+            console.log('check : get proposal_id from server')
+
+            const formData = new FormData(); // JavaScript
+            formData.append('proposal_id', proposal.id) // selected file
+
+            apiClient({
+                method: "post",
+                url: "/api/proposal/destroy",
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" },               
+            })
+            .then((response) => {
+                setIsPending(false)
+                console.log('result: got reponse... fetching data')     
+                console.log(response.data)
+                setDestroy(true)
+            })
+            .catch((error) => {
+                setIsPending(false)
+                console.error(error.response.data)
+                if (error.response.status === 422) {
+                    setTitle(error.response.data.title); 
+                    setError(error.response.data.message);
+                  
+                } else {
+                    setTitle('Restricted area'); 
+                    setError('You don\'t have permission to enter this area.');
+                }
+            });
+          // end request delete
+
+        } // handleDestroy
+ 
+    
+        return (
+          <>
+            <Button variant="danger" onClick={handleShow}>
+              DELETE
+            </Button>
+      
+            <Modal  show={show} size="md" onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>DELETE PROPOSAL ?</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+    
+              Are you sure ?
+          
+              </Modal.Body>
+              <Modal.Footer>
+
+              <Button variant="danger" onClick={handleDestroy}>
+                  Yes
+                </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
          
               </Modal.Footer>
             </Modal>
@@ -95,7 +182,26 @@ const Detail = ({proposal,tender,created_at}) => {
         );
       }
 
+      function handleEdit(){
+        console.log('edit')
+        setEdit(true)
+      }
+
+      if (destroy === true) {
+        //return <Redirect to={'/success'} />
+        setDestroyed(true)
+      }
+
+      if (edit === true) {
+        return <Redirect to={'/tender/' + tender.id + '/apply'} />
+      }
+
     return (
+
+      <>
+      { error ? <ErrorMsg title={title} message={error} /> :
+      
+    
             <div key={tender.id} className="card mt-3">
                 <div className="card-header">
                     <div className="d-lg-flex flex-row justify-content-center mt-2">
@@ -173,10 +279,24 @@ const Detail = ({proposal,tender,created_at}) => {
                     </div>
                     
                 </div>
-                <div className="card-footer text-center">          
-               Applied on {date}
+                <div className="card-footer"> 
+                <div className="d-flex justify-content-between">
+                  <div>
+                      <Button className="me-1" variant="warning" onClick={handleEdit}>
+                      EDIT
+                      </Button>
+
+                      <DeleteProposal />
+                  </div>
+                  <div>
+                    Applied on {date}
+                  </div>
+                </div>                     
                 </div>
             </div>
+
+            }
+            </>
     );
 };
 
