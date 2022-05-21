@@ -15,9 +15,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   const [error,setError] = React.useState('')
   const [title,setTitle] = React.useState('')
     const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
-    const languageList =tender.languages.map((language) => 
-        <span className="badge bg-secondary">{language}</span>
-    );
+    // const languageList =tender.languages.map((language) => 
+    //     <span className="badge bg-secondary">{language}</span>
+    // );
 
     const [edit,setEdit] = React.useState(false)
     const [destroy,setDestroy] = React.useState(false)
@@ -209,7 +209,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                         <div className="ms-1 me-1 "><p>CHANNEL : <span className="badge bg-secondary">{tender.channel}</span></p></div>
                         <div className="ms-1 me-1 "><p>CATEGORY : <span className="badge bg-secondary">{tender.tender_category}</span></p></div>      
                         <div className="ms-1 me-1 "><p>CODE : <span className="badge bg-secondary">{tender.programme_code}</span></p></div>
-                        <div className="ms-1 me-1 "><p>LANGUAGE : {languageList}</p></div>
+                        {/* <div className="ms-1 me-1 "><p>LANGUAGE : {languageList}</p></div> */}
                         <div className="ms-1 me-1 "><p>EPISODES : <span className="badge bg-secondary">{tender.number_of_episode} X {tender.duration}'</span></p></div>
                     </div>                
                 </div>
