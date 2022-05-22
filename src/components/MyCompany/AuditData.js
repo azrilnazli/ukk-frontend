@@ -83,7 +83,7 @@ const AuditData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({

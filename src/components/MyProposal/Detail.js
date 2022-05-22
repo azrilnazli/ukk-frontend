@@ -264,10 +264,10 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                 <div className='col-lg-6'>
 
                                             { proposal.video_id != 0 ?
-                                            <p className="card-text">
+                                            <div className="card-text">
                                             <h5>Video</h5>
                                             <ShowVideoPlayer/>
-                                            </p>
+                                            </div>
                                             : null }
                                 </div>
                                 <div className='col-lg-6'>

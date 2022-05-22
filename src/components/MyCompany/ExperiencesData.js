@@ -67,7 +67,7 @@ const ExperiencesData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -82,7 +82,7 @@ const ExperiencesData = () => {
 const handleSubmit = (e) => {
   
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
   //updateStateValue('id', true)
 
   // reset the error
@@ -101,7 +101,7 @@ const handleSubmit = (e) => {
       //updateStateValue('id', response.data.id)
      
       if (response.status === 200) {
-        console.log(response.data)
+        //console.log(response.data)
         setShow(false) // close the modal
      
         
@@ -128,7 +128,7 @@ const handleSubmit = (e) => {
 
 const [fullscreen, setFullscreen] = React.useState(true);
 const [isPending, setIsPending] = React.useState(true);
-console.log(state.id.value)
+//console.log(state.id.value)
     // load data from server
     React.useEffect(() => {
         const abortCont = new AbortController();

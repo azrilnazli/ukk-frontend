@@ -14,6 +14,8 @@ const MyProposal = () => {
     const [proposals, setProposals] = useState([])
     const [destroyed, setDestroyed] = useState(false)
     const [uploaded, setUploaded] = useState(false)
+    const [total, setTotal] = useState([])
+
 
     const getProposal = () => {
         setIsPending(true)
@@ -33,7 +35,9 @@ const MyProposal = () => {
                 setError('You don\'t have any proposal being applied.');
             } else {
                 setUploaded(true)
-                setProposals(response.data.proposals)
+                setTotal(response.data.total) // total applied tender
+                setProposals(response.data.proposals) // proposals returned from server
+
             }
         })
         .catch((error) => {
@@ -52,6 +56,11 @@ const MyProposal = () => {
     }
     React.useEffect(() => getProposal(), [destroyed]); // GET request to server
 
+    console.log(total.sambung_siri)
+
+ 
+    
+
     const proposalList = proposals.map((proposal) => {
    
             return (
@@ -65,6 +74,9 @@ const MyProposal = () => {
 
     return (
         <div>
+        { total.sambung_siri > 1 ? <ErrorMsg title="SAMBUNG SIRI" message="You've submitted more than 1 proposal." />  : null }
+        { total.swasta > 2 ? <ErrorMsg title="SWASTA" message="You've submitted more than 2 proposals." />  : null }
+            
         { isPending ? 
             <div  className='container container-fluid bg-light rounded p-3 col-md-12'>loading...</div>
             :

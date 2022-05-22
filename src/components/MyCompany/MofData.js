@@ -83,7 +83,7 @@ const MofData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -98,7 +98,7 @@ const MofData = () => {
 const handleSubmit = (e) => {
 
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
 
   // reset the error
   const fields = collect(state);

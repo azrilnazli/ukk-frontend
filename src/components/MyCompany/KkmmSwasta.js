@@ -86,7 +86,7 @@ const KkmmSwastaData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -120,11 +120,11 @@ const handleSubmit = (e) => {
     
       if (response.status === 200) {
        
-        console.log(response.data)
+        //console.log(response.data)
           // upload file
 
         if(selectedFile){
-          console.log('upload')
+          //console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal

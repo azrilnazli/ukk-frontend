@@ -16,7 +16,7 @@ const RequestForApproval = () => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/check_for_approval', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data.is_completed) 
+            //console.log(response.data.is_completed) 
             setAllowRequest(response.data.status) // check if vendor completed the required form
             setIsCompleted(response.data.is_completed) // server should return is_completed for first time submission
         })
@@ -37,7 +37,7 @@ const RequestForApproval = () => {
             url: "/api/company/request_for_approval",
             data: formData,
         }).then(response => {
-            console.log(response.data.status)
+            //console.log(response.data.status)
             setIsCompleted(response.data.status) // true or false
         }).catch(error => {
 
@@ -45,7 +45,7 @@ const RequestForApproval = () => {
     
             // validation error
             const errors = collect(error.response.data.errors); 
-            console.log(errors)
+            //console.log(errors)
             errors.each( (error,field) => {
                 setIsCompletedError(error)
             })

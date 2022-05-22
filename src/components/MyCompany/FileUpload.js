@@ -17,7 +17,7 @@ const FileUpload = () => {
             headers: { "Content-Type": "multipart/form-data" },
         });
         } catch(error) {
-        console.log(error)
+        //console.log(error)
         }
 
         

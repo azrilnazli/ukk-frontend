@@ -83,7 +83,7 @@ const FinasFDData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -163,7 +163,7 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      console.log(response.data.is_finas_fd_cert_uploaded)
+      //console.log(response.data.is_finas_fd_cert_uploaded)
       updateStateValue('is_finas_fd_cert_uploaded',response.data.is_finas_fd_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
@@ -172,7 +172,7 @@ const handleUpload = (e) => {
       if (error.response.status === 422) {
 
         const errors = collect(error.response.data.errors); 
-        console.log(errors)
+        //console.log(errors)
         errors.each( (error,field) => {
             updateStateError(field,error)  
         })

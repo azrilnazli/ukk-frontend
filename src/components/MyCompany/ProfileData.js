@@ -74,7 +74,7 @@ const ProfileData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -89,7 +89,7 @@ const ProfileData = () => {
 const handleSubmit = (e) => {
   
   e.preventDefault();
-  console.log('submit')
+  //console.log('submit')
   //updateStateValue('id', true)
 
   // reset the error

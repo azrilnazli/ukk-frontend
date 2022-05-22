@@ -120,7 +120,7 @@ const handleSubmit = (e) => {
     
       if (response.status === 200) {
        
-        console.log(response.data)
+        //console.log(response.data)
           // upload file
 
         if(selectedFile){

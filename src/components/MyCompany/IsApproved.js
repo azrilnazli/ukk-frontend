@@ -10,7 +10,7 @@ const ApprovalStatus = () => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/check_approval_status', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data.status)
+            //console.log(response.data.status)
             setIsPending(false)
             setIsApproved(response.data.status)
         })

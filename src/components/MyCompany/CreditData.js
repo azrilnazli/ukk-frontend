@@ -84,7 +84,7 @@ const CreditData = () => {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     const { name, value } = e.target; // object
 
     setState(prevState => ({
@@ -120,7 +120,7 @@ const handleSubmit = (e) => {
           // upload file
 
         if(selectedFile){
-          console.log('upload')
+          //console.log('upload')
           handleUpload(e)
         } else {
           setShow(false) // close the modal

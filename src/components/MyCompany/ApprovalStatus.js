@@ -12,7 +12,7 @@ const ApprovalStatus = () => {
         const abortCont = new AbortController();
         apiClient.get('/api/company/check_is_completed', { signal: abortCont.signal} )
         .then(response => {
-            console.log(response.data.status)
+            //console.log(response.data.status)
             setIsCompleted(response.data.status)
         })
         .catch(error => console.error(error));
