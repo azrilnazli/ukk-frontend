@@ -101,6 +101,16 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
         );
       }
 
+
+      function EditProposal(){
+
+        return(
+          <Button variant="warning" onClick={handleEdit}>
+          EDIT
+          </Button>
+        )
+      }
+
       function DeleteProposal() {
         const [show, setShow] = useState(false);
 
@@ -280,16 +290,11 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                     
                 </div>
                 <div className="card-footer"> 
-                <div className="d-flex justify-content-between">
-                  <div>
-                      <Button className="me-1" variant="warning" onClick={handleEdit}>
-                      EDIT
-                      </Button>
-
-                      <DeleteProposal />
-                  </div>
-                  <div>
-                    Applied on {date}
+                <div>
+                  <div className="d-flex flex-row">
+                      <div className=""><EditProposal /></div>       
+                      <div className="ms-2"><DeleteProposal /></div>     
+                      <div className="ms-auto">Applied on <strong>{date}</strong></div>               
                   </div>
                 </div>                     
                 </div>
