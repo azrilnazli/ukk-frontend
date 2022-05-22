@@ -10,15 +10,18 @@ const GetTender = ({type}) => {
 
     const [error,setError] = React.useState('')
     const [title,setTitle] = React.useState('')
-    const [tenders, setTenders] = React.useState([]);
+    const [tenders, setTenders] = React.useState([])
+    const [isPending, setIspending] = React.useState(true)
+
     const getTenderList = () => {
         apiClient.get('/api/tenders/' + type + '/get_tenders') 
         .then(response => {
            // console.log(response.data)
+            setIspending(false)
             setTenders(response.data.tenders)
         })
         .catch(error => { 
-           
+            setIspending(false)
             console.error(error.response.data)
             if (error.response.status === 422) {
                 setTitle(error.response.data.title); 
@@ -34,18 +37,22 @@ const GetTender = ({type}) => {
     React.useEffect(() => getTenderList(), []); 
 
     const tenderList = tenders.map((tender) => 
+    
         <Detail key={tender.id} tender={tender} />
-        // <p>{tender.id}</p>
     );
-    //React.useEffect(() => tenderList, []); 
 
-    return (
-        <>
-        { error ? <ErrorMsg title={title} message={error} /> :
-        <div>{tenderList}</div>
-        }
-        </>
-    );
+    if(error){
+        return (<><ErrorMsg title={title} message={error} /></>)
+    } else {
+        return (
+            <>
+            {isPending ? <div className='container container-fluid bg-light rounded p-3 bg-light'> loading...</div>
+            :
+                <>{tenderList}</>
+            }
+            </>
+        );
+    }
 };
 
 export default GetTender;
