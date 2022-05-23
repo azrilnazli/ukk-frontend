@@ -221,7 +221,7 @@ const Video = ({proposal_id,tender_id}) => {
         }).then(response => {
             console.log('result : video uploaded successfully')
             setUploadPercentage(0)
-            setSystemMsg('Your video was uploaded successfully. Now sent for encoding. Please wait...')
+            setSystemMsg('Your video was uploaded successfully. Now sent for cloud encoding queue.')
             
             console.log(response.data)
     
