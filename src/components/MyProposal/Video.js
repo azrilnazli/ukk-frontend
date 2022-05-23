@@ -10,7 +10,7 @@ const collect = require('collect.js');
 
 const Video = ({proposal_id,tender_id}) => {
 
-    // console.log('********************************')
+    // console.log('********************************')is_ready
     // console.log('welcome to Video Check System ')
     // console.log('********************************')
 
@@ -24,7 +24,8 @@ const Video = ({proposal_id,tender_id}) => {
     const [systemMsg, setSystemMsg] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
-    const [isVideoPlayable, setIsVideoPlayable] = useState(false)
+
+    const [isVideoPlayable, setIsVideoPlayable] = useState(false) // based on is_ready
 
     const handleChange = (e) => {
         setFile(e.target.files[0])
@@ -59,8 +60,10 @@ const Video = ({proposal_id,tender_id}) => {
                         if(response.data.converting === true){ // is converting
                           
                             setShowVideo(false)
-                            setUploaded(true); // setter 
+                            setIsVideoPlayable(false)
+                            setIsDisabled(true)
                             console.log('result : is_processing is true')
+
                         }else{
                             console.log('result : is_processing is false')
                         }          
@@ -83,7 +86,7 @@ const Video = ({proposal_id,tender_id}) => {
                     apiClient.get(`/api/video/${response.data.video_id}/is_playable`)
                     .then((response) => {
                          
-                        if(response.data.is_playable == true){ // is converting
+                        if(response.data.is_playable == true){ // is playable
                             console.log('result : is playable : yes')
                             setIsVideoPlayable(true)
                         } else {
@@ -127,9 +130,9 @@ const Video = ({proposal_id,tender_id}) => {
                 .then((response) => {
                 
                     console.log('result :  conversion_process exist')
-                    console.log('check : if converting is true ?')
+                    console.log('check : if converting is true ?' + response.data.converting )
 
-                        if(response.data.converting == true){
+                        if(response.data.converting === true){
                             console.log('result : is converting = ' + response.data.progress + '%')
                        
                             setConversionPercentage(response.data.progress); // setter 
@@ -285,16 +288,16 @@ const Video = ({proposal_id,tender_id}) => {
                                 <div className='row' >
                                     <div className="d-lg-flex justify-content-center align-items-center">
                                         { isDisabled ? 
-                                            <div className='col-lg text-center'><i class="fas fa-sync fa-spin"></i></div> 
+                                            <div className='col-lg ms-auto align-self-center text-center'><i className="fas fa-sync fa-spin"></i></div> 
                                         : 
                                             <div className='col-lg text-center'><ShowVideoPlayer/></div>
                                         }
                                         <div className='col-lg ml-2'> 
                                         { isDisabled ? 
-                                            <div className='col-lg'>Video is being processed.</div> 
+                                            <div className='col'>Video is being processed.</div> 
                                         : 
-                                            <div className='col-lg'>
-                                                 <p>You've successfully attached a video to this proposal.</p>
+                                            <div className='col ms-auto align-self-center'>
+                                                 <span>Video is ready <i className="text-success fas fa-check"></i></span>
                                             </div>
                                         }
                                        
@@ -303,8 +306,13 @@ const Video = ({proposal_id,tender_id}) => {
                                 </div>
                             </div>     
                             :
-                            <div className="alert alert-secondary" role="alert">
-                                <p>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 ) </p>
+                            <div className="alert alert-secondary text-center" role="alert">
+                            
+                                { isDisabled ?
+                                <span><i class="fas fa-sync fa-spin"></i>  Video is being processed</span>
+                                :
+                                <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span>
+                                }
                             </div>
                             }
                         </div>
