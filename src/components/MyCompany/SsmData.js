@@ -135,7 +135,6 @@ const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
    
-
     // JS formData
     const formData = new FormData();
     formData.append('document', 'ssm_cert.pdf'); // force the filename on server
@@ -219,7 +218,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <Modal.Body>
     
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/ssm_cert.pdf"}
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/ssm_cert.pdf?" + Date().toLocaleString() }
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"

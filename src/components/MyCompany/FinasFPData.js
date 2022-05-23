@@ -231,7 +231,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <Modal.Body>
      
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf"}
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fp_cert.pdf?" + Date().toLocaleString() }
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"

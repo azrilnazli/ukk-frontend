@@ -238,9 +238,9 @@ const [fullscreen, setFullscreen] = React.useState(true);
         <Modal.Title>Bumiputera Status</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      { config.SERVER_URL + "/storage/companies/" + state.id.value + "/bumiputera_cert.pdf"}
+
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/bumiputera_cert.pdf"}
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/bumiputera_cert.pdf?" + Date().toLocaleString() }
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"
