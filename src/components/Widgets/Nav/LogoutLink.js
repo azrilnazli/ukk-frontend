@@ -1,7 +1,7 @@
 import React from 'react';
-import apiClient from '../../services/api';
+import apiClient from '../../../services/api';
 import { Redirect } from 'react-router-dom';
-import UserData from './UserData';
+import UserData from '../UserData';
 
 const LogoutLink = ({ logout, user }) => {
 

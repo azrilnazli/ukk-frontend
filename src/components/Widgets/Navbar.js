@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Navbar, NavbarBrand, Container,Nav,NavDropdown } from 'react-bootstrap';
 import { BrowserRouter as Router,Link } from 'react-router-dom';
-import LogoutLink from './LogoutLink';
+import LogoutLink from './Nav/LogoutLink';
+import RequirementLink from './Nav/RequirementLink';
 import config from '../../config.json';
 
 
@@ -18,7 +19,7 @@ const NavbarMenu = (
 
 ) => {
 
-    let None = null
+   
 
     const homeLink = loggedIn 
     ? <NavLink as={Link} to='/dashboard' className="nav-link">Dashboard</NavLink> 
@@ -27,6 +28,7 @@ const NavbarMenu = (
     // const moviesLink = loggedIn 
     // ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
     // : null
+
 
     const MyCompanyLink = loggedIn 
     ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
@@ -43,9 +45,11 @@ const NavbarMenu = (
     const faqLink = loggedIn 
     ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
     : null
-
-
-    const tenderLink = loggedIn ?  
+   
+    const requirementLink = loggedIn 
+    ? <RequirementLink /> 
+    : null
+    const proposalLink = loggedIn ?  
     
     <NavDropdown 
                 
@@ -72,6 +76,9 @@ const NavbarMenu = (
     </NavDropdown>
     : 
     null
+
+
+
 
     const accountLink = loggedIn ?  
     
@@ -111,19 +118,14 @@ const NavbarMenu = (
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     {homeLink}
-
-                    {MyCompanyLink}
-
-                    {tenderLink}
-{/*                     
-                    {MyProposalLink}
-                    {MyTenderLink} */}
-                    
-                    {faqLink}
+                    {requirementLink}
+                    {proposalLink}
                 </Nav>
                 <Nav>
-                {accountLink}
-                {authLink}
+                    {MyCompanyLink}
+                    {faqLink}
+                    {accountLink}
+                    {authLink}
                 </Nav>
                 </Navbar.Collapse>
             </Container>

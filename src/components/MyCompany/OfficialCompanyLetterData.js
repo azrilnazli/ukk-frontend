@@ -7,13 +7,13 @@ import TextField from '../Widgets/TextField';
 
 const collect = require('collect.js'); 
 
-const CreditData = () => {
+const OfficialCompanyLetterData = () => {
 
   const [isPending, setIsPending] = React.useState(true)
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
-    apiClient.get('/api/company/credit', { signal: abortCont.signal} )
+    apiClient.get('/api/company/official_company_letter', { signal: abortCont.signal} )
     .then(response => {
         //console.log(response)
         setIsPending(false)
@@ -28,13 +28,13 @@ const CreditData = () => {
     .catch(error => console.error(error));
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
-  //console.log('is_credit_cert_uploaded')
+  //console.log('is_official_company_letter_cert_uploaded')
 
-  // credit related fields
+  // official_company_letter related fields
   const initialValues = {
     id: { value: '' ,error: '' },
 
-    is_credit_cert_uploaded: { value: null ,error: '' },
+    is_official_company_letter_cert_uploaded: { value: null ,error: '' },
 
     selectedFile: { value: '' ,error: '' },
   }
@@ -108,8 +108,8 @@ const handleSubmit = (e) => {
   })
 
   // post the data
-  apiClient.post('/api/company/update_credit', {
-      is_credit_cert_uploaded: state.is_credit_cert_uploaded.value,
+  apiClient.post('/api/company/update_official_company_letter', {
+      is_official_company_letter_cert_uploaded: state.is_official_company_letter_cert_uploaded.value,
 
   }).then(response => {
       //console.log(response);
@@ -125,8 +125,6 @@ const handleSubmit = (e) => {
         } else {
           setShow(false) // close the modal
         }
-
-        
       }
   }).catch(error => {
      
@@ -151,8 +149,8 @@ const handleUpload = (e) => {
 
     // JS formData
     const formData = new FormData();
-    formData.append('document', 'credit_cert.pdf'); // force the filename on server
-    formData.append('field', 'is_credit_cert_uploaded'); // db field
+    formData.append('document', 'official_company_letter_cert.pdf'); // force the filename on server
+    formData.append('field', 'is_official_company_letter_cert_uploaded'); // db field
     formData.append("selectedFile", selectedFile); // input name = selectedFile
 
     // axios 
@@ -163,8 +161,8 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      //console.log(response.data.is_credit_cert_uploaded)
-      updateStateValue('is_credit_cert_uploaded',response.data.is_credit_cert_uploaded )
+      //console.log(response.data.is_official_company_letter_cert_uploaded)
+      updateStateValue('is_official_company_letter_cert_uploaded',response.data.is_official_company_letter_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
       //console.error(error)
@@ -193,7 +191,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">Credit Information</span>
+        <span className="float-start">official_company_letter Information</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
@@ -202,17 +200,17 @@ const [fullscreen, setFullscreen] = React.useState(true);
         
         { !isPending ? 
         <div className="card-body">
-          { state.is_credit_cert_uploaded.value != null ? 
+          { state.is_official_company_letter_cert_uploaded.value != null ? 
           <div>
             <dl className="row">
       
 
-                <dt className="col-sm-3">Credit Certificate</dt>
+                <dt className="col-sm-3">Official Company Letter Certificate</dt>
                 <dd className="col-sm-9">
-                    { state.is_credit_cert_uploaded.value ? 
+                    { state.is_official_company_letter_cert_uploaded.value ? 
                     <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
                     :
-                    <span className="text-danger">Please upload Credit certifacate ( PDF )</span>
+                    <span className="text-danger">Please upload official company letter certifacate ( PDF )</span>
                     }
                 </dd>
             </dl>
@@ -225,12 +223,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
-        <Modal.Title>Credit</Modal.Title>
+        <Modal.Title>official_company_letter</Modal.Title>
       </Modal.Header>
       <Modal.Body>
       
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/credit_cert.pdf?" + Date().toLocaleString() }
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/official_company_letter_cert.pdf?" + Date().toLocaleString() }
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"
@@ -243,7 +241,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Credit Informations</Modal.Title>
+        <Modal.Title>Official Company Letter</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -255,12 +253,12 @@ const [fullscreen, setFullscreen] = React.useState(true);
               type="file" 
             /> */}
                    <TextField
-                    label="Credit Certificate"          
+                    label="Official Company Letter Certificate"          
                     name="file"
                     onChange={handleFileSelect}
                     type="file"
                     accept="application/pdf"
-                    placeholder="Upload your company credit certificate"
+                    placeholder="Upload your company Official Company Letter certificate"
                     error={state.selectedFile.error}
                 />
           </Form.Group>
@@ -281,4 +279,4 @@ const [fullscreen, setFullscreen] = React.useState(true);
     );
 };
 
-export default CreditData;
+export default OfficialCompanyLetterData;

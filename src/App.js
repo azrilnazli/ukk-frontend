@@ -9,8 +9,8 @@ import Welcome from './components/Pages/Welcome';
 import Dashboard from './components/Pages/Dashboard';
 import LoginForm from './components/LoginForm';
 
-import LogoutLink from './components/Widgets/LogoutLink';
-import LoginLink from './components/Widgets/LoginLink';
+import LogoutLink from './components/Widgets/Nav/LogoutLink';
+import LoginLink from './components/Widgets/Nav/LoginLink';
 
 import RegisterForm from './components/RegisterForm';
 import PasswordEmail from './components/Password/email';
@@ -22,10 +22,15 @@ import MyAccount from './components/MyAccount';
 import MyCompany from './components/MyCompany';
 import MyProposal from './components/MyProposal';
 
+import Requirements from './components/Tender/Requirements';
 import TenderSambungSiri from './components/Tender/SambungSiri.js';
 import TenderSwasta from './components/Tender/Swasta.js';
-import Requirements from './components/Tender/Requirements';
 
+import TenderRequirement from './components/Requirement/Tender.js';
+import RequirementSambungSiri from './components/Requirement/SambungSiri.js';
+import RequirementSwasta from './components/Requirement/Swasta.js';
+import RequirementSyndicated from './components/Requirement/Syndicated.js';
+import RequirementFinishedProduct from './components/Requirement/FinishedProduct.js';
 
 import Faq from './components/Pages/Faq';
 import Reducer from './components/Pages/Reducer';
@@ -92,6 +97,12 @@ const App = () => {
               <PrivateRoute path='/tender/sambung_siri'   loggedIn={loggedIn} component={TenderSambungSiri} />
               <PrivateRoute path='/tender/swasta'   loggedIn={loggedIn} component={TenderSwasta} />
               <PrivateRoute path='/tender/:id/apply'  loggedIn={loggedIn} component={Apply} />
+
+              <PrivateRoute path='/tender-requirement'  loggedIn={loggedIn} component={TenderRequirement} />
+              <PrivateRoute path='/requirement/sambung-siri'   loggedIn={loggedIn} component={RequirementSambungSiri} />
+              <PrivateRoute path='/requirement/swasta'   loggedIn={loggedIn} component={RequirementSwasta} />
+              <PrivateRoute path='/requirement/syndicated'   loggedIn={loggedIn} component={RequirementSyndicated} />
+              <PrivateRoute path='/requirement/finished-product'   loggedIn={loggedIn} component={RequirementFinishedProduct} />
 
               <PrivateRoute path='/change_password' loggedIn={loggedIn} component={Password} />
               <PrivateRoute path='/movies'  loggedIn={loggedIn} component={Movies} />
