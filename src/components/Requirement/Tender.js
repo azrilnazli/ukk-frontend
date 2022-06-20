@@ -2,8 +2,12 @@ import React from 'react';
 import apiClient from '../../services/api';
 import { Button, Navbar, NavbarBrand, Container,Nav,NavDropdown } from 'react-bootstrap';
 import { BrowserRouter as Router,Link,NavLink  } from 'react-router-dom';
-import CheckData from '../MyCompany/CheckData';
+
 import config from '../../config.json';
+
+import RequestForApproval from './RequestForApproval';
+import GetApprovalStatus from './GetApprovalStatus';
+import CheckCompanyModule from './CheckCompanyModule';
 
 const Tender = () => {
 
@@ -34,13 +38,44 @@ const Tender = () => {
         <>
             <div key={tender.id} className='container container-fluid bg-light rounded p-3 mt-2'>
                 <div className='row'>
-                    <h5>{tender.title}</h5>
-                </div>
-                <div className='row'>
-                    <p><strong>Max proposal</strong> : {tender.max}</p>
-                </div>
-                <div className='row'>
-                    <div className='col-md-6'>{tender.description}</div>
+                    <div className='col-md-6'>
+
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="alert alert-secondary" role="alert">
+                                    <strong>Tender Name</strong> : <span className="badge bg-dark"> {tender.title}</span> 
+                                </div>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="alert alert-secondary" role="alert">
+                                    <strong>Date</strong> : <span className="badge bg-dark">{tender.start}</span> - <span className="badge bg-dark">{tender.end}</span>
+                                </div>                                
+                            </div>
+                        </div>
+        
+
+                        <div className="alert alert-secondary" role="alert">
+                            <strong>Max proposal</strong> : <span className="badge bg-dark">{tender.max}</span>
+                        </div>
+                        <div className="alert alert-secondary" role="alert">
+                            {tender.description}    
+                        </div>
+                        
+
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="alert alert-secondary" role="alert">
+                                    <strong>Status</strong> : <GetApprovalStatus tender_detail_id={tender.id}  /> 
+                                </div>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="alert alert-secondary" role="alert">
+                                    <strong>Request for Approval</strong> : <RequestForApproval tender_detail_id={tender.id} />
+                                </div>                                
+                            </div>
+                        </div>
+
+                    </div>
                
                     <div className='col-md-6'>
              
@@ -48,7 +83,7 @@ const Tender = () => {
                             <ul className='list-group '>
                                 {tender.tender_requirements.map((requirement) =>
                                     <>
-                                    <CheckData module={ requirement.module } title={ requirement.title } />
+                                    <CheckCompanyModule module={ requirement.module } title={ requirement.title } />
                                     </>
                                 )}
                             </ul> 
@@ -56,9 +91,6 @@ const Tender = () => {
                       
                     </div>
 
-                </div>
-                <div className='row'>
-                    <h5>Date Range : <strong>{tender.start} -  {tender.end}</strong></h5>
                 </div>
             </div>
         </>

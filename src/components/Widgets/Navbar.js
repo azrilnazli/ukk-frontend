@@ -46,9 +46,17 @@ const NavbarMenu = (
     ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
     : null
    
+    // const requirementLink = loggedIn 
+    // ? <RequirementLink /> 
+    // : null
+
     const requirementLink = loggedIn 
-    ? <RequirementLink /> 
+    ?   <NavLink as={Link} to='/tender-requirement' className="nav-link"><i className="fa fa-list-alt" aria-hidden="true"></i> Tender</NavLink> 
     : null
+   
+
+
+
     const proposalLink = loggedIn ?  
     
     <NavDropdown 
@@ -105,9 +113,6 @@ const NavbarMenu = (
     </NavDropdown>
     : 
     null
-
-
-
 
      return ( 
 
