@@ -106,7 +106,7 @@ const NavbarMenu = (
         <NavDropdown.Divider />
         <NavDropdown.Item >
             {/* <LogoutLink logout={logout}/> */}
-            <NavLink as={Link} to='/logout' onClick={logout} className="dropdown-item"><i className="fa fa-share-square" aria-hidden="true"></i> Logout</NavLink>
+            <NavLink as={Link} to='/home' onClick={logout} className="dropdown-item"><i className="fa fa-share-square" aria-hidden="true"></i> Logout</NavLink>
         </NavDropdown.Item>
     </NavDropdown>
     : 
