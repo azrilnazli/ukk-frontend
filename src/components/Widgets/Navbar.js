@@ -122,7 +122,7 @@ const NavbarMenu = (
                 <Nav className="me-auto">
                     {homeLink}
                     {requirementLink}
-                    {proposalLink}
+                    {/* {proposalLink} */}
                     {faqLink}
                 </Nav>
                 <Nav>
