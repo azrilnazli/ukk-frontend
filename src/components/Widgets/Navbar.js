@@ -100,9 +100,9 @@ const NavbarMenu = (
         <NavDropdown.Item >
             <NavLink as={Link} to='/my_company' className="dropdown-item"><i className="fa fa-home" aria-hidden="true"></i> My Company</NavLink>
         </NavDropdown.Item>
-        <NavDropdown.Item >
+        {/* <NavDropdown.Item >
             <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-list-alt" aria-hidden="true"></i> My Proposal</NavLink>
-        </NavDropdown.Item>
+        </NavDropdown.Item> */}
         <NavDropdown.Divider />
         <NavDropdown.Item >
             {/* <LogoutLink logout={logout}/> */}
