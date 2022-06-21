@@ -1,5 +1,6 @@
 import React from 'react';
 import apiClient from '../../services/api';
+import AllowRequest from './AllowRequest';
 
 const RequestForApproval = (props) => {
 
@@ -21,7 +22,12 @@ const RequestForApproval = (props) => {
     }
 
     return (
-        <button onClick={handleSubmit} className='btn btn-primary btn-sm'>Submit</button>
+        <span className='ms-2'>
+            <AllowRequest 
+                handleSubmit={handleSubmit}
+                tender_detail_id={props.tender_detail_id} 
+            />
+        </span>
     );
 };
 

@@ -22,8 +22,8 @@ const NavbarMenu = (
    
 
     const homeLink = loggedIn 
-    ? <NavLink as={Link} to='/dashboard' className="nav-link">Dashboard</NavLink> 
-    : <NavLink as={Link} to='/home' className="nav-link">Home</NavLink>
+    ? <NavLink as={Link} to='/home' className="nav-link"><i className="fa fa-home" ></i> Home</NavLink> 
+    : <NavLink as={Link} to='/' className="nav-link"><i className="fa fa-home" ></i> Home</NavLink>
 
     // const moviesLink = loggedIn 
     // ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
@@ -43,7 +43,7 @@ const NavbarMenu = (
     : null
 
     const faqLink = loggedIn 
-    ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
+    ? <NavLink as={Link} to='/faq' className="nav-link"><i className="fa fa-question" ></i> FAQ</NavLink> 
     : null
    
     // const requirementLink = loggedIn 
@@ -54,9 +54,6 @@ const NavbarMenu = (
     ?   <NavLink as={Link} to='/tender-requirement' className="nav-link"><i className="fa fa-list-alt" aria-hidden="true"></i> Tender</NavLink> 
     : null
    
-
-
-
     const proposalLink = loggedIn ?  
     
     <NavDropdown 
@@ -76,17 +73,11 @@ const NavbarMenu = (
         <NavDropdown.Item >
             <NavLink as={Link} to='/tender/swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
         </NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item >
-            <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-user" ></i> My Proposal</NavLink>
-        </NavDropdown.Item>
+
         
     </NavDropdown>
     : 
     null
-
-
-
 
     const accountLink = loggedIn ?  
     
@@ -107,8 +98,15 @@ const NavbarMenu = (
         
         <NavDropdown.Divider />
         <NavDropdown.Item >
+            <NavLink as={Link} to='/my_company' className="dropdown-item"><i className="fa fa-home" aria-hidden="true"></i> My Company</NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-list-alt" aria-hidden="true"></i> My Proposal</NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item >
             {/* <LogoutLink logout={logout}/> */}
-            <NavLink as={Link} to='/home' onClick={logout} className="dropdown-item"><i className="fa fa-share-square" aria-hidden="true"></i> Logout</NavLink>
+            <NavLink as={Link} to='/logout' onClick={logout} className="dropdown-item"><i className="fa fa-share-square" aria-hidden="true"></i> Logout</NavLink>
         </NavDropdown.Item>
     </NavDropdown>
     : 
@@ -125,10 +123,9 @@ const NavbarMenu = (
                     {homeLink}
                     {requirementLink}
                     {proposalLink}
+                    {faqLink}
                 </Nav>
                 <Nav>
-                    {MyCompanyLink}
-                    {faqLink}
                     {accountLink}
                     {authLink}
                 </Nav>

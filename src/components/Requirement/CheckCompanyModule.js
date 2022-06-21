@@ -13,8 +13,8 @@ const CheckCompanyModule = (props) => {
 
     apiClient.get('/api/company-approvals/check-for-approval/' + props.module)
     .then(response => {
-        console.log(response)
-        setProfile(response.data.status)
+        //console.log(response)
+        setProfile(response.data.status) // true or false
         setIsPending(true)
     })
     .catch(error => console.error(error));

@@ -7,6 +7,7 @@ import PublicRoute from './utils/PublicRoute';
 
 import Welcome from './components/Pages/Welcome';
 import Dashboard from './components/Pages/Dashboard';
+import Home from './components/Pages/Home';
 import LoginForm from './components/LoginForm';
 
 import LogoutLink from './components/Widgets/Nav/LogoutLink';
@@ -75,7 +76,6 @@ const App = () => {
 
               {/* Public eg guest */}
               <PublicRoute path='/' exact  component={Welcome} />
-              <PublicRoute path='/home' exact  component={Welcome} />
               <PublicRoute path='/register' component={RegisterForm} />
               <PublicRoute path='/password-email' component={PasswordEmail} />
               <PublicRoute path='/password-reset' component={PasswordReset} />
@@ -88,6 +88,7 @@ const App = () => {
               />
               
               {/* Private eg authenticated user */}
+              <PrivateRoute path='/home'    loggedIn={loggedIn} component={Home} />
               <PrivateRoute path='/dashboard'    loggedIn={loggedIn} component={Dashboard} />
               <PrivateRoute path='/my_company' loggedIn={loggedIn} component={MyCompany} />
               <PrivateRoute path='/my_account' loggedIn={loggedIn} component={MyAccount} />

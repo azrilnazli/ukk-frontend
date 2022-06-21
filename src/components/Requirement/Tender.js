@@ -16,8 +16,7 @@ const Tender = () => {
     const [title,setTitle] = React.useState('')
     const [tenders, setTenders] = React.useState([])
     const [isPending, setIspending] = React.useState(true)
-
-    
+   
     const getTenderDetailList = () => {
         apiClient.get('/api/tender-details') 
         .then(response => {
@@ -28,7 +27,6 @@ const Tender = () => {
         .catch(error => { 
             setIspending(false)
             console.error(error.response.data)
-   
         });
     }
     React.useEffect(() => getTenderDetailList(), []); 
@@ -70,7 +68,11 @@ const Tender = () => {
                             </div>
                             <div className='col-md-6'>
                                 <div className="alert alert-secondary" role="alert">
-                                    <strong>Request for Approval</strong> : <RequestForApproval tender_detail_id={tender.id} />
+                                    <strong>Request for Approval</strong> 
+                                    : 
+                                    <RequestForApproval 
+                                        tender_detail_id={tender.id} 
+                                    />
                                 </div>                                
                             </div>
                         </div>
@@ -79,16 +81,18 @@ const Tender = () => {
                
                     <div className='col-md-6'>
              
-                          
                             <ul className='list-group '>
+                           
                                 {tender.tender_requirements.map((requirement) =>
                                     <>
-                                    <CheckCompanyModule module={ requirement.module } title={ requirement.title } />
+                                        <CheckCompanyModule 
+                                            module={ requirement.module } 
+                                            title={ requirement.title }
+                                        />
                                     </>
                                 )}
                             </ul> 
                          
-                      
                     </div>
 
                 </div>
