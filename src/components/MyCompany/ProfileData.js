@@ -287,7 +287,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                     error={state.states.error}
                 /> */}
 
-{state.states.error}
+
           <StatesField
                     label="State"          
                     name="states"

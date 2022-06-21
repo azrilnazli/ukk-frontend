@@ -1,6 +1,7 @@
 import React, { useState,useEffect,Fragment } from 'react';
 import apiClient from '../../services/api';
 import TextField from './TextField';
+import StatesField from '../Widgets/StatesField';
 const collect = require('collect.js'); 
 
 const Profile = () => {
@@ -288,20 +289,29 @@ const Profile = () => {
                         </div>
                         <div className="col-md-4">
                             <div className=" px-4">
-                                <span className="text-uppercase">State</span>
+                                {/* <span className="text-uppercase">State</span> */}
                                 { 
                                     showForm ? 
-                                    <TextField
-                                        label="State"
+                                    // <TextField
+                                    //     label="State"
+                                    //     name="states"
+                                    //     placeholder="State"
+                                    //     value={state.states.value}
+                                    //     onChange={handleChange}
+                                    //     error={state.states.error}
+                                    // />
+                                    <StatesField
+                                        label="STATE"          
                                         name="states"
-                                        placeholder="State"
-                                        value={state.states.value}
                                         onChange={handleChange}
+                                        value={state.states.value}
+                                        placeholder="Enter your company state"
                                         error={state.states.error}
                                     />
                                     :      
                                     <h4><strong>{ state.states.value }</strong></h4> 
-                                }   
+                                } 
+   
                             </div>
                         </div>
                     </div>
