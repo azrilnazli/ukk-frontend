@@ -251,7 +251,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
       <Modal.Body>
         <Form>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="Current Audit Year"          
                     name="current_audit_year"
@@ -263,7 +263,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="Paid Capital"          
                     name="paid_capital"
@@ -276,7 +276,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
           </Form.Group>
 
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
                    <TextField
                     label="Current Audit Certificate"          
                     name="current_audit_year"

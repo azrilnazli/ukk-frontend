@@ -268,7 +268,7 @@ const [isPending, setIsPending] = React.useState(true)
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="MOF Expiry Date"          
                     name="mof_expiry_date"
@@ -280,7 +280,7 @@ const [isPending, setIsPending] = React.useState(true)
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
             <Form.Label>ePerolehan Status ?</Form.Label>
             <Form.Check 
               name="is_mof_active"

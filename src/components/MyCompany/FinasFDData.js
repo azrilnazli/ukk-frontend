@@ -263,7 +263,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="FINAS (DF) Expiry Date"          
                     name="finas_fd_expiry_date"
@@ -276,7 +276,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
           </Form.Group>
 
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
             {/* <Form.Label>Upload finas_fd Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}

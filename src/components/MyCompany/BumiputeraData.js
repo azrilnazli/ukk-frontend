@@ -300,7 +300,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     is_disabled={state.is_bumiputera.value}
                     label="Bumiputera Expiry Date"          
@@ -320,7 +320,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
              null 
           }  
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
             {/* <Form.Label>Upload MOF Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
