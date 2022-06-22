@@ -68,7 +68,7 @@ const Tender = () => {
                             </div>
                             <div className='col-md-6'>
                                 <div className="alert alert-secondary" role="alert">
-                                    <strong>Request for Approval</strong> 
+                                    <strong><small>Request for Approval</small></strong> 
                                     : 
                                     <RequestForApproval 
                                         tender_detail_id={tender.id} 
