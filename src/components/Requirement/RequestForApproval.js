@@ -8,6 +8,7 @@ const RequestForApproval = (props) => {
         <span className='ms-2'>
             <AllowRequestButton
                 tender_detail_id={props.tender_detail_id} 
+                setIsSubmit={props.setIsSubmit}
             />
         </span>
     );

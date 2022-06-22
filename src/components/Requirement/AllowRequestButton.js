@@ -24,6 +24,7 @@ const AllowRequest = (props) => {
 
     const handleSubmit = (e) => {
         setIsSubmit(true)
+        props.setIsSubmit(true)
         // formData
         const formData = new FormData();
         formData.append('tender_detail_id', props.tender_detail_id); 
@@ -35,9 +36,11 @@ const AllowRequest = (props) => {
             data: formData,
         }).then(response => {
             setIsSubmit(false)
+            props.setIsSubmit(false)
             console.log(response.data)
         }).catch(error => {
             setIsSubmit(false)
+            props.setIsSubmit(false)
             console.log(error)
         })  
     }
