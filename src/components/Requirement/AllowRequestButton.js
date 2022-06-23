@@ -62,7 +62,7 @@ const AllowRequest = (props) => {
                                      
                                         disabled
                                         className='btn btn-secondary btn-sm'
-                                        >Requested</button>
+                                        >{submit}</button>
     )
 }
 
