@@ -9,6 +9,7 @@ import RequestForApproval from './RequestForApproval';
 import GetApprovalStatus from './GetApprovalStatus';
 import CheckCompanyModule from './CheckCompanyModule';
 import AllowRequestButton from './AllowRequestButton';
+import GetComment from './GetComment';
 
 const Tender = () => {
 
@@ -41,22 +42,26 @@ const Tender = () => {
                     <div className='col-md-6'>
 
                         <div className='row'>
-                            <div className='col-md-6'>
+                            <div className='col-md-4'>
                                 <div className="alert alert-secondary" role="alert">
                                     <strong>Tender Name</strong> : <span className="badge bg-dark"> {tender.title}</span> 
                                 </div>
                             </div>
-                            <div className='col-md-6'>
+                            <div className='col-md-4'>
                                 <div className="alert alert-secondary" role="alert">
                                     <strong>Date</strong> : <span className="badge bg-dark">{tender.start}</span> - <span className="badge bg-dark">{tender.end}</span>
                                 </div>                                
                             </div>
+                            <div className='col-md-4'>
+                                <div className="alert alert-secondary" role="alert">
+                                    <strong>Max proposal</strong> : <span className="badge bg-dark">{tender.max}</span>
+                                </div>                               
+                            </div>
                         </div>
         
-
-                        <div className="alert alert-secondary" role="alert">
-                            <strong>Max proposal</strong> : <span className="badge bg-dark">{tender.max}</span>
-                        </div>
+                        
+                        <GetComment tender_detail_id={tender.id} />
+                 
                         <div className="alert alert-secondary" role="alert">
                             {tender.description}    
                         </div>

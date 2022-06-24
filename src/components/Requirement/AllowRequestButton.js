@@ -7,7 +7,7 @@ const AllowRequest = (props) => {
     const [isSubmit,setIsSubmit] = React.useState(false)
     const [showSubmitButton,setshowSubmitButton] = React.useState(true)
 
-    const getTenderDetailList = () => {
+    const getData = () => {
         apiClient.get('/api/company-approvals/allow-request/' + props.tender_detail_id ) 
         .then(response => {
             console.log(response.data)
@@ -20,7 +20,7 @@ const AllowRequest = (props) => {
 
         });
     }
-    React.useEffect(() => getTenderDetailList(), [isSubmit]); 
+    React.useEffect(() => getData(), [isSubmit]); 
 
     const handleSubmit = (e) => {
         setIsSubmit(true)
