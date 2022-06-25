@@ -49,7 +49,9 @@ const Tender = () => {
                             </div>
                             <div className='col-md-4'>
                                 <div className="alert alert-secondary" role="alert">
-                                    <strong>Date</strong> : <span className="badge bg-dark">{tender.start}</span> - <span className="badge bg-dark">{tender.end}</span>
+                                    <strong>Expired in</strong> 
+                                    : 
+                                    <small><span className="badge bg-dark">{tender.expired}</span></small>
                                 </div>                                
                             </div>
                             <div className='col-md-4'>
