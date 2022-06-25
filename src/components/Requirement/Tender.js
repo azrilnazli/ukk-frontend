@@ -118,6 +118,11 @@ const Tender = () => {
     );
     
     return (
+        isPending ?
+        <div className='container container-fluid bg-light rounded p-3 mt-2'>
+            <span>loading...</span>
+        </div>
+        :
         <>
         {tenderList}
         </>

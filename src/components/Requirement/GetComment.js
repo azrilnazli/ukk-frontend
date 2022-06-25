@@ -24,23 +24,24 @@ const GetComment = (props) => {
     }
     React.useEffect(() => getData(), []); 
 
-
     return (
-            ( showComment ?
-            <div className="alert alert-warning" role="alert">
-                <small>
-                    <span className="badge bg-dark me-1">Message from RTM</span>
-                     ~
-                     { data ? data.date : <span>loading...</span> } 
-                </small>
-                <hr />
-                <p className="lead">
-                    { data ? data.comment : <span>loading...</span> }
-                </p>
-            </div>
-
-            : null
-            )
+            isPending ? 
+                <div className="alert alert-warning" role="alert">
+                    <span>checking message...</span>
+                </div>
+                :
+                showComment && 
+                <div className="alert alert-warning" role="alert">
+                    <small>
+                        <span className="badge bg-dark me-1">Message from RTM</span>
+                        ~
+                        { data ? data.date : <span>loading...</span> } 
+                    </small>
+                    <hr />
+                    <p className="lead">
+                        { data ? data.comment : <span>loading...</span> }
+                    </p>
+                </div> 
     );
 };
 
