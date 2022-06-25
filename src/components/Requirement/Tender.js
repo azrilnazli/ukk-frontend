@@ -50,7 +50,9 @@ const Tender = () => {
                             <div className='col-md-4'>
                                 <div className="alert alert-secondary" role="alert">
                                     <strong>Expired in</strong> 
+                                    &nbsp;
                                     : 
+                                    &nbsp;
                                     <small><span className="badge bg-dark">{tender.expired}</span></small>
                                 </div>                                
                             </div>
@@ -73,7 +75,9 @@ const Tender = () => {
                             <div className='col-md-6'>
                                 <div className="alert alert-secondary" role="alert">
                                     <strong>Status</strong> 
+                                    &nbsp;
                                     : 
+                                    &nbsp;
                                     <GetApprovalStatus 
                                         tender_detail_id={tender.id}  
                                         isSubmit={isSubmit}
@@ -84,7 +88,9 @@ const Tender = () => {
                             <div className='col-md-6'>
                                 <div className="alert alert-secondary" role="alert">
                                     <strong><small>Request for Approval</small></strong> 
+                                    &nbsp;
                                     : 
+                                    &nbsp;
                                     <span className='ms-2'>
                                         <AllowRequestButton 
                                             tender_detail_id={tender.id} 
