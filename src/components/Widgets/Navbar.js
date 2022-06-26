@@ -7,7 +7,6 @@ import config from '../../config.json';
 
 
 const NavbarMenu = (
-
     {
 
         authLink,
@@ -16,10 +15,8 @@ const NavbarMenu = (
         NavLink: NavLink,
         ...rest
     }
-
 ) => {
 
-   
 
     const homeLink = loggedIn 
     ? <NavLink as={Link} to='/home' className="nav-link"><i className="fa fa-home" ></i> Home</NavLink> 
@@ -122,7 +119,7 @@ const NavbarMenu = (
                 <Nav className="me-auto">
                     {homeLink}
                     {requirementLink}
-                    {/* {proposalLink} */}
+                    {proposalLink}
                     {faqLink}
                 </Nav>
                 <Nav>

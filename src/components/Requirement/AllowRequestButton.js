@@ -10,6 +10,7 @@ const AllowRequest = (props) => {
     const getData = () => {
         apiClient.get('/api/company-approvals/allow-request/' + props.tender_detail_id ) 
         .then(response => {
+            console.log('test')
             console.log(response.data)
             setIspending(false)
             setshowSubmitButton(response.data.status) // boolean

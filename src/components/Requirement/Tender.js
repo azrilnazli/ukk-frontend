@@ -100,8 +100,25 @@ const Tender = () => {
                                     </span>
                                 </div>                                
                             </div>
+                        </div> 
+                        <div className='row'>
+                            <div className='col'>
+                                <div className="alert alert-success" role="alert">
+                                    <div className='row'>
+                                        <div className='col-6'>
+                                        Your application has been approved. Now you can browse 
+                                        all the available tenders. Please click botton on the right.
+                                        </div>
+                                        <div className='col-6 d-lg-flex justify-content-center align-items-center'>
+                                        <Link to={`/tender_details/${tender.id}`} className="btn btn-primary">
+                                            Browse Tender <span className='ms-2 badge bg-light text-dark'>16</span>
+                                        </Link>
+                                        </div>
+                       
+                                    </div>
+                                </div>
+                            </div>    
                         </div>
-
                     </div>
                
                     <div className='col-md-6'>
