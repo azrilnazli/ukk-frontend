@@ -88,7 +88,7 @@ const LoginForm = ({
                 :
                 null 
                 } */}
-                <button onClick={handleClick} type="button" className="m-2 btn btn-warning">Register</button>
+                <button onClick={handleClick} disabled  type="button" className="m-2 btn btn-warning">Register</button>
 
                 <NavLink  to='/password-email' className="btn btn-link">Forgot Your Password ?</NavLink>
             </div>
