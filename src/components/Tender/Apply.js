@@ -10,6 +10,8 @@ const Apply = () => {
     const { id } = useParams();
     const [tender, setTender] = React.useState([]);
     const getTenderDetail = () => {
+
+        // get Tender detail
         apiClient.get('/api/tender/' + id)
         .then(response => {
             //console.log(response)

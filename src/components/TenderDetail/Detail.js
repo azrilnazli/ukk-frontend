@@ -68,7 +68,7 @@ const Detail = ({key,tender}) => {
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
         
      
                 <div className="card-footer text-center">          

@@ -323,18 +323,19 @@ const Video = ({proposal_id,tender_id}) => {
                
                                     <div className="input-group mb-3">
 
-                                        { !isDisabled ? 
+                                        { isDisabled ? 
                                             <input 
                                             type="file"
-                                            required
+                                            disabled
                                             accept="video/mp4,video/x-m4v,video/*"
                                             className={"form-control" + (errors ? ' is-invalid' : uploaded ? ' is-valid' : '' )}
                                             onChange={handleChange} 
                                             />
                                         :
+                                            
                                             <input 
                                             type="file"
-                                            disabled
+                                            required
                                             accept="video/mp4,video/x-m4v,video/*"
                                             className={"form-control" + (errors ? ' is-invalid' : uploaded ? ' is-valid' : '' )}
                                             onChange={handleChange} 

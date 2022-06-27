@@ -23,29 +23,61 @@ const TenderDetails = ({tender}) => {
     }
 
     return (
+
         <div className="card mt-3">
             <div className="card-header">
-                <div className="d-lg-flex flex-row justify-content-center mt-2">
-                    <div className="ms-1 me-1 "><p>ID : <span className="badge bg-secondary">{tender.id}</span></p></div>
-                    <div className="ms-1 me-1 "><p>CHANNEL : <span className="badge bg-secondary">{tender.channel}</span></p></div>
-                    <div className="ms-1 me-1 "><p>CATEGORY : <span className="badge bg-secondary">{tender.tender_category}</span></p></div>      
-                    <div className="ms-1 me-1 "><p>CODE : <span className="badge bg-secondary">{tender.programme_code}</span></p></div>
-                    <div className="ms-1 me-1 "><p>LANGUAGE : {languageList}</p></div>
-                       
-                    <div className="ms-1 me-1 "><p>EPISODES : <span className="badge bg-secondary">{tender.number_of_episode} X {tender.duration}'</span></p></div>
-                </div>                
+            <h2>{tender.programme_category} - {tender.programme_code}</h2>
             </div>
 
-    
             <div className="card-body">
-                <h5 className="card-title">NEED STATEMENT</h5>
-                <p className="card-text">
-                {/* <div dangerouslySetInnerHTML={{__html:tender.description}} /> */}
-                <NewLineToBr>{tender.description}</NewLineToBr>
-                </p>
+                <div className="row">
+            
+                    <div className='col-md-3 bg-light rounded'>
+
+                        <table className='table '>
+                            <tr>
+                                <th>ID</th>
+                                <td><span className="badge bg-secondary">{tender.id}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Language</th>
+                                <td>{languageList}</td>
+                            </tr>
+                            <tr>
+                                <th>Channel</th>
+                                <td><span className="badge bg-secondary">{tender.channel}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Category</th>
+                                <td><span className="badge bg-secondary">{tender.programme_category}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Code</th>
+                                <td><span className="badge bg-secondary">{tender.programme_code}</span></td>
+                            </tr>  
+                            <tr>
+                                <th>Episode</th>
+                                <td><span className="badge bg-secondary">{tender.number_of_episode}</span></td>
+                            </tr>
+                            <tr>
+                                <th>Duration</th>
+                                <td><span className="badge bg-secondary">{tender.duration}</span></td>
+                            </tr>                                                                      
+                        </table>      
+                    </div>
+                    <div className='col-md-7'>
+                        <div className="card-body">
+                        <h5 className="card-title">NEED STATEMENT</h5>
+                        <p className="card-text">
+                        {/* <div dangerouslySetInnerHTML={{__html:tender.description}} /> */}
+                        <NewLineToBr>{tender.description}</NewLineToBr>
+                        </p>
+                        </div>
+                    </div>
             </div>
-        
-        </div>
+        </div> {/* card */}
+
+    </div>
 );
 };
 

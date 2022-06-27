@@ -292,7 +292,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 <div className="card-footer"> 
                 <div>
                   <div className="d-flex flex-row">
-                      <div className=""><EditProposal /></div>       
+                      {/* <div className=""><EditProposal /></div>        */}
                       <div className="ms-2"><DeleteProposal /></div>     
                       <div className="ms-auto align-self-center">Applied on <strong>{date}</strong></div>               
                   </div>

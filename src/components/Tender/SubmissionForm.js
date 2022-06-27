@@ -11,27 +11,30 @@ const SubmissionForm = ({tender_id}) => {
       // load data from server
       const [isPending, setIspending] = React.useState(true);
       const [systemMsg, setSystemMsg] = React.useState(false);
+      const [status, setStatus] = React.useState();
+      const [message, setMessage] = React.useState('');
       const [tenderSubmissionId, setTenderSubmissionId] = React.useState('');
 
-      React.useEffect(() => {
-        const abortCont = new AbortController();
-        apiClient.get('/api/proposal/show/' + state.tender_id.value, { signal: abortCont.signal} )
-        .then(response => {
+    //   Pembekal can apply as many tender
+    //   React.useEffect(() => {
+    //     const abortCont = new AbortController();
+    //     apiClient.get('/api/proposal/show/' + state.tender_id.value, { signal: abortCont.signal} )
+    //     .then(response => {
           
-           // console.log(response)
-            setIspending(false)
-            if(response.data.exists === true){
-                setTenderSubmissionId(response.data.proposal.id)
-                const fields = collect(response.data.proposal);
-                // console.log(fields)
-                fields.each( (value,field) => {
-                    updateStateValue(field, value)
-                })
-            }
-        })
-        .catch(error => console.error(error));
-        return () => abortCont.abort();    
-    }, [] ); // Empty array [] means this only run on first render
+    //        // console.log(response)
+    //         setIspending(false)
+    //         if(response.data.exists === true){
+    //             setTenderSubmissionId(response.data.proposal.id)
+    //             const fields = collect(response.data.proposal);
+    //             // console.log(fields)
+    //             fields.each( (value,field) => {
+    //                 updateStateValue(field, value)
+    //             })
+    //         }
+    //     })
+    //     .catch(error => console.error(error));
+    //     return () => abortCont.abort();    
+    // }, [] ); // Empty array [] means this only run on first render
 
 
     // TenderSubmission related fields
@@ -98,7 +101,7 @@ const SubmissionForm = ({tender_id}) => {
         })
       
         // post the data
-        apiClient.post('/api/tender/update_proposal', {
+        apiClient.post('/api/tender-submissions/store', {
             tender_id: state.tender_id.value,
             video_id: state.video_id.value,
             theme: state.theme.value,
@@ -110,25 +113,36 @@ const SubmissionForm = ({tender_id}) => {
           
             if (response.status === 200) {
              
+                // success message
+                setStatus('success');
+                setMessage(response.data.message); 
+
                 // Proposal PDF
                 if(selectedFile){
                     handleUpload(e)
                 }
 
-                setTenderSubmissionId(response.data.id)
+                setTenderSubmissionId(response.data.tender_submission_id)
                 //console.log(response.data)
 
                 setSystemMsg(true)
+
                 setTimeout( () => setSystemMsg(false), 5000 ); // hide after 10 seconds
             }
         }).catch(error => {
            
+            setStatus('danger');
+
             if (error.response.status === 422) {
                 const errors = collect(error.response.data.errors); 
                 errors.each( (error,field) => {
                     updateStateError(field,error)  
                 })
             }
+
+            if (error.response.status === 423) {
+                setMessage(error.response.data.message); 
+            }   
         });
     } // handleSubmit
 
@@ -153,6 +167,10 @@ const SubmissionForm = ({tender_id}) => {
             headers: { "Content-Type": "multipart/form-data" },
         }).then(response => {
            
+            // should check status boolean
+            // should check message
+            // expecting
+            
             updateStateValue('id',response.data.id ) // to be used for PDF display
             
         }).catch(error => {
@@ -163,6 +181,9 @@ const SubmissionForm = ({tender_id}) => {
                     updateStateError(field,error)  
                 })
             }
+            if (error.response.status === 423) {
+                const errors = collect(error.response.data.message); 
+            }            
         })
     }
     const handleFileSelect = (event) => {
@@ -173,13 +194,11 @@ const SubmissionForm = ({tender_id}) => {
 
     return (
         <>
-   
             <div className="card mt-3">
                 <div className="card-header">
-                        <h5>PROPOSAL DETAILS</h5>
+                    <h5>PROPOSAL DETAILS</h5>
                 </div>
 
-        
                 <div className="card-body">
 
                     { systemMsg ? 
@@ -237,15 +256,30 @@ const SubmissionForm = ({tender_id}) => {
                                     onChange={handleChange}
                                     placeholder="Enter you synopsis"
                                     value={state.synopsis.value}
-                                
                                     error={state.synopsis.error}
                             />
                         </Form.Group>
 
-            
-                        <Button variant="primary" onClick={handleSubmit}>
-                        Save Changes
-                        </Button>
+                        <div className='row'>
+                            <div className='col-md-1'>
+                            {   
+                                status === 'success' ?
+                                <Button variant="secondary" disabled>
+                                Submit
+                                </Button>
+                                :
+                                <Button variant="primary" onClick={handleSubmit}>
+                                Submit
+                                </Button>                              
+                            }
+                            </div>
+                            {   
+                                message && 
+                                <div className='col-md-6'>
+                                    <span className={`text-${status}`}><strong>{ message }</strong></span> 
+                                </div>
+                            }
+                        </div>
                     </Form>
 
               
@@ -253,23 +287,7 @@ const SubmissionForm = ({tender_id}) => {
                 </div>
             
             </div>
-    
-            {tenderSubmissionId ?
-            <div className="card mt-3">
-                <div className="card-header">
-                        <h5>VIDEO</h5>
-                </div>
-
-                <div className="card-body">
-                        
-                    <Video tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
-        
-                </div>
-            </div>
-            : null }
-
-
-            {tenderSubmissionId ?
+            {tenderSubmissionId &&
             <div className="card mt-3">
                 <div className="card-header">
                         <h5>PDF</h5>
@@ -280,7 +298,22 @@ const SubmissionForm = ({tender_id}) => {
                   <Pdf tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} />
                 </div>
             </div>
-            : null }
+            }            
+    
+            { tenderSubmissionId &&
+                <div className="card mt-3">
+                    <div className="card-header">
+                            <h5>VIDEO</h5>
+                    </div>
+
+                    <div className="card-body">
+                        <Video tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
+                    </div>
+                </div>
+            }
+
+
+
        
         </>
     );
