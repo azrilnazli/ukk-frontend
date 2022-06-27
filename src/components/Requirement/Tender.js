@@ -19,6 +19,7 @@ const Tender = () => {
     const [tenders, setTenders] = React.useState([])
     const [isPending, setIspending] = React.useState(true)
     const [isSubmit, setIsSubmit] = React.useState(false)
+    const [approvalStatus, setApprovalStatus] = React.useState(false)
   
     const getTenderDetailList = () => {
         apiClient.get('/api/tender-details') 
@@ -70,7 +71,7 @@ const Tender = () => {
                             {tender.description}    
                         </div>
                         
-
+                        { approvalStatus !== "approved" &&
                         <div className='row'>
                             <div className='col-md-6'>
                                 <div className="alert alert-secondary" role="alert">
@@ -81,7 +82,7 @@ const Tender = () => {
                                     <GetApprovalStatus 
                                         tender_detail_id={tender.id}  
                                         isSubmit={isSubmit}
-                                    
+                                        setApprovalStatus={setApprovalStatus}
                                     /> 
                                 </div>
                             </div>
@@ -101,6 +102,9 @@ const Tender = () => {
                                 </div>                                
                             </div>
                         </div> 
+                        }
+
+                        { approvalStatus === "approved" &&
                         <div className='row'>
                             <div className='col'>
                                 <div className="alert alert-success" role="alert">
@@ -111,7 +115,7 @@ const Tender = () => {
                                         </div>
                                         <div className='col-6 d-lg-flex justify-content-center align-items-center'>
                                         <Link to={`/tender_details/${tender.id}`} className="btn btn-primary">
-                                            Browse Tender <span className='ms-2 badge bg-light text-dark'>16</span>
+                                            Browse Tender <span className='ms-2 badge bg-light text-dark'>{ tender.tenders_count }</span>
                                         </Link>
                                         </div>
                        
@@ -119,6 +123,9 @@ const Tender = () => {
                                 </div>
                             </div>    
                         </div>
+                        }
+
+
                     </div>
                
                     <div className='col-md-6'>

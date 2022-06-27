@@ -12,6 +12,7 @@ const GetApprovalStatus = (props) => {
             console.log(response.data)
             setIspending(false)
             setApprovalStatus(response.data.status)
+            props.setApprovalStatus(response.data.status)
         })
         .catch(error => { 
             setIspending(false)
@@ -22,7 +23,7 @@ const GetApprovalStatus = (props) => {
     React.useEffect(() => getDetail(), [props.isSubmit]); 
 
     return (
-        isPending ? <span>Loading...</span> : <span className="badge bg-dark">{approvalStatus}</span>
+        isPending ? <span>Loading...</span> : <span className="badge bg-dark text-uppercase">{approvalStatus}</span>
     )
 }
 
