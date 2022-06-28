@@ -231,7 +231,52 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
         
                 <div className="card-body">
                     <div className='row p-3'>
-  
+                        { proposal.theme && 
+                        <div className='row'>
+                            <div className='col'>
+                              <span className='badge bg-dark text-uppercase'>theme</span>
+                              <div className="alert alert-warning " role="alert">
+                                <span class="lead text-uppercase">
+                                  
+                                  <NewLineToBr>{proposal.theme}</NewLineToBr>
+                                  
+                                </span>
+                              </div>
+                            </div>
+                         </div>
+                         }
+
+                        { proposal.genre && 
+                        <div className='row'>
+                            <div className='col'>
+                              <span className='badge bg-dark text-uppercase'>genre</span>
+                              <div className="alert alert-warning " role="alert">
+                                <span class="lead text-uppercase">
+                                  
+                                  <NewLineToBr>{proposal.genre}</NewLineToBr>
+                                  
+                                </span>
+                              </div>
+                            </div>
+                         </div>
+                         }     
+
+                        { proposal.concept && 
+                        <div className='row'>
+                            <div className='col'>
+                              <span className='badge bg-dark text-uppercase'>concept</span>
+                              <div className="alert alert-warning " role="alert">
+                                <span class="lead text-uppercase">
+                                  
+                                  <NewLineToBr>{proposal.concept}</NewLineToBr>
+                                  
+                                </span>
+                              </div>
+                            </div>
+                         </div>
+                         }                    
+
+
                         { proposal.synopsis && 
                         <div className='row'>
                             <div className='col'>
