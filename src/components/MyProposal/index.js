@@ -3,9 +3,9 @@ import Pdf from './Pdf';
 import Video from './Video';
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
-import Detail from './Detail';
+import FormDataTypeB from './FormDataTypeB';
 
-
+import FormDataTypeA from './FormDataTypeA';
 const MyProposal = () => {
 
     const [isPending, setIsPending] = useState(false)
@@ -14,7 +14,7 @@ const MyProposal = () => {
     const [proposals, setProposals] = useState([])
     const [destroyed, setDestroyed] = useState(false)
     const [uploaded, setUploaded] = useState(false)
-    const [total, setTotal] = useState([])
+    //const [total, setTotal] = useState([])
 
 
     const getProposal = () => {
@@ -35,7 +35,7 @@ const MyProposal = () => {
                 setError('You don\'t have any proposal being applied.');
             } else {
                 setUploaded(true)
-                setTotal(response.data.total) // total applied tender
+                //setTotal(response.data.total) // total applied tender
                 setProposals(response.data.proposals) // proposals returned from server
             }
         })
@@ -54,14 +54,18 @@ const MyProposal = () => {
     }
     React.useEffect(() => getProposal(), [destroyed]); // GET request to server
 
-    console.log(total.sambung_siri)
+    //console.log(total.sambung_siri)
 
  
     const proposalList = proposals.map((proposal) => {
    
             return (
                     <>
-                    <Detail setDestroyed={setDestroyed} proposal={proposal} tender={proposal.tender} created_at={proposal.created_at} />
+                    <FormDataTypeB 
+                        setDestroyed={setDestroyed} 
+                        proposal={proposal} 
+                        tender={proposal.tender} 
+                        created_at={proposal.created_at} />
                     </>
             )
       
