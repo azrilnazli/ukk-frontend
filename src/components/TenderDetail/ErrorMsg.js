@@ -13,15 +13,8 @@ const ErrorMsg = ({title,message}) => {
         <div className="alert alert-danger d-flex align-items-center" role="alert">
            
             <div>
-            <i class="fas fa-exclamation"></i> <strong>{title}</strong> 
-            {/* {message} */}
-            <p>Assalamualaikum dan Salam Sejahtera,</p>
-
-            <p>Syarikat masih gagal untuk memenuhi keperluan pendaftaran, dan status masih belum berjaya berdaftar sebagai pembekal yang berdaftar di dalam Sistem RTM TVCMS.</p>
-
-            <p>Sila rujuk kepada Urusetia TVCMS.</p>
-
-            <p>Sekian, terima kasih.</p>
+            <i class="fas fa-exclamation"></i>&nbsp;<strong>{title}</strong> 
+                &nbsp;-&nbsp;{message}
             </div>
         </div>
     );

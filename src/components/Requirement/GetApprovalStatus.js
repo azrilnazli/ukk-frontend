@@ -6,13 +6,13 @@ const GetApprovalStatus = (props) => {
     const [isPending,setIspending] = React.useState(true)
     const [approvalStatus,setApprovalStatus] = React.useState('')
 
-    const getDetail = () => {
+    const getData = () => {
         apiClient.get('/api/company-approvals/get-approval-status/' + props.tender_detail_id ) 
         .then(response => {
             console.log(response.data)
             setIspending(false)
             setApprovalStatus(response.data.status)
-            props.setApprovalStatus(response.data.status)
+  
         })
         .catch(error => { 
             setIspending(false)
@@ -20,7 +20,7 @@ const GetApprovalStatus = (props) => {
 
         });
     }
-    React.useEffect(() => getDetail(), [props.isSubmit]); 
+    React.useEffect(() => getData(), [props.isSubmit]); 
 
     return (
         isPending ? <span>Loading...</span> : <span className="badge bg-dark text-uppercase">{approvalStatus}</span>

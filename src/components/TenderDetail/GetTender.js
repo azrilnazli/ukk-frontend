@@ -30,7 +30,6 @@ const GetTender = (props) => {
             } else {
                 setTitle('Restricted area'); 
                 setError('You don\'t have permission to enter this area.');
-               
             }
         });
     }

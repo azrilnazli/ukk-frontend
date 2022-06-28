@@ -37,7 +37,6 @@ const MyProposal = () => {
                 setUploaded(true)
                 setTotal(response.data.total) // total applied tender
                 setProposals(response.data.proposals) // proposals returned from server
-
             }
         })
         .catch((error) => {
@@ -50,7 +49,6 @@ const MyProposal = () => {
             } else {
                 setTitle('Restricted area'); 
                 setError('You don\'t have permission to enter this area.');
-               
             }
         });
     }
