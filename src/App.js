@@ -24,8 +24,7 @@ import MyCompany from './components/MyCompany';
 import MyProposal from './components/MyProposal';
 
 import Requirements from './components/Tender/Requirements';
-import TenderSambungSiri from './components/Tender/SambungSiri.js';
-import TenderSwasta from './components/Tender/Swasta.js';
+
 
 import TenderDetail from './components/TenderDetail';
 
@@ -98,8 +97,6 @@ const App = () => {
 
               <PrivateRoute path='/tender_details/:tender_detail_id'   loggedIn={loggedIn} component={TenderDetail} />   
               <PrivateRoute path='/tender/requirements'   loggedIn={loggedIn} component={Requirements} />
-              <PrivateRoute path='/tender/sambung_siri'   loggedIn={loggedIn} component={TenderSambungSiri} />
-              <PrivateRoute path='/tender/swasta'   loggedIn={loggedIn} component={TenderSwasta} />
               <PrivateRoute path='/tender/:id/apply'  loggedIn={loggedIn} component={Apply} />
 
               <PrivateRoute path='/tender-requirement'  loggedIn={loggedIn} component={TenderRequirement} />
