@@ -232,28 +232,37 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 <div className="card-body">
                     <div className='row p-3'>
   
+                        { proposal.synopsis && 
                         <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>synopsis</span>
                               <div className="alert alert-warning " role="alert">
                                 <span class="lead text-uppercase">
+                                  
                                   <NewLineToBr>{proposal.synopsis}</NewLineToBr>
+                                  
                                 </span>
                               </div>
                             </div>
                          </div>
+                         }
 
+                        { proposal.published_year && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>Published Year</span>
                               <div className="alert alert-warning " role="alert">
+                              
                                 <span class="lead text-uppercase">
                                   {proposal.published_year}
                                 </span>
+                              
                               </div>
                             </div>
                          </div>
+                          }
 
+                        { proposal.casts && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>casts</span>
@@ -264,7 +273,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+                        }
 
+                        { proposal.languages && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>languages</span>
@@ -275,6 +286,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+                        }
 
                          <div className='row'>
                             <div className='col'>
@@ -298,6 +310,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                             </div>
                          </div>
 
+                         { proposal.country && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>country</span>
@@ -308,6 +321,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+                          }
 
                          <div className='row'>
                             <div className='col'>
@@ -330,6 +344,8 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+
+                         { proposal.rules && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>Terms & Conditions</span>
@@ -340,7 +356,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+                        }
 
+                        { proposal.informations && 
                          <div className='row'>
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>Extra Informations</span>
@@ -351,17 +369,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                               </div>
                             </div>
                          </div>
+                        }
 
-                         <div className='row'>
-                            <div className='col'>
-                              <span className='badge bg-dark text-uppercase'>Extra Informations</span>
-                              <div className="alert alert-warning " role="alert">
-                                <span class="lead text-uppercase">
-                                  <NewLineToBr>{proposal.informations}</NewLineToBr>
-                                </span>
-                              </div>
-                            </div>
-                         </div>
+
 
                          <div className='row'>
                             <div className='col'>

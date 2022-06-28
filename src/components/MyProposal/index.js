@@ -41,7 +41,7 @@ const MyProposal = () => {
         })
         .catch((error) => {
             setIsPending(false)
-            console.error(error.response.data)
+            console.error(error)
             if (error.response.status === 422) {
                 setTitle(error.response.data.title); 
                 setError(error.response.data.message);
@@ -61,11 +61,13 @@ const MyProposal = () => {
    
             return (
                     <>
-                    <FormDataTypeB 
-                        setDestroyed={setDestroyed} 
-                        proposal={proposal} 
-                        tender={proposal.tender} 
-                        created_at={proposal.created_at} />
+                    { proposal && 
+                        <FormDataTypeB 
+                            setDestroyed={setDestroyed} 
+                            proposal={proposal} 
+                            tender={proposal.tender} 
+                            created_at={proposal.created_at} />
+                    }
                     </>
             )
       
