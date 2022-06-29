@@ -338,10 +338,10 @@ const SubmissionFormTypeB = ({tender_id}) => {
 
                         <Form.Group className="mb-3">
                             <TextArea
-                                    label="Terms and Conditions"          
+                                    label="Programme Rights"          
                                     name="rules"
                                     onChange={handleChange}
-                                    placeholder="Terms and Conditions"
+                                    placeholder="Please state Programme Rights eg All Rights ( Hakmilik RTM ) or Rent ..."
                                     value={state.rules.value}
                                     error={state.rules.error}
                             />

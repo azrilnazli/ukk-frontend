@@ -393,7 +393,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                          { proposal.rules && 
                          <div className='row'>
                             <div className='col'>
-                              <span className='badge bg-dark text-uppercase'>Terms & Conditions</span>
+                              <span className='badge bg-dark text-uppercase'>Programme Rights</span>
                               <div className="alert alert-warning " role="alert">
                                 <span class="lead text-uppercase">
                                   <NewLineToBr>{proposal.rules}</NewLineToBr>
