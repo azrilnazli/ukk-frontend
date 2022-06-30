@@ -285,7 +285,18 @@ const VideoUploadTypeB = ({proposal_id,tender_id}) => {
                         <div className='col-lg-4'>
                   
                             <div className="alert alert-secondary text-center" role="alert">
-                                <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span>
+                                { uploaded ? 
+                                <div className="alert alert-secondary" role="alert">
+                                    <span>Congratulation, your video was successfully uploaded.
+                                        You may check video playback in My Proposal later on.
+                                    
+                                    </span>
+                                </div>
+                                :
+                                <div className="alert alert-secondary text-center" role="alert">
+                                    <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span>
+                                </div>
+                                }
                             </div>
                             
                         </div>
