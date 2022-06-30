@@ -72,8 +72,7 @@ const Detail = ({key,tender}) => {
         
      
                 <div className="card-footer text-center">          
-                   
-                     <NavLink  to={`/tender/${tender.id}/apply`} className="btn btn-primary">APPLY</NavLink>
+                     <NavLink  to={`/tender/${tender.id}/create`} className="btn btn-primary">APPLY</NavLink>
                 </div>
             </div>
     );

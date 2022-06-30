@@ -22,7 +22,7 @@ const MyProposal = () => {
         console.log('Initiate Get Proposal from Server')
         console.log('.............................')
         // get current video id
-        console.log('check : get_video from server')
+        console.log('check : tender submissions from server')
         apiClient.get('/api/proposal/my_proposal') // axios call to server
         .then((response) => {
             setIsPending(false)
@@ -60,13 +60,13 @@ const MyProposal = () => {
    
             return (
                     <>
-                    { proposal && 
+                
                         <FormDataTypeB 
                             setDestroyed={setDestroyed} 
                             proposal={proposal} 
                             tender={proposal.tender} 
                             created_at={proposal.created_at} />
-                    }
+                    
                     </>
             )
       
@@ -75,9 +75,7 @@ const MyProposal = () => {
 
     return (
         <div>
-        {/* { total.sambung_siri > 1 ? <ErrorMsg title="SAMBUNG SIRI" message="You've submitted more than 1 proposal." />  : null }
-        { total.swasta > 2 ? <ErrorMsg title="SWASTA" message="You've submitted more than 2 proposals." />  : null }
-             */}
+
         { isPending ? 
             <div  className='container container-fluid bg-light rounded p-3 col-md-12'>loading...</div>
             :

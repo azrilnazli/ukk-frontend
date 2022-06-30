@@ -8,7 +8,7 @@ const collect = require('collect.js');
 
 
 
-const VideoUploadTypeB = ({proposal_id,tender_id}) => {
+const VideoUploadTypeB = ({proposal_id}) => {
 
     // console.log('********************************')is_ready
     // console.log('welcome to Video Check System ')
@@ -192,7 +192,7 @@ const VideoUploadTypeB = ({proposal_id,tender_id}) => {
 
         
         formData.append('proposal_id', proposal_id) // selected file
-        formData.append('tender_id', tender_id) // selected file
+        //formData.append('tender_id', tender_id) // selected file
         formData.append('start_time', datetime)
         formData.append('file', file) // selected file
 
@@ -294,7 +294,10 @@ const VideoUploadTypeB = ({proposal_id,tender_id}) => {
                                 </div>
                                 :
                                 <div className="alert alert-secondary text-center" role="alert">
-                                    <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span>
+                                    
+                                    {isVideoPlayable ?  
+                                        <div className='col-lg text-center'><ShowVideoPlayer/></div> 
+                                    : <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span> }
                                 </div>
                                 }
                             </div>

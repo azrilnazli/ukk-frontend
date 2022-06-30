@@ -6,7 +6,7 @@ import config from '../../config.json'
 const collect = require('collect.js'); 
 
 
-const Pdf = ({proposal_id,tender_id}) => {
+const Pdf = ({proposal_id}) => {
 
     const [file,setFile] = useState('');
     const [filename,setFilename] = useState('Choose file');
@@ -52,7 +52,6 @@ const Pdf = ({proposal_id,tender_id}) => {
         setErrors('')
         const formData = new FormData(); // JavaScript
         formData.append('proposal_id', proposal_id) // selected file
-        formData.append('tender_id', tender_id) // selected file
         formData.append('file', file) // selected file
 
         setSystemMsg('Your PDF is being uploaded')

@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import apiClient from '../../services/api';
 import TenderDetails from './TenderDetails';
-import SubmissionFormTypeB from './SubmissionFormTypeB';
+import CreateFormTypeB from './CreateFormTypeB';
 const collect = require('collect.js'); 
 
-const Apply = () => {
+const CreateTender = () => {
     
     const { id } = useParams();
     const [tender, setTender] = React.useState([]);
@@ -27,11 +27,11 @@ const Apply = () => {
             <TenderDetails tender={tender} />   
         </div>
 
-        
-        <SubmissionFormTypeB tender_id={id}/>
+        <CreateFormTypeB />
+     
      
         </>
     );
 };
 
-export default Apply;
+export default CreateTender;

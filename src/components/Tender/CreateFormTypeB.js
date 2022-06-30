@@ -7,34 +7,13 @@ import VideoUploadTypeB from '../MyProposal/VideoUploadTypeB';
 import Pdf from '../MyProposal/Pdf';
 const collect = require('collect.js'); 
 
-const SubmissionFormTypeB = ({tender_id}) => {
+const CreateFormTypeB = ({tender_id}) => {
       // load data from server
       const [isPending, setIspending] = React.useState(true);
       const [systemMsg, setSystemMsg] = React.useState(false);
       const [status, setStatus] = React.useState();
       const [message, setMessage] = React.useState('');
       const [tenderSubmissionId, setTenderSubmissionId] = React.useState('');
-
-    //   Pembekal can apply as many tender
-    //   React.useEffect(() => {
-    //     const abortCont = new AbortController();
-    //     apiClient.get('/api/proposal/show/' + state.tender_id.value, { signal: abortCont.signal} )
-    //     .then(response => {
-          
-    //        // console.log(response)
-    //         setIspending(false)
-    //         if(response.data.exists === true){
-    //             setTenderSubmissionId(response.data.proposal.id)
-    //             const fields = collect(response.data.proposal);
-    //             // console.log(fields)
-    //             fields.each( (value,field) => {
-    //                 updateStateValue(field, value)
-    //             })
-    //         }
-    //     })
-    //     .catch(error => console.error(error));
-    //     return () => abortCont.abort();    
-    // }, [] ); // Empty array [] means this only run on first render
 
 
     // TenderSubmission related fields
@@ -135,7 +114,7 @@ const SubmissionFormTypeB = ({tender_id}) => {
                 setStatus('success');
                 setMessage(response.data.message); 
 
-                // Proposal PDF
+                // tender_submission PDF
                 if(selectedFile){
                     handleUpload(e)
                 }
@@ -386,6 +365,7 @@ const SubmissionFormTypeB = ({tender_id}) => {
                 </div>
             
             </div>
+            
             {tenderSubmissionId &&
             <div className="card mt-3">
                 <div className="card-header">
@@ -394,7 +374,7 @@ const SubmissionFormTypeB = ({tender_id}) => {
 
                 <div className="card-body">
                         
-                  <Pdf tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} />
+                  <Pdf tender_id={state.tender_id.value} tender_submission_id={tenderSubmissionId} />
                 </div>
             </div>
             }            
@@ -406,7 +386,7 @@ const SubmissionFormTypeB = ({tender_id}) => {
                     </div>
 
                     <div className="card-body">
-                        <VideoUploadTypeB tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
+                        <VideoUploadTypeB tender_id={state.tender_id.value} tender_submission_id={tenderSubmissionId} /> 
                     </div>
                 </div>
             }
@@ -418,4 +398,4 @@ const SubmissionFormTypeB = ({tender_id}) => {
     );
 };
 
-export default SubmissionFormTypeB;
+export default CreateFormTypeB;

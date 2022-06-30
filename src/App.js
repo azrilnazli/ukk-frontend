@@ -25,10 +25,12 @@ import MyProposal from './components/MyProposal';
 
 import Requirements from './components/Tender/Requirements';
 
+import CreateTender from './components/Tender/CreateTender';
+import EditTender from './components/Tender/EditTender';
 
 import TenderDetail from './components/TenderDetail';
-
 import TenderRequirement from './components/Requirement/Tender.js';
+
 import RequirementSambungSiri from './components/Requirement/SambungSiri.js';
 import RequirementSwasta from './components/Requirement/Swasta.js';
 import RequirementSyndicated from './components/Requirement/Syndicated.js';
@@ -37,7 +39,6 @@ import RequirementFinishedProduct from './components/Requirement/FinishedProduct
 import Faq from './components/Pages/Faq';
 import Reducer from './components/Pages/Reducer';
 import Password from './components/MyAccount/Password';
-import Apply from './components/Tender/Apply';
 import Restricted from './components/Pages/Restricted';
 
 
@@ -97,7 +98,8 @@ const App = () => {
 
               <PrivateRoute path='/tender_details/:tender_detail_id'   loggedIn={loggedIn} component={TenderDetail} />   
               <PrivateRoute path='/tender/requirements'   loggedIn={loggedIn} component={Requirements} />
-              <PrivateRoute path='/tender/:id/apply'  loggedIn={loggedIn} component={Apply} />
+              <PrivateRoute path='/tender/:id/create'  loggedIn={loggedIn} component={CreateTender} />
+              <PrivateRoute path='/tender/:tender_id/:tender_submission_id/edit'  loggedIn={loggedIn} component={EditTender} />
 
               <PrivateRoute path='/tender-requirement'  loggedIn={loggedIn} component={TenderRequirement} />
               <PrivateRoute path='/requirement/sambung-siri'   loggedIn={loggedIn} component={RequirementSambungSiri} />
