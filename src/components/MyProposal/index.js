@@ -3,9 +3,9 @@ import Pdf from './Pdf';
 import Video from './Video';
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
-import Detail from './Detail';
+import FormDataTypeB from './FormDataTypeB';
 
-
+import FormDataTypeA from './FormDataTypeA';
 const MyProposal = () => {
 
     const [isPending, setIsPending] = useState(false)
@@ -14,7 +14,7 @@ const MyProposal = () => {
     const [proposals, setProposals] = useState([])
     const [destroyed, setDestroyed] = useState(false)
     const [uploaded, setUploaded] = useState(false)
-    const [total, setTotal] = useState([])
+    //const [total, setTotal] = useState([])
 
 
     const getProposal = () => {
@@ -35,14 +35,13 @@ const MyProposal = () => {
                 setError('You don\'t have any proposal being applied.');
             } else {
                 setUploaded(true)
-                setTotal(response.data.total) // total applied tender
+                //setTotal(response.data.total) // total applied tender
                 setProposals(response.data.proposals) // proposals returned from server
-
             }
         })
         .catch((error) => {
             setIsPending(false)
-            console.error(error.response.data)
+            console.error(error)
             if (error.response.status === 422) {
                 setTitle(error.response.data.title); 
                 setError(error.response.data.message);
@@ -50,22 +49,25 @@ const MyProposal = () => {
             } else {
                 setTitle('Restricted area'); 
                 setError('You don\'t have permission to enter this area.');
-               
             }
         });
     }
     React.useEffect(() => getProposal(), [destroyed]); // GET request to server
 
-    console.log(total.sambung_siri)
+    //console.log(total.sambung_siri)
 
  
-    
-
     const proposalList = proposals.map((proposal) => {
    
             return (
                     <>
-                    <Detail setDestroyed={setDestroyed} proposal={proposal} tender={proposal.tender} created_at={proposal.created_at} />
+                    { proposal && 
+                        <FormDataTypeB 
+                            setDestroyed={setDestroyed} 
+                            proposal={proposal} 
+                            tender={proposal.tender} 
+                            created_at={proposal.created_at} />
+                    }
                     </>
             )
       
@@ -74,9 +76,9 @@ const MyProposal = () => {
 
     return (
         <div>
-        { total.sambung_siri > 1 ? <ErrorMsg title="SAMBUNG SIRI" message="You've submitted more than 1 proposal." />  : null }
+        {/* { total.sambung_siri > 1 ? <ErrorMsg title="SAMBUNG SIRI" message="You've submitted more than 1 proposal." />  : null }
         { total.swasta > 2 ? <ErrorMsg title="SWASTA" message="You've submitted more than 2 proposals." />  : null }
-            
+             */}
         { isPending ? 
             <div  className='container container-fluid bg-light rounded p-3 col-md-12'>loading...</div>
             :

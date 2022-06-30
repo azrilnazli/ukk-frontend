@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Navbar, NavbarBrand, Container,Nav,NavDropdown } from 'react-bootstrap';
 import { BrowserRouter as Router,Link } from 'react-router-dom';
-import LogoutLink from './LogoutLink';
+import LogoutLink from './Nav/LogoutLink';
+import RequirementLink from './Nav/RequirementLink';
 import config from '../../config.json';
 
 
 const NavbarMenu = (
-
     {
 
         authLink,
@@ -15,18 +15,17 @@ const NavbarMenu = (
         NavLink: NavLink,
         ...rest
     }
-
 ) => {
 
-    let None = null
 
     const homeLink = loggedIn 
-    ? <NavLink as={Link} to='/dashboard' className="nav-link">Dashboard</NavLink> 
-    : <NavLink as={Link} to='/home' className="nav-link">Home</NavLink>
+    ? <NavLink as={Link} to='/home' className="nav-link"><i className="fa fa-home" ></i> Home</NavLink> 
+    : <NavLink as={Link} to='/' className="nav-link"><i className="fa fa-home" ></i> Home</NavLink>
 
     // const moviesLink = loggedIn 
     // ? <NavLink as={Link} to='/movies' className="nav-link">Movies</NavLink> 
     // : null
+
 
     const MyCompanyLink = loggedIn 
     ? <NavLink as={Link} to='/my_company' className="nav-link">My Company</NavLink> 
@@ -41,11 +40,18 @@ const NavbarMenu = (
     : null
 
     const faqLink = loggedIn 
-    ? <NavLink as={Link} to='/faq' className="nav-link">FAQ</NavLink> 
+    ? <NavLink as={Link} to='/faq' className="nav-link"><i className="fa fa-question" ></i> FAQ</NavLink> 
     : null
+   
+    // const requirementLink = loggedIn 
+    // ? <RequirementLink /> 
+    // : null
 
-
-    const tenderLink = loggedIn ?  
+    const requirementLink = loggedIn 
+    ?   <NavLink as={Link} to='/tender-requirement' className="nav-link"><i className="fa fa-list-alt" aria-hidden="true"></i> Tender</NavLink> 
+    : null
+   
+    const proposalLink = loggedIn ?  
     
     <NavDropdown 
                 
@@ -64,10 +70,7 @@ const NavbarMenu = (
         <NavDropdown.Item >
             <NavLink as={Link} to='/tender/swasta' className="dropdown-item"><i className="fa fa-search" ></i> SWASTA</NavLink> 
         </NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item >
-            <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-user" ></i> My Proposal</NavLink>
-        </NavDropdown.Item>
+
         
     </NavDropdown>
     : 
@@ -92,15 +95,19 @@ const NavbarMenu = (
         
         <NavDropdown.Divider />
         <NavDropdown.Item >
+            <NavLink as={Link} to='/my_company' className="dropdown-item"><i className="fa fa-home" aria-hidden="true"></i> My Company</NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Item >
+            <NavLink as={Link} to='/my_proposal' className="dropdown-item"><i className="fa fa-list-alt" aria-hidden="true"></i> My Proposal</NavLink>
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item >
             {/* <LogoutLink logout={logout}/> */}
             <NavLink as={Link} to='/home' onClick={logout} className="dropdown-item"><i className="fa fa-share-square" aria-hidden="true"></i> Logout</NavLink>
         </NavDropdown.Item>
     </NavDropdown>
     : 
     null
-
-
-
 
      return ( 
 
@@ -111,19 +118,13 @@ const NavbarMenu = (
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     {homeLink}
-
-                    {MyCompanyLink}
-
-                    {tenderLink}
-{/*                     
-                    {MyProposalLink}
-                    {MyTenderLink} */}
-                    
+                    {requirementLink}
+                    {/* {proposalLink} */}
                     {faqLink}
                 </Nav>
                 <Nav>
-                {accountLink}
-                {authLink}
+                    {accountLink}
+                    {authLink}
                 </Nav>
                 </Navbar.Collapse>
             </Container>

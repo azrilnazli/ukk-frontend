@@ -108,7 +108,7 @@ const handleSubmit = (e) => {
   })
 
   // post the data
-  apiClient.post('/api/company/update_ssm', {
+  apiClient.post('/api/company/update_credit', {
       is_credit_cert_uploaded: state.is_credit_cert_uploaded.value,
 
   }).then(response => {

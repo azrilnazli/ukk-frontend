@@ -301,7 +301,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="Bank Statement Date Start"          
                     name="bank_statement_date_start"
@@ -313,7 +313,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
                 />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
           <TextField
                     label="Bank Statement Date End"          
                     name="bank_statement_date_end"
@@ -326,7 +326,7 @@ const [fullscreen, setFullscreen] = React.useState(true);
           </Form.Group>
 
 
-          <Form.Group className="mb-3">
+          <Form.Group  className="col-md-6 mb-3">
                    <TextField
                     label="Bank Statement"          
                     name="bank_cert"

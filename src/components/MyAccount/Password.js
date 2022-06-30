@@ -196,7 +196,7 @@ const Password = () => {
                     :
                     <Fragment>
                     <div className="col-auto">
-                        <label className="col-form-label">Password</label>
+                        <label className="col-form-label">Current Password</label>
                     </div>
                     <div className="col-auto">
                             <TextField

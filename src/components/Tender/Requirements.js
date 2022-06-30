@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
-import pdf_requirements from './220420_SYARAT_PENYERTAAN_PEROLEHAN_SWASTA_BAHARU_2023.pdf';
-import pdf_need_statement from './need_statement.pdf';
+import pdf_requirements from './pdf/220420_SYARAT_PENYERTAAN_PEROLEHAN_SWASTA_BAHARU_2023.pdf';
+import pdf_need_statement from './pdf/need_statement.pdf';
 
 const Requirements = () => {
 

@@ -15,6 +15,8 @@ import BumiputeraData from './BumiputeraData';
 import CreditData from './CreditData';
 import BoardOfDirectors from './BoardOfDirectorsData';
 import ExperiencesData from './ExperiencesData';
+import AuthorizationLetterData from './AuthorizationLetterData';
+import OfficialCompanyLetterData from './OfficialCompanyLetterData';
 
  
 const MyCompany = () => {
@@ -37,8 +39,9 @@ const MyCompany = () => {
             <AuditData />
             <BankData  /> 
             <CreditData />
+            <AuthorizationLetterData />
+            <OfficialCompanyLetterData />
 
-      
         </React.Fragment>
         
     );

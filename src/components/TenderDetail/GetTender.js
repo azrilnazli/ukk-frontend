@@ -1,7 +1,7 @@
 import React from 'react';
 import apiClient from '../../services/api';
-//import Detail from './Detail';
-import IsApproved from '../../services/IsApproved';
+import Detail from './Detail';
+//import IsApproved from '../../services/IsApproved';
 import ErrorMsg from './ErrorMsg';
 const collect = require('collect.js'); 
 
@@ -18,28 +18,27 @@ const GetTender = (props) => {
         .then(response => {
             console.log(response.data)
             setIspending(false)
-            //setTenders(response.data.tenders)
+            setTenders(response.data.tenders)
         })
         .catch(error => { 
             setIspending(false)
-            // console.error(error.response.data)
-            // if (error.response.status === 422) {
-            //     setTitle(error.response.data.title); 
-            //     setError(error.response.data.message);
+            console.error(error.response.data)
+            if (error.response.status === 422) {
+                setTitle(error.response.data.title); 
+                setError(error.response.data.message);
                
-            // } else {
-            //     setTitle('Restricted area'); 
-            //     setError('You don\'t have permission to enter this area.');
-               
-            // }
+            } else {
+                setTitle('Restricted area'); 
+                setError('You don\'t have permission to enter this area.');
+            }
         });
     }
     React.useEffect(() => getTenderList(), []); 
 
-    // const tenderList = tenders.map((tender) => 
+    const tenderList = tenders.map((tender) => 
     
-    //     <Detail key={tender.id} tender={tender} />
-    // );
+        <Detail key={tender.id} tender={tender} />
+    );
 
     if(error){
         return (<><ErrorMsg title={title} message={error} /></>)
@@ -48,8 +47,8 @@ const GetTender = (props) => {
             <>
             {isPending ? <div className='container container-fluid bg-light rounded p-3 bg-light'> loading...</div>
             :
-                // <>{tenderList}</>
-                <>test</>
+                <>{tenderList}</>
+                
             }
             </>
         );

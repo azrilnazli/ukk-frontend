@@ -4,22 +4,23 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import FileUpload from './FileUpload';
 import config from '../../config.json'
 import TextField from '../Widgets/TextField';
+
 const collect = require('collect.js'); 
 
-const FinasFDData = () => {
+const AuthorizationLetterData = () => {
 
   const [isPending, setIsPending] = React.useState(true)
-
   // load data from server
   React.useEffect(() => {
     const abortCont = new AbortController();
-    apiClient.get('/api/company/finas_fd', { signal: abortCont.signal} )
+    apiClient.get('/api/company/authorization_letter', { signal: abortCont.signal} )
     .then(response => {
         //console.log(response)
         setIsPending(false)
         const fields = collect(response.data.data);
-        //console.log(fields)
+       // console.log(fields)
          fields.each( (value,field) => {
+  
              //console.log(field + ":" + value)
              updateStateValue(field, value)
          })
@@ -27,14 +28,14 @@ const FinasFDData = () => {
     .catch(error => console.error(error));
     return () => abortCont.abort();    
   }, [] ); // Empty array [] means this only run on first render
+  //console.log('is_authorization_letter_cert_uploaded')
 
-  // finas_fd related fields
+  // authorization_letter related fields
   const initialValues = {
     id: { value: '' ,error: '' },
-    finas_fd_registration_number: { value: null ,error: '' },
-    //is_finas_fd_active: { value: '' ,error: '' },
-    is_finas_fd_cert_uploaded: { value: '' ,error: '' },
-    finas_fd_expiry_date: { value: '' ,error: '' },
+
+    is_authorization_letter_cert_uploaded: { value: null ,error: '' },
+
     selectedFile: { value: '' ,error: '' },
   }
 
@@ -43,13 +44,13 @@ const FinasFDData = () => {
   //change input value dynamically
   const updateStateValue = (field,value) => {
 
-    setState(prevState => ({
-        ...prevState,
-        [field]: {
-            ...prevState[field],
-            value: value,   
-            }
-        }));
+      setState(prevState => ({
+          ...prevState,
+          [field]: {
+              ...prevState[field],
+              value: value,   
+              }
+          }));
   };
 
   // change input value dynamically
@@ -107,11 +108,9 @@ const handleSubmit = (e) => {
   })
 
   // post the data
-  apiClient.post('/api/company/update_finas_fd', {
-      finas_fd_registration_number: state.finas_fd_registration_number.value,
-      //is_finas_fd_active: state.is_finas_fd_active.value,
-      is_finas_fd_cert_uploaded: state.is_finas_fd_cert_uploaded.value,
-      finas_fd_expiry_date:  state.finas_fd_expiry_date.value
+  apiClient.post('/api/company/update_authorization_letter', {
+      is_authorization_letter_cert_uploaded: state.is_authorization_letter_cert_uploaded.value,
+
   }).then(response => {
       //console.log(response);
     
@@ -131,7 +130,7 @@ const handleSubmit = (e) => {
       }
   }).catch(error => {
      
-        console.error(error)
+        //console.error(error)
       if (error.response.status === 422) {
           const errors = collect(error.response.data.errors); 
           errors.each( (error,field) => {
@@ -149,10 +148,11 @@ const [isFileUploaded, setIsFileUploaded] = React.useState(null);
 
 const handleUpload = (e) => {
    
+
     // JS formData
     const formData = new FormData();
-    formData.append('document', 'finas_fd_cert.pdf'); // force the filename on server
-    formData.append('field', 'is_finas_fd_cert_uploaded'); // db field
+    formData.append('document', 'authorization_letter_cert.pdf'); // force the filename on server
+    formData.append('field', 'is_authorization_letter_cert_uploaded'); // db field
     formData.append("selectedFile", selectedFile); // input name = selectedFile
 
     // axios 
@@ -163,8 +163,8 @@ const handleUpload = (e) => {
         headers: { "Content-Type": "multipart/form-data" },
     }).then(response => {
       setShow(false) // open the modal
-      //console.log(response.data.is_finas_fd_cert_uploaded)
-      updateStateValue('is_finas_fd_cert_uploaded',response.data.is_finas_fd_cert_uploaded )
+      //console.log(response.data.is_authorization_letter_cert_uploaded)
+      updateStateValue('is_authorization_letter_cert_uploaded',response.data.is_authorization_letter_cert_uploaded )
       updateStateValue('id',response.data.id ) // to be used for PDF display
     }).catch(error => {
       //console.error(error)
@@ -187,54 +187,50 @@ const handleFileSelect = (event) => {
 
 const [fullscreen, setFullscreen] = React.useState(true);
 
-//console.log(state.finas_fd_registration_number.value)
+//console.log(state.ssm_registration_number.value)
 
     return (
       <div className="card mt-3">
         <h5 className="card-header">          
         <div className="d-flex flex-row bd-highlight align-items-center justify-content-between">
-        <span className="float-start">FINAS (DF)</span>
+        <span className="float-start">Authorization Letter</span>
 
         <a  className=" btn btn-sm btn-primary m-1" onClick={handleShow}>Edit</a>
         
         </div>
         </h5>  
         
-        { !isPending ?
+        { !isPending ? 
         <div className="card-body">
-          { state.finas_fd_registration_number.value != null ? 
+          { state.is_authorization_letter_cert_uploaded.value != null ? 
           <div>
             <dl className="row">
-                <dt className="col-sm-3">FINAS (DF) Registration</dt>
-                <dd className="col-sm-9">{state.finas_fd_registration_number.value}</dd>
+      
 
-                <dt className="col-sm-3">Expiry Date</dt>
-                <dd className="col-sm-9">{state.finas_fd_expiry_date.value}</dd>
-
-                <dt className="col-sm-3">FINAS (DF) Certificate</dt>
+                <dt className="col-sm-3">Authorization Letter Certificate</dt>
                 <dd className="col-sm-9">
-                    { state.is_finas_fd_cert_uploaded.value ? 
+                    { state.is_authorization_letter_cert_uploaded.value ? 
                     <button onClick={handleShowPdf} className='btn btn-primary btn-sm'>View Document</button>
                     :
-                    <span className="text-danger">Please upload FINAS (DF) certifacate ( PDF )</span>
+                    <span className="text-danger">Please upload authorization_letter certifacate ( PDF )</span>
                     }
                 </dd>
             </dl>
           </div>
-          : <span className='text-danger'>No data</span> }
-          </div>
-        : <div className="card-body">...loading</div> }
-
+           : <span className='text-danger'>No data</span> }
+           </div>
+         : <div className="card-body">...loading</div> }
+   
 
   <>
   <Modal fullscreen={fullscreen}  show={showPdf} onHide={handleClosePdf}>
       <Modal.Header closeButton>
-        <Modal.Title>FINAS (DF)</Modal.Title>
+        <Modal.Title>authorization_letter</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-     
+      
       <embed
-        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/finas_fd_cert.pdf?" + Date().toLocaleString() }
+        src={ config.SERVER_URL + "/storage/companies/" + state.id.value + "/authorization_letter_cert.pdf?" + Date().toLocaleString() }
         type="application/pdf"
         frameBorder="0"
         scrolling="auto"
@@ -244,53 +240,27 @@ const [fullscreen, setFullscreen] = React.useState(true);
       </Modal.Body>
     </Modal>
 
+
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>FINAS DF</Modal.Title>
+        <Modal.Title>Authorization Letter Informations</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-
           <Form.Group className="mb-3">
-          <TextField
-                    label="FINAS (DF) Registration Number"          
-                    name="finas_fd_registration_number"
-                    onChange={handleChange}
-                    type="text"
-                    value={state.finas_fd_registration_number.value}
-                    placeholder="Enter your company finas_fd registration number"
-                    error={state.finas_fd_registration_number.error}
-                />
-          </Form.Group>
-
-          <Form.Group  className="col-md-6 mb-3">
-          <TextField
-                    label="FINAS (DF) Expiry Date"          
-                    name="finas_fd_expiry_date"
-                    onChange={handleChange}
-                    type="date"
-                    value={state.finas_fd_expiry_date.value}
-                    placeholder="Enter your company finas_fd Expiry Date"
-                    error={state.finas_fd_expiry_date.error}
-                />
-          </Form.Group>
-
-
-          <Form.Group  className="col-md-6 mb-3">
-            {/* <Form.Label>Upload finas_fd Certificate</Form.Label>
+            {/* <Form.Label>Upload ssm Certificate</Form.Label>
             <Form.Control 
               onChange={handleFileSelect}
               accept=".pdf"
               type="file" 
             /> */}
                    <TextField
-                    label="FINAS (DF) Certificate"          
+                    label="Authorization Letter Certificate"          
                     name="file"
                     onChange={handleFileSelect}
                     type="file"
-                    // value={state.finas_fd_expiry_date.value}
-                    placeholder="Upload your company FINAS (DF) certificate (PDF Format)"
                     accept="application/pdf"
+                    placeholder="Upload your company Authorization Letter certificate"
                     error={state.selectedFile.error}
                 />
           </Form.Group>
@@ -311,4 +281,4 @@ const [fullscreen, setFullscreen] = React.useState(true);
     );
 };
 
-export default FinasFDData;
+export default AuthorizationLetterData;

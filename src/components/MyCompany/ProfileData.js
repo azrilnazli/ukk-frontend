@@ -4,6 +4,7 @@ import {Modal, Button, Form} from 'react-bootstrap';
 import FileUpload from './FileUpload';
 import config from '../../config.json'
 import TextField from '../Widgets/TextField';
+import StatesField from '../Widgets/StatesField';
 
 const collect = require('collect.js'); 
 
@@ -276,11 +277,21 @@ const [fullscreen, setFullscreen] = React.useState(true);
 
           
           <Form.Group className="mb-3">
-          <TextField
+          {/* <TextField
                     label="State"          
                     name="states"
                     onChange={handleChange}
                     type="text"
+                    value={state.states.value}
+                    placeholder="Enter your company state"
+                    error={state.states.error}
+                /> */}
+
+
+          <StatesField
+                    label="State"          
+                    name="states"
+                    onChange={handleChange}
                     value={state.states.value}
                     placeholder="Enter your company state"
                     error={state.states.error}

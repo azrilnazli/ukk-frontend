@@ -4,6 +4,7 @@ import apiClient from '../../services/api';
 import Form from './form.js';
 import SystemMsg from '../Alerts/SystemMsg';
 import logo from './logo.png';
+import GetContent from './GetContent';
 
 
 const LoginForm = (props) => {
@@ -98,7 +99,7 @@ const LoginForm = (props) => {
 
     // user redirect after successful login
     if (toHome === true) {
-        return <Redirect to='/dashboard' />
+        return <Redirect to='/home' />
     }
     
     // redirect to register route
@@ -124,18 +125,9 @@ const LoginForm = (props) => {
                 
                                 {authError ? <SystemMsg msg={errorMsg} type='danger' /> : null }
                                
-                                {/* <h3><i className="fa fa-cog"></i> Login</h3> */}
+                                <GetContent />
                                 
-                                <h2> Selamat Datang ke Sistem RTM TVCMS. </h2>
-                                <p className="card-text">
-                                    MAKLUMAN: Pendaftaran syarikat bagi pembekalan swasta & sambung siri 2023 telah tamat pada Jam 11:59 malam, 14 Mei 2022 
-                                    <br />
-                                    Pihak Pembekal yang telah mendaftar boleh menghantar semula dokumen yang berkaitan sebelum 20 Mei 2022.
-                                    <br />
-                                    Sila rujuk tatacara memuat naik dokumen, proposal dan video pada ruangan FAQ.
-
-
-                                </p>
+                          
                                 <Form 
                                 
                                     authError={authError} 

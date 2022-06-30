@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import apiClient from '../../services/api';
 import TenderDetails from './TenderDetails';
-import SubmissionForm from './SubmissionForm';
+import SubmissionFormTypeB from './SubmissionFormTypeB';
 const collect = require('collect.js'); 
 
 const Apply = () => {
@@ -10,6 +10,8 @@ const Apply = () => {
     const { id } = useParams();
     const [tender, setTender] = React.useState([]);
     const getTenderDetail = () => {
+
+        // get Tender detail
         apiClient.get('/api/tender/' + id)
         .then(response => {
             //console.log(response)
@@ -26,7 +28,7 @@ const Apply = () => {
         </div>
 
         
-        <SubmissionForm tender_id={id}/>
+        <SubmissionFormTypeB tender_id={id}/>
      
         </>
     );
