@@ -26,7 +26,7 @@ const CreateTender = () => {
 
     return (
         <>
-        edit tender
+      
         <div className='container container-fluid bg-light rounded p-3 col-md-12'>
             <TenderDetails tender={tender} />   
         </div>
