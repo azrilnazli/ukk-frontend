@@ -458,7 +458,11 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 <div>
                   <div className="d-flex flex-row">
                       {/* <div className=""><EditProposal /></div>        */}
-                      {/* <div className="ms-2"><DeleteProposal /></div>      */}
+                      
+                      if( tender.tender_detail.id === 3 ||   tender.tender_detail.id === 4 ){
+                        <div className="ms-2"><DeleteProposal /></div>     
+                      }
+                      
                       <div className="ms-auto align-self-center">Applied on <strong>{date}</strong></div>               
                   </div>
                 </div>                     
