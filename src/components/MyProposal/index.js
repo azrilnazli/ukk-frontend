@@ -65,7 +65,8 @@ const MyProposal = () => {
                             setDestroyed={setDestroyed} 
                             proposal={proposal} 
                             tender={proposal.tender} 
-                            created_at={proposal.created_at} />
+                            created_at={proposal.created_at} 
+                        />
                     
                     </>
             )

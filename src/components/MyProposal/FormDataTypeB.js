@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
 import config from '../../config.json'
+import GetVideoDetail from './GetVideoDetail';
 
 
 const Detail = ({setDestroyed,proposal,tender,created_at}) => {
@@ -440,12 +441,22 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                             <div className='col'>
                               <span className='badge bg-dark text-uppercase'>Video</span>
                               <div className="alert alert-warning " role="alert">
-                                <span class="lead text-uppercase">
+                                <span class="text-uppercase">
                                       { proposal.video ?
-                                  
-                                            <ShowVideoPlayer/>
+                                        <>
+                                            <GetVideoDetail 
+                                              video_id={proposal.video_id}
+                                            />
+                                            <hr />
+                                            { proposal.video.is_ready ?
+                                            <ShowVideoPlayer />
+                                            :
+                                            'still processing ...'
+                                            }
+                                        </>
                                            
-                                            : <span>not uploaded</span> }
+                                            : <span>not uploaded</span> 
+                                      }
                                 </span>
                               </div>
                             </div>
@@ -458,9 +469,12 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 <div>
                   <div className="d-flex flex-row">
                       {/* <div className=""><EditProposal /></div>        */}
-                      <NavLink  to={`/tender/${tender.id}/${proposal.id}/edit`} className="btn btn-primary">EDIT</NavLink>
+                     
                       { (tender.tender_detail.id === 3 || tender.tender_detail.id === 4 ) &&
+                       <>
+                        <NavLink  to={`/tender/${tender.id}/${proposal.id}/edit`} className="btn btn-primary">EDIT</NavLink>
                         <div className="ms-2"><DeleteProposal /></div>     
+                        </>
                       }
                       
                       
