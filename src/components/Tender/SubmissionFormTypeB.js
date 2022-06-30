@@ -3,7 +3,7 @@ import apiClient from '../../services/api';
 import TextField from '../Widgets/TextField';
 import TextArea from '../Widgets/TextArea';
 import {Modal, Button, Form} from 'react-bootstrap';
-import Video from '../MyProposal/Video';
+import VideoUploadTypeB from '../MyProposal/VideoUploadTypeB';
 import Pdf from '../MyProposal/Pdf';
 const collect = require('collect.js'); 
 
@@ -406,7 +406,7 @@ const SubmissionFormTypeB = ({tender_id}) => {
                     </div>
 
                     <div className="card-body">
-                        <Video tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
+                        <VideoUploadTypeB tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
                     </div>
                 </div>
             }

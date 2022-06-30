@@ -1,6 +1,5 @@
 import React , { useState }  from 'react';
 import Pdf from './Pdf';
-import Video from './Video';
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
 import FormDataTypeB from './FormDataTypeB';
