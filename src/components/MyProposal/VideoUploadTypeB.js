@@ -283,39 +283,11 @@ const VideoUploadTypeB = ({proposal_id,tender_id}) => {
                 <div className='row' >
 
                         <div className='col-lg-4'>
-                            { isVideoPlayable ? 
-                            <div className="alert alert-secondary" role="alert">
-                                <div className='row' >
-                                    <div className="d-lg-flex justify-content-center align-items-center">
-                                        { isDisabled ? 
-                                            <div className='col-lg ms-auto align-self-center text-center'><i className="fas fa-sync fa-spin"></i></div> 
-                                        : 
-                                            // <div className='col-lg text-center'><ShowVideoPlayer/></div>
-                                            <div className='col'>Video is ready.</div>
-                                        }
-                                        <div className='col-lg ml-2'> 
-                                        { isDisabled ? 
-                                            <div className='col'>Video is being processed.</div> 
-                                        : 
-                                            <div className='col ms-auto align-self-center'>
-                                                 <span>Video is ready <i className="text-success fas fa-check"></i></span>
-                                            </div>
-                                        }
-                                       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>     
-                            :
+                  
                             <div className="alert alert-secondary text-center" role="alert">
-                            
-                                { isDisabled ?
-                                <span><i class="fas fa-sync fa-spin"></i>  Video is being processed.</span>
-                                :
                                 <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span>
-                                }
                             </div>
-                            }
+                            
                         </div>
                         <div className='col-lg-8'>
                             <div className='row'>
