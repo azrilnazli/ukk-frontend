@@ -3,6 +3,7 @@ import apiClient from '../../services/api';
 import Progress from './Progress';
 import Conversion from './Conversion';
 import VideoJSPlayer from '../VideoJS';
+import RawPlayer from '../VideoJS/RawPlayer';
 import {Modal, Button, Form} from 'react-bootstrap';
 const collect = require('collect.js'); 
 
@@ -242,7 +243,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
         })
     }
 
-    function ShowVideoPlayer() {
+    function HLSVideoPlayer() {
 
         const [show, setShow] = useState(false);
       
@@ -251,8 +252,8 @@ const VideoUploadTypeB = ({proposal_id}) => {
     
         return (
           <>
-            <Button variant="primary" onClick={handleShow}>
-              Play Video
+            <Button variant="success" onClick={handleShow}>
+              COMPRESSED
             </Button>
       
             <Modal show={show} size="lg" onHide={handleClose}>
@@ -262,6 +263,41 @@ const VideoUploadTypeB = ({proposal_id}) => {
               <Modal.Body>
     
               <VideoJSPlayer id={videoId} />
+            
+          
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+         
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
+
+      
+    function RAWVideoPlayer() {
+
+        const [show, setShow] = useState(false);
+      
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+    
+        return (
+          <>
+            <Button variant="warning" onClick={handleShow}>
+              ORIGINAL
+            </Button>
+      
+            <Modal show={show} size="lg" onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>VIDEO PLAYER</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+    
+              <RawPlayer id={videoId} />
           
               </Modal.Body>
               <Modal.Footer>
@@ -296,8 +332,16 @@ const VideoUploadTypeB = ({proposal_id}) => {
                                 <div className="alert alert-secondary text-center" role="alert">
                                     
                                     {isVideoPlayable ?  
-                                        <div className='col-lg text-center'><ShowVideoPlayer/></div> 
-                                    : <span>Suggested Codec is H264/AAC  with these container ( MOV,MP4,MPEG-2 )</span> }
+                                    <div className='col-lg text-center'>
+                                        <HLSVideoPlayer/>
+                                        &nbsp;
+                                        <RAWVideoPlayer/>
+                                    </div> 
+                                    : 
+                                    <div className='col-lg text-center'>
+                                        <RAWVideoPlayer/>
+                                    </div>
+                                    }
                                 </div>
                                 }
                             </div>

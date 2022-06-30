@@ -2,6 +2,8 @@ import React , { useState }  from 'react';
 
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
+import RawPlayer from '../VideoJS/RawPlayer';
+import {Modal, Button, Form} from 'react-bootstrap';
 
 const GetVideoDetail = ({video_id}) => {
 
@@ -40,6 +42,40 @@ const GetVideoDetail = ({video_id}) => {
         });
     }
     React.useEffect(() => getProposal(), []); // GET request to server
+
+    
+    function ShowVideoPlayer() {
+
+        const [show, setShow] = useState(false);
+      
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+    
+        return (
+          <>
+            <Button variant="primary" onClick={handleShow}>
+              Play RAW Video
+            </Button>
+      
+            <Modal show={show} size="lg" onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>VIDEO PLAYER</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+    
+           <RawPlayer id='21' />
+          
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+         
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
 
 
     return (

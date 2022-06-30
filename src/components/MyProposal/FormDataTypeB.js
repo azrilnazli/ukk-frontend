@@ -2,6 +2,7 @@ import React , { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import { format } from 'date-fns';
 import VideoJSPlayer from '../VideoJS';
+import RawPlayer from '../VideoJS/RawPlayer';
 import {Modal, Button, Form} from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import apiClient from '../../services/api';
@@ -32,7 +33,41 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
         },[]);
     }
 
-    function ShowVideoPlayer() {
+    
+    function RAWVideoPlayer() {
+
+      const [show, setShow] = useState(false);
+    
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+  
+      return (
+        <>
+          <Button variant="warning" onClick={handleShow}>
+            ORIGINAL
+          </Button>
+    
+          <Modal show={show} size="lg" onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>VIDEO PLAYER</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+  
+            <RawPlayer id={proposal.video_id} />
+        
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+       
+            </Modal.Footer>
+          </Modal>
+        </>
+      );
+    }
+
+    function HLSVideoPlayer() {
 
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
@@ -40,8 +75,8 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
     
         return (
           <>
-            <Button variant="primary" onClick={handleShow}>
-              Play Video
+            <Button variant="success" onClick={handleShow}>
+              COMPRESSED
             </Button>
       
             <Modal show={show} size="lg" onHide={handleClose}>
@@ -449,9 +484,13 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                             />
                                             <hr />
                                             { proposal.video.is_ready ?
-                                            <ShowVideoPlayer />
+                                            <>
+                                            <HLSVideoPlayer />
+                                            &nbsp;
+                                            <RAWVideoPlayer />
+                                            </>
                                             :
-                                            'still processing ...'
+                                            <RAWVideoPlayer />
                                             }
                                         </>
                                            
