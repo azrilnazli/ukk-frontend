@@ -219,7 +219,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 </div>
                     <div className="d-lg-flex flex-row justify-content-start mt-2">
                       
-                        <div className="ms-1 me-1 "><p>TYPE : <span className="badge bg-secondary">{tender.tender_details.title}</span></p></div>
+                        <div className="ms-1 me-1 "><p>TYPE : <span className="badge bg-secondary">{tender.tender_detail.title}</span></p></div>
                         <div className="ms-1 me-1 "><p>PROPOSAL ID : <span className="badge bg-secondary">{proposal.id}</span></p></div>
                         <div className="ms-1 me-1 "><p>TENDER ID : <span className="badge bg-secondary">{tender.id}</span></p></div>
                         <div className="ms-1 me-1 "><p>CHANNEL : <span className="badge bg-secondary">{tender.channel}</span></p></div>
