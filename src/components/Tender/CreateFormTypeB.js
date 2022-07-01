@@ -372,8 +372,7 @@ const CreateFormTypeB = ({tender_id}) => {
                 </div>
 
                 <div className="card-body">
-                        
-                  <Pdf tender_id={tender_id} tender_submission_id={tenderSubmissionId} />
+                  <Pdf proposal_id={tenderSubmissionId} />
                 </div>
             </div>
             }            
