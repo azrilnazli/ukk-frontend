@@ -329,7 +329,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
                                     </span>
                                 </div>
                                 :
-                                <div className="alert alert-secondary text-center" role="alert">
+                                <div className="" role="alert">
                                     
                                     {isVideoPlayable ?  
                                     <div className='col-lg text-center'>
@@ -338,9 +338,15 @@ const VideoUploadTypeB = ({proposal_id}) => {
                                         <RAWVideoPlayer/>
                                     </div> 
                                     : 
-                                    <div className='col-lg text-center'>
-                                        <RAWVideoPlayer/>
-                                    </div>
+                                    <>
+                                         { uploaded ?
+                                        <div className='col-lg text-center'>
+                                            <RAWVideoPlayer/>
+                                        </div>
+                                        :
+                                        <>Wait until upload finish before leaving this page.</>
+                                        }
+                                    </>
                                     }
                                 </div>
                                 }
