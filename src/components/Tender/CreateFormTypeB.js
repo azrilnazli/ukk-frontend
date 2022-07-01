@@ -90,9 +90,8 @@ const CreateFormTypeB = ({tender_id}) => {
       
         // post the data
         apiClient.post('/api/tender-submissions/store', {
-            tender_id: state.tender_id.value,
-            video_id: state.video_id.value,
-      
+            tender_id: tender_id,
+     
             synopsis: state.synopsis.value,
             published_year: state.published_year.value,
             casts: state.casts.value,

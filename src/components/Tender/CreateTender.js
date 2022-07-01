@@ -27,7 +27,7 @@ const CreateTender = () => {
             <TenderDetails tender={tender} />   
         </div>
 
-        <CreateFormTypeB />
+        <CreateFormTypeB tender_id={id} />
      
      
         </>
