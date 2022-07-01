@@ -373,7 +373,7 @@ const CreateFormTypeB = ({tender_id}) => {
 
                 <div className="card-body">
                         
-                  <Pdf tender_id={state.tender_id.value} tender_submission_id={tenderSubmissionId} />
+                  <Pdf tender_id={tender_id} tender_submission_id={tenderSubmissionId} />
                 </div>
             </div>
             }            
@@ -385,7 +385,7 @@ const CreateFormTypeB = ({tender_id}) => {
                     </div>
 
                     <div className="card-body">
-                        <VideoUploadTypeB tender_id={state.tender_id.value} tender_submission_id={tenderSubmissionId} /> 
+                        <VideoUploadTypeB tender_id={tender_id} tender_submission_id={tenderSubmissionId} /> 
                     </div>
                 </div>
             }

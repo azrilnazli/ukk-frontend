@@ -219,7 +219,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                   Yes
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>
-                  Close
+                  No
                 </Button>
          
               </Modal.Footer>

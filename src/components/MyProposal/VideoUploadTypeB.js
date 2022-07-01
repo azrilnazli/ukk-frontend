@@ -193,7 +193,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
 
         
         formData.append('proposal_id', proposal_id) // selected file
-        //formData.append('tender_id', tender_id) // selected file
+        formData.append('tender_submission_id', proposal_id) // selected file
         formData.append('start_time', datetime)
         formData.append('file', file) // selected file
 
@@ -325,7 +325,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
                                 <div className="alert alert-secondary" role="alert">
                                     <span>Congratulation, your video was successfully uploaded.
                                         You may check video playback in My Proposal later on.
-                                    
+                                        <RAWVideoPlayer/>
                                     </span>
                                 </div>
                                 :
