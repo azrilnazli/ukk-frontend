@@ -23,13 +23,10 @@ const CreateTender = () => {
 
     return (
         <>
-        <div className='container container-fluid bg-light rounded p-3 col-md-12'>
-            <TenderDetails tender={tender} />   
-        </div>
-
-        <CreateFormTypeB tender_id={id} />
-     
-     
+            <div className='container container-fluid bg-light rounded p-3 col-md-12'>
+                <TenderDetails tender={tender} />   
+            </div>
+            <CreateFormTypeB tender_id={id} />
         </>
     );
 };
