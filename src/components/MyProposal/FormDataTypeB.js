@@ -53,7 +53,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
             </Modal.Header>
             <Modal.Body>
   
-            <RawPlayer id={proposal.video_id} />
+            <RawPlayer id={proposal.video.id} />
         
             </Modal.Body>
             <Modal.Footer>
@@ -85,7 +85,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
               </Modal.Header>
               <Modal.Body>
     
-              <VideoJSPlayer id={proposal.video_id} />
+              <VideoJSPlayer id={proposal.video.id} />
           
               </Modal.Body>
               <Modal.Footer>
@@ -480,7 +480,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                       { proposal.video ?
                                         <>
                                             <GetVideoDetail 
-                                              video_id={proposal.video_id}
+                                              video_id={proposal.video.id}
                                             />
                                             <hr />
                                             { proposal.video.is_ready ?

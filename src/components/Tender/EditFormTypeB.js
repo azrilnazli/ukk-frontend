@@ -427,7 +427,7 @@ const CreateFormTypeB = ({tender_id}) => {
                     </div>
 
                     <div className="card-body">
-                        <VideoUploadTypeB  proposal_id={tenderSubmissionId} /> 
+                        <VideoUploadTypeB  tender_submission_id={tenderSubmissionId} /> 
                     </div>
                 </div>
             }

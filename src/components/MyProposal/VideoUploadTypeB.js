@@ -9,7 +9,7 @@ const collect = require('collect.js');
 
 
 
-const VideoUploadTypeB = ({proposal_id}) => {
+const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
 
     // console.log('********************************')is_ready
     // console.log('welcome to Video Check System ')
@@ -40,7 +40,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
         console.log('.............................')
         // get current video id
         console.log('check : get_video from server')
-        apiClient.get(`/api/proposal/${proposal_id}/get_video`) // axios call to txt file
+        apiClient.get(`/api/proposal/${tender_submission_id}/get_video`) // axios call to txt file
         .then((response) => {
             //console.log(response) 
             console.log('check : video_id exists is TRUE ?')
@@ -192,8 +192,8 @@ const VideoUploadTypeB = ({proposal_id}) => {
         const formData = new FormData(); // JavaScript
 
         
-        formData.append('proposal_id', proposal_id) // selected file
-        formData.append('tender_submission_id', proposal_id) // selected file
+        formData.append('tender_submission_id', tender_submission_id) // selected file
+     
         formData.append('start_time', datetime)
         formData.append('file', file) // selected file
 
@@ -325,6 +325,7 @@ const VideoUploadTypeB = ({proposal_id}) => {
                                 <div className="alert alert-secondary" role="alert">
                                     <span>Congratulation, your video was successfully uploaded.
                                         You may check video playback in My Proposal later on.
+                                        <hr />
                                         <RAWVideoPlayer/>
                                     </span>
                                 </div>
