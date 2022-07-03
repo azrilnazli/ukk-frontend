@@ -3,6 +3,7 @@ import React , { useState }  from 'react';
 import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
 import RawPlayer from '../VideoJS/RawPlayer';
+import VideoJSPlayer from '../VideoJS';
 import {Modal, Button, Form} from 'react-bootstrap';
 import config from '../../config.json'
 
