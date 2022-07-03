@@ -488,6 +488,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                       { proposal.video ?
                                         <>
                                             <GetVideoDetail 
+                                      
                                               video_id={proposal.video.id}
                                             />
                                             <hr />
