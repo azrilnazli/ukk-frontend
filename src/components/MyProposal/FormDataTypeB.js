@@ -484,13 +484,11 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                             />
                                             <hr />
                                             { proposal.video.is_ready ?
-                                            <>
-                                            <HLSVideoPlayer />
-                                            &nbsp;
-                                            <RAWVideoPlayer />
-                                            </>
+                                              <>
+                                              <HLSVideoPlayer />
+                                              </>
                                             :
-                                            <RAWVideoPlayer />
+                                              <><strong>video is still being processing</strong></>
                                             }
                                         </>
                                            

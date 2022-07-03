@@ -44,38 +44,7 @@ const GetVideoDetail = ({video_id}) => {
     React.useEffect(() => getProposal(), []); // GET request to server
 
     
-    function ShowVideoPlayer() {
-
-        const [show, setShow] = useState(false);
-      
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
-    
-        return (
-          <>
-            <Button variant="primary" onClick={handleShow}>
-              Play RAW Video
-            </Button>
-      
-            <Modal show={show} size="lg" onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>VIDEO PLAYER</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-    
-           <RawPlayer id='21' />
-          
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-         
-              </Modal.Footer>
-            </Modal>
-          </>
-        );
-      }
+   
 
 
     return (
@@ -89,7 +58,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Video Length : {video.length}</pre>
                 <pre>Encoding status :&nbsp;
                   { video.is_reencode ? 
-                      'encoding was failed ( suggestion : Please re-encode the video to H264/AAC using HandBrake with lower bitrates ( 360p ) and reupload )' 
+                      'encoding was failed ( suggestion : Please re-encode the video )' 
                     : 
                       <>
                       { video.is_ready ?

@@ -25,6 +25,7 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
     const [systemMsg, setSystemMsg] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [showVideo, setShowVideo] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState('');
 
     const [isVideoPlayable, setIsVideoPlayable] = useState(false) // based on is_ready
 
@@ -45,8 +46,10 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
             //console.log(response) 
             console.log('check : video_id exists is TRUE ?')
             if(response.data.exists === true){
+
                 console.log('result : video_id exists with id ' + response.data.video_id)
                 setVideoId(response.data.video_id)
+                setCurrentVideo(response.data.video)
                 setShowVideo(true)
 
                 console.log('check : video_id not null ?')
@@ -114,56 +117,6 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
        
     }
     React.useEffect(() => getCurrentVideo(), []); // check if video was uploaded
-
-    const getVideoProgress = () => {
-        console.log('.............................')
-        console.log('Initiate Video Progress Check')
-        console.log('.............................')
-        console.log('check : if videoId was set ?')
-        if(videoId !== '') { //if videoId is present 
-            
-            console.log('result : videoId is set :' + videoId)
-    
-            let timer = setInterval(() => { // timer is setInterval() id , need to clear if conversionPercentage == 100
-                console.log('check : get conversion_process')
-               
-                apiClient.get(`/api/video/${videoId}/conversion_progress`) // axios call to txt file
-                .then((response) => {
-                
-                    console.log('result :  conversion_process exist')
-                    console.log('check : if converting is true ?' + response.data.converting )
-
-                        if(response.data.converting === true){
-                            console.log('result : is converting = ' + response.data.progress + '%')
-                       
-                            setConversionPercentage(response.data.progress); // setter 
-                        
-                        } else {
-                            console.log('result : not converting')
-                            setSystemMsg('Your video was successfully uploaded and processed.')
-                            setIsDisabled(false)
-                            setIsVideoPlayable(true)
-                           
-                            setConversionPercentage(0);
-                            clearInterval(timer)
-                        }
-          
-                })
-                .catch((e) => {
-                    console.log("Error : conversion_progress");
-                   
-                    setConversionPercentage(0); // set counter to zero
-                    clearInterval(timer)
-                });
-            }, 2000); // update evey 1 sec
-
-  
-        } else {
-            console.log('result : videoId is not being set')
-        }
-    }
-    
-    React.useEffect(() => getVideoProgress(), [uploaded,videoId]); // only run useEffect when videoId is changed
 
     const handleSubmit = (e) => {
         console.log('.............................')
@@ -253,7 +206,7 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
         return (
           <>
             <Button variant="success" onClick={handleShow}>
-              COMPRESSED
+              PLAY
             </Button>
       
             <Modal show={show} size="lg" onHide={handleClose}>
@@ -320,7 +273,7 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
 
                         <div className='col-lg-4'>
                   
-                            <div className="alert alert-secondary text-center" role="alert">
+                            <div className="alert alert-secondary " role="alert">
                                 { uploaded ? 
                                 <div className="alert alert-secondary" role="alert">
                                     <span>Congratulation, your video was successfully uploaded.
@@ -335,17 +288,36 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
                                     {isVideoPlayable ?  
                                     <div className='col-lg text-center'>
                                         <HLSVideoPlayer/>
-                                        &nbsp;
-                                        <RAWVideoPlayer/>
                                     </div> 
                                     : 
                                     <>
-                                         { uploaded ?
+                                        { uploaded ?
                                         <div className='col-lg text-center'>
-                                            <RAWVideoPlayer/>
+                                            Your video is being processed on cloud server.
                                         </div>
                                         :
-                                        <>Wait until upload finish before leaving this page.</>
+                                        <>
+                                            { currentVideo ? 
+                                                <>
+                                                <span>Current Video : &nbsp;<span className="badge bg-dark">{currentVideo.original_filename}</span></span>
+                                                <br />
+                                                <span>Status : &nbsp;
+                                                    <span className="badge bg-dark">
+                                                    { currentVideo.is_ready ?
+                                                        <HLSVideoPlayer/>
+                                                    :
+                                                        <>still processing</>
+                                                    }
+                                                    </span>
+                                                </span>            
+                                                
+                                                </> 
+                                            :     
+                                                <>
+                                                Wait until upload finish before leaving this page.
+                                                </>
+                                            }
+                                        </>
                                         }
                                     </>
                                     }
