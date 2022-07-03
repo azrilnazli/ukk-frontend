@@ -95,6 +95,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Original codec : {video.format}</pre>
                 <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
+                <pre>Original Video : <RAWVideoPlayer /></pre>
            
                 <pre>Encoding status :&nbsp;
                   { video.is_failed ? 
