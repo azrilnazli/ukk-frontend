@@ -36,8 +36,7 @@ const GetVideoDetail = ({video_id}) => {
               </Modal.Header>
               <Modal.Body>
     
-         
-
+                Direct URL={src}
                 <video width="750" height="500" controls >
                     <source src={src} type="video/mp4"/>
                 </video>
