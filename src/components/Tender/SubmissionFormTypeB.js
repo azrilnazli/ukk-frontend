@@ -3,17 +3,38 @@ import apiClient from '../../services/api';
 import TextField from '../Widgets/TextField';
 import TextArea from '../Widgets/TextArea';
 import {Modal, Button, Form} from 'react-bootstrap';
-import VideoUploadTypeB from '../MyProposal/VideoUploadTypeB';
+import Video from '../MyProposal/Video';
 import Pdf from '../MyProposal/Pdf';
 const collect = require('collect.js'); 
 
-const CreateFormTypeB = ({tender_id}) => {
+const SubmissionFormTypeB = ({tender_id}) => {
       // load data from server
       const [isPending, setIspending] = React.useState(true);
       const [systemMsg, setSystemMsg] = React.useState(false);
       const [status, setStatus] = React.useState();
       const [message, setMessage] = React.useState('');
       const [tenderSubmissionId, setTenderSubmissionId] = React.useState('');
+
+    //   Pembekal can apply as many tender
+    //   React.useEffect(() => {
+    //     const abortCont = new AbortController();
+    //     apiClient.get('/api/proposal/show/' + state.tender_id.value, { signal: abortCont.signal} )
+    //     .then(response => {
+          
+    //        // console.log(response)
+    //         setIspending(false)
+    //         if(response.data.exists === true){
+    //             setTenderSubmissionId(response.data.proposal.id)
+    //             const fields = collect(response.data.proposal);
+    //             // console.log(fields)
+    //             fields.each( (value,field) => {
+    //                 updateStateValue(field, value)
+    //             })
+    //         }
+    //     })
+    //     .catch(error => console.error(error));
+    //     return () => abortCont.abort();    
+    // }, [] ); // Empty array [] means this only run on first render
 
 
     // TenderSubmission related fields
@@ -90,8 +111,9 @@ const CreateFormTypeB = ({tender_id}) => {
       
         // post the data
         apiClient.post('/api/tender-submissions/store', {
-            tender_id: tender_id,
-     
+            tender_id: state.tender_id.value,
+            video_id: state.video_id.value,
+      
             synopsis: state.synopsis.value,
             published_year: state.published_year.value,
             casts: state.casts.value,
@@ -113,7 +135,7 @@ const CreateFormTypeB = ({tender_id}) => {
                 setStatus('success');
                 setMessage(response.data.message); 
 
-                // tender_submission PDF
+                // Proposal PDF
                 if(selectedFile){
                     handleUpload(e)
                 }
@@ -203,7 +225,7 @@ const CreateFormTypeB = ({tender_id}) => {
                     </div>
                     :
                     <div className='alert alert-info'>
-                        Please complete this form before being able to upload VIDEO or PDF.
+                        Type B Please complete this form before being able to upload VIDEO or PDF.
                     </div>
                     }
 
@@ -319,7 +341,7 @@ const CreateFormTypeB = ({tender_id}) => {
                                     label="Programme Rights"          
                                     name="rules"
                                     onChange={handleChange}
-                                    placeholder="Please state Programme Rights eg: All Rights ( Hakmilik RTM ) or Show Duration "
+                                    placeholder="Please state Programme Rights eg All Rights ( Hakmilik RTM ) or Rent ..."
                                     value={state.rules.value}
                                     error={state.rules.error}
                             />
@@ -327,7 +349,7 @@ const CreateFormTypeB = ({tender_id}) => {
 
                         <Form.Group className="mb-3">
                             <TextArea
-                                    label="Please state extra informations eg: programme rating, box office status etc"          
+                                    label="Extra Informations"          
                                     name="informations"
                                     onChange={handleChange}
                                     placeholder="Extra Informations"
@@ -364,7 +386,6 @@ const CreateFormTypeB = ({tender_id}) => {
                 </div>
             
             </div>
-            
             {tenderSubmissionId &&
             <div className="card mt-3">
                 <div className="card-header">
@@ -372,7 +393,8 @@ const CreateFormTypeB = ({tender_id}) => {
                 </div>
 
                 <div className="card-body">
-                  <Pdf proposal_id={tenderSubmissionId} />
+                        
+                  <Pdf tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} />
                 </div>
             </div>
             }            
@@ -384,7 +406,7 @@ const CreateFormTypeB = ({tender_id}) => {
                     </div>
 
                     <div className="card-body">
-                        <VideoUploadTypeB tender_id={tender_id} tender_submission_id={tenderSubmissionId} /> 
+                        <Video tender_id={state.tender_id.value} proposal_id={tenderSubmissionId} /> 
                     </div>
                 </div>
             }
@@ -396,4 +418,4 @@ const CreateFormTypeB = ({tender_id}) => {
     );
 };
 
-export default CreateFormTypeB;
+export default SubmissionFormTypeB;
