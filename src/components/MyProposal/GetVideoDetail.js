@@ -36,15 +36,12 @@ const GetVideoDetail = ({video_id}) => {
               </Modal.Header>
               <Modal.Body>
     
-              <embed
-                  src={src}
-                  type="movie/mp4"
-                  frameBorder="0"
-                  scrolling="auto"
-                  height="100%"
-                  width="100%"
-                ></embed>
-          
+         
+
+                <video width="750" height="500" controls >
+                    <source src={src} type="video/mp4"/>
+                </video>
+                        
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
