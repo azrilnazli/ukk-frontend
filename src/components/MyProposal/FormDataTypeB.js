@@ -76,7 +76,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
         return (
           <>
             <Button variant="success" onClick={handleShow}>
-              COMPRESSED
+              PLAY
             </Button>
       
             <Modal show={show} size="lg" onHide={handleClose}>
