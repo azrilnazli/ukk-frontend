@@ -85,9 +85,21 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Uploaded on : {video.date}</pre>
                 <pre>Original name : {video.original_filename}</pre>
                 <pre>Original codec : {video.format}</pre>
-                <pre>Original size : {video.filesize}</pre>
+                <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
-                <pre>Encoding status : { video.is_ready ? 'done' : 'still processing' }</pre> 
+                <pre>Encoding status :&nbsp;
+                  { video.is_failed ? 
+                      'encoding was failed ( suggestion : Please re-encode the video to H264/AAC using HandBrake with lower bitrates ( 360p ) and reupload )' 
+                    : 
+                      <>
+                      { video.is_ready ?
+                          'encoding was successful'
+                        : 
+                          'still processing'
+                      } 
+                      </>
+                  }
+                </pre> 
             </div>
         )
     );
