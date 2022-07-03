@@ -14,7 +14,9 @@ window.addEventListener("beforeunload", (ev) =>
 const RawPlayer = (props) => {
   const playerRef = React.useRef(null);
   const token = sessionStorage.getItem('token');
-  const src = config.SERVER_URL + `/api/video/${props.id}/play`
+  //const src = config.SERVER_URL + `/api/video/${props.id}/play`
+  const src = config.SERVER_URL + `:8080/${props.id}/original.mp4`
+  //http://202.165.14.246:8080/1001/original.mp4
   //const src = `https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8` //test header
   //const src = `http://admin.test/api/movie/${props.id}/play` //test header
 
