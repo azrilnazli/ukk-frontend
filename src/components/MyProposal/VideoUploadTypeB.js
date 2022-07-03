@@ -286,7 +286,10 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
                                 <div className="" role="alert">
                                     
                                     {isVideoPlayable ?  
+                                    
                                     <div className='col-lg text-center'>
+                                        <span>Current Video : &nbsp;<span className="badge bg-dark">{currentVideo.original_filename}</span></span>
+                                        <hr />
                                         <HLSVideoPlayer/>
                                     </div> 
                                     : 
@@ -300,7 +303,7 @@ const VideoUploadTypeB = ({tender_id,tender_submission_id}) => {
                                             { currentVideo ? 
                                                 <>
                                                 <span>Current Video : &nbsp;<span className="badge bg-dark">{currentVideo.original_filename}</span></span>
-                                                <br />
+                                                <hr />
                                                 <span>Status : &nbsp;
                                                     <span className="badge bg-dark">
                                                     { currentVideo.is_ready ?
