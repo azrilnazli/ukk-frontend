@@ -1,4 +1,5 @@
 {
     "SERVER_URL": "http://ukk-backend.test",
+    "VIDEO_URL": "http://ukk-backend.test:8080",
     "APP" : "RTM TVCMS"
 }
