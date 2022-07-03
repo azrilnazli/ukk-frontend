@@ -16,6 +16,46 @@ const GetVideoDetail = ({video_id}) => {
     //http://202.165.14.246:8080/{video_id}/original.mp4
     //const [total, setTotal] = useState([])
 
+    function RAWVideoPlayer() {
+
+        const [show, setShow] = useState(false);
+      
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+    
+        return (
+          <>
+            <Button variant="warning" onClick={handleShow}>
+              ORIGINAL
+            </Button>
+      
+            <Modal show={show} size="lg" onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>VIDEO PLAYER</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+    
+              <embed
+                  src={src}
+                  type="movie/mp4"
+                  frameBorder="0"
+                  scrolling="auto"
+                  height="100%"
+                  width="100%"
+                ></embed>
+          
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+         
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
+
 
     const getProposal = () => {
         setIsPending(true)
@@ -58,7 +98,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Original codec : {video.format}</pre>
                 <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
-                <pre>Original Video : <a target="_blank" href={src}>{video.original_filename}</a></pre>
+                <pre>Original Video : <RAWVideoPlayer /></pre>
                 <pre>Encoding status :&nbsp;
                   { video.is_failed ? 
                       'encoding was failed ( suggestion : Please re-encode the video )' 
