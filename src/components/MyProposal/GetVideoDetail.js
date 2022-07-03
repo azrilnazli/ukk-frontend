@@ -11,7 +11,8 @@ const GetVideoDetail = ({video_id}) => {
     const [error,setError] = React.useState('')
     const [title,setTitle] = React.useState('')
     const [video, setVideo] = useState([])
-
+    const src = config.VIDEO_URL + `/${video_id}/original.mp4`
+    //http://202.165.14.246:8080/{video_id}/original.mp4
     //const [total, setTotal] = useState([])
 
 
@@ -56,7 +57,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Original codec : {video.format}</pre>
                 <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
-                <pre>Original Video : <a target="_blank" href="http://202.165.14.246:8080/{{ $row->id }}/original.mp4">{video.original_filename}</a></pre>
+                <pre>Original Video : <a target="_blank" href={src}>{video.original_filename}</a></pre>
                 <pre>Encoding status :&nbsp;
                   { video.is_failed ? 
                       'encoding was failed ( suggestion : Please re-encode the video )' 
