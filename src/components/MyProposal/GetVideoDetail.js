@@ -4,6 +4,7 @@ import apiClient from '../../services/api';
 import ErrorMsg from './ErrorMsg';
 import RawPlayer from '../VideoJS/RawPlayer';
 import {Modal, Button, Form} from 'react-bootstrap';
+import config from '../../config.json'
 
 const GetVideoDetail = ({video_id}) => {
 
