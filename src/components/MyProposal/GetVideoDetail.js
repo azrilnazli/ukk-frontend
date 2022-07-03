@@ -88,7 +88,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
                 <pre>Encoding status :&nbsp;
-                  { video.is_failed ? 
+                  { video.is_reencode ? 
                       'encoding was failed ( suggestion : Please re-encode the video to H264/AAC using HandBrake with lower bitrates ( 360p ) and reupload )' 
                     : 
                       <>
