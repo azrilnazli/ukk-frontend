@@ -16,6 +16,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   const [isPending,setIsPending] = useState(false)
   const [error,setError] = React.useState('')
   const [title,setTitle] = React.useState('')
+  const src = config.VIDEO_URL + `/${proposal.video.id}/original.mp4`
     const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
     // const languageList =tender.languages.map((language) => 
     //     <span className="badge bg-secondary">{language}</span>
@@ -53,7 +54,14 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
             </Modal.Header>
             <Modal.Body>
   
-            <RawPlayer id={proposal.video.id} />
+            <embed
+                src={src}
+                type="movie/mp4"
+                frameBorder="0"
+                scrolling="auto"
+                height="100%"
+                width="100%"
+              ></embed>
         
             </Modal.Body>
             <Modal.Footer>
@@ -124,7 +132,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                 scrolling="auto"
                 height="100%"
                 width="100%"
-            ></embed>
+              ></embed>
           
               </Modal.Body>
               <Modal.Footer>
@@ -488,7 +496,12 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                               <HLSVideoPlayer />
                                               </>
                                             :
+                                              <>
+                                              <RAWVideoPlayer />
+                                              <hr />
                                               <><strong>video is still being processing</strong></>
+                                              </>
+
                                             }
                                         </>
                                            
