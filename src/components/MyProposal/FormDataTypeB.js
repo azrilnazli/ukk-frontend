@@ -16,7 +16,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   const [isPending,setIsPending] = useState(false)
   const [error,setError] = React.useState('')
   const [title,setTitle] = React.useState('')
-  const src = config.VIDEO_URL + `/${proposal.video.id}/original.mp4`
+  
+
+
     const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
     // const languageList =tender.languages.map((language) => 
     //     <span className="badge bg-secondary">{language}</span>
@@ -35,46 +37,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
     }
 
     
-    function RAWVideoPlayer() {
-
-      const [show, setShow] = useState(false);
     
-      const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
-  
-      return (
-        <>
-          <Button variant="warning" onClick={handleShow}>
-            ORIGINAL
-          </Button>
-    
-          <Modal show={show} size="lg" onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>VIDEO PLAYER</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-  
-            <embed
-                src={src}
-                type="movie/mp4"
-                frameBorder="0"
-                scrolling="auto"
-                height="100%"
-                width="100%"
-              ></embed>
-        
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-       
-            </Modal.Footer>
-          </Modal>
-        </>
-      );
-    }
-
     function HLSVideoPlayer() {
 
         const [show, setShow] = useState(false);
@@ -498,8 +461,6 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
                                               </>
                                             :
                                               <>
-                                              <RAWVideoPlayer />
-                                              <hr />
                                               <><strong>video is still being processing</strong></>
                                               </>
 

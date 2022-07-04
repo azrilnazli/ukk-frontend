@@ -105,7 +105,7 @@ const GetVideoDetail = ({video_id}) => {
                       { video.is_ready ?
                           'encoding was successful'
                         : 
-                          <>still processing @ {video.encoding_progress}</>
+                          <>still processing : {video.encoding_progress ? video.encoding_progress : 0 } %</>
                       } 
                       </>
                   }
