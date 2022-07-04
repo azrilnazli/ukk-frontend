@@ -107,7 +107,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   
       return (
         <>
-          <Button variant="success" onClick={handleShow}>
+          <Button variant="primary" onClick={handleShow}>
             SHOW VIDEO
           </Button>
     
@@ -140,7 +140,7 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   
       return (
         <>
-          <Button variant="warning" onClick={handleShow}>
+          <Button variant="primary" onClick={handleShow}>
             SHOW VIDEO
           </Button>
     
