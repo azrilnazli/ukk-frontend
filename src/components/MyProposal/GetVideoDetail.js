@@ -13,48 +13,10 @@ const GetVideoDetail = ({video_id}) => {
     const [error,setError] = React.useState('')
     const [title,setTitle] = React.useState('')
     const [video, setVideo] = useState([])
-    const src = config.VIDEO_URL + `/${video_id}/original.mp4`
-    //http://202.165.14.246:8080/{video_id}/original.mp4
-    //const [total, setTotal] = useState([])
 
-    function RAWVideoPlayer() {
+   
 
-        const [show, setShow] = useState(false);
-      
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
-    
-        return (
-          <>
-            <Button variant="warning" onClick={handleShow}>
-              ORIGINAL
-            </Button>
-      
-            <Modal show={show} size="lg" onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>VIDEO PLAYER</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-    
-              
-                <video width="750" height="500" controls >
-                    <source src={src} type="video/mp4"/>
-                </video>
-                        
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-         
-              </Modal.Footer>
-            </Modal>
-          </>
-        );
-      }
-
-
-    const getProposal = () => {
+   const getProposal = () => {
         setIsPending(true)
         console.log('.............................')
         console.log('Initiate Get Video Metadata from Server')
@@ -82,8 +44,6 @@ const GetVideoDetail = ({video_id}) => {
     }
     React.useEffect(() => getProposal(), []); // GET request to server
 
-    
-   
 
 
     return (
@@ -95,7 +55,7 @@ const GetVideoDetail = ({video_id}) => {
                 <pre>Original codec : {video.format}</pre>
                 <pre>Original size : {video.uploaded_size}</pre>
                 <pre>Video Length : {video.length}</pre>
-                <pre>Original Video : <RAWVideoPlayer /></pre>
+           
            
                 <pre>Encoding status :&nbsp;
                   { video.is_failed ? 
