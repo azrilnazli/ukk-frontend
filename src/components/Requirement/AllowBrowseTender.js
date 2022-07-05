@@ -31,8 +31,7 @@ const AllowBrowseTender = (props) => {
                     <div className='row'>
                         <div className='col-6'>
                         Your application has been approved. Now you can browse 
-                        all the available tenders. Please click botton on the right.
-                        </div>
+                        all the available tenders.</div>
                         <div className='col-6 d-lg-flex justify-content-center align-items-center'>
                         <Link to={`/tender_details/${props.tender.id}`} className="btn btn-primary">
                             Browse Tender <span className='ms-2 badge bg-light text-dark'>{ props.tender.tenders_count }</span>

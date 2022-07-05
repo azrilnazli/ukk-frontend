@@ -15,16 +15,9 @@ const Detail = ({setDestroyed,proposal,tender,created_at}) => {
   const [isPending,setIsPending] = useState(false)
   const [error,setError] = React.useState('')
   const [title,setTitle] = React.useState('')
-  
-
-
-    const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
-    // const languageList =tender.languages.map((language) => 
-    //     <span className="badge bg-secondary">{language}</span>
-    // );
-
-    const [edit,setEdit] = React.useState(false)
-    const [destroy,setDestroy] = React.useState(false)
+  const date = format(new Date(created_at), 'yyyy/MM/dd kk:mm:ss')
+  const [edit,setEdit] = React.useState(false)
+  const [destroy,setDestroy] = React.useState(false)
 
     function ShowProposalData() {
 
